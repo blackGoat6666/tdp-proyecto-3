@@ -19,18 +19,21 @@ public class Personaje {
 		
 	}
 	public void moverDerecha() {
-		
+		miPosicion.setLocation(miPosicion.getX(),miPosicion.getY()+1);
 	}
 	public void moverIzquierda() {
-		
+		miPosicion.setLocation(miPosicion.getX(),miPosicion.getY()-1);
 	}
 	public void moverAbajo() {
-		
+		miPosicion.setLocation(miPosicion.getX()-1,miPosicion.getY());
 	}
 	public void moverArriba() {
-		
+		miPosicion.setLocation(miPosicion.getX()+1,miPosicion.getY());
 	}
 	public void volverModoNormal() {
 		
+	}
+	public Point getPosicion() {
+		return miPosicion;
 	}
 }

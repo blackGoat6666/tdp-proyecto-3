@@ -1,5 +1,8 @@
 package logica;
 
+import grilla.Grilla;
+import personaje.Personaje;
+
 public class Logica {
 	//atributos de instancia
 	private int nivel;
@@ -7,6 +10,7 @@ public class Logica {
 	private boolean truncarPantalla;
 	private String consumibleEnUso;
 	private Grilla miGrilla;
+	private Personaje miPersonaje;
 	//constructor
 	
 	//metodos
@@ -29,16 +33,16 @@ public class Logica {
 		
 	}
 	public void pacmanArriba() {
-		
+		miPersonaje.moverArriba();
 	}
 	public void pacmanAbajo() {
-		
+		miPersonaje.moverAbajo();
 	}
 	public void pacmanIzquierda() {
-		
+		miPersonaje.moverIzquierda();
 	}
 	public void pacmanDerecha() {
-		
+		miPersonaje.moverDerecha();
 	}
 	public void perderVida() {
 		
