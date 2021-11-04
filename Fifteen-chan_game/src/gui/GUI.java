@@ -316,6 +316,8 @@ private void initialize() {
 				grillaNivel1.setVisible(false);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(true);
+				pacMan.setLocation(308,369);
+				grillaNivel3.add(pacMan);
 			}
 		});
 		frame.addKeyListener(new KeyListener() {
