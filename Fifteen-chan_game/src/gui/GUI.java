@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,6 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import fabricas.FabricaEnemigos;
+import fabricas.FabricaVampiro;
+import logica.Logica;
+import personaje.Personaje;
 
 import javax.swing.JLabel;
 
@@ -22,7 +28,8 @@ public class GUI {
 	private JLabel labels[][] = new JLabel[20][20];
 	private JLabel labels2[][] = new JLabel[20][20];
 	private JLabel labels3[][] = new JLabel[20][20];
-
+	private JLabel pacMan;
+    private Logica miLogica;
 	private JFrame frame;
 	private JPanel grillaNivel3;
 	
@@ -170,6 +177,14 @@ private void initialize() {
 		panelJuego.add(btnVolverMenu);
 		grillaNivel1.setLayout(null);
 		
+		
+		
+		FabricaEnemigos vampiro= new FabricaVampiro();
+		miLogica= new Logica(vampiro);
+		pacMan= vampiro.getPacman();
+		pacMan.setBounds(308, 369, 46, 14);
+		grillaNivel1.add(pacMan);
+		frame.repaint();
 
 		
 		//labels de la grilla
@@ -232,8 +247,10 @@ private void initialize() {
 				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				
 			}
 		});
+		
 		
 		btnJugarSCP.addMouseListener(new MouseAdapter() {
 			@Override
@@ -290,5 +307,45 @@ private void initialize() {
 				grillaNivel3.setVisible(true);
 			}
 		});
-	}
+		frame.addKeyListener(new KeyListener() {
+	        public void keyTyped(KeyEvent e) {
+	        }
+            public void keyPressed(KeyEvent e) {
+	        	int presiona=e.getKeyCode();
+	        	Point posicion = pacMan.getLocation();	
+	    		int movimiento = 5;
+	        	switch (presiona) 
+	            {
+	      	      case KeyEvent.VK_UP: {
+	      	        int ubicacion = posicion.y - movimiento;
+	      	        posicion.setLocation(posicion.x, ubicacion);
+	      	        System.out.println("llegue putas");
+	      	        frame.repaint();
+	    		    break;
+	      	      }
+	      	      case KeyEvent.VK_LEFT:{
+	    		    int ubicacion = posicion.x - movimiento;
+	    		    posicion.setLocation(ubicacion, posicion.y);
+	    		    frame.repaint();
+	    		    break;
+	    		  }	               
+	    		  case KeyEvent.VK_RIGHT: {
+		    	    int ubicacion = posicion.x +movimiento;
+		    	    posicion.setLocation(ubicacion, posicion.y);
+		    	    frame.repaint();
+		    		break;
+		    	}
+		        case KeyEvent.VK_DOWN: {
+		    		int ubicacion = posicion.y + movimiento;
+		    		posicion.setLocation(posicion.x, ubicacion);
+		    		frame.repaint();
+		    		break;
+		    	}
+	           }
+	         frame.repaint();
+	        }
+			public void keyReleased(KeyEvent e) {
+			}
+		});
+   }
 }

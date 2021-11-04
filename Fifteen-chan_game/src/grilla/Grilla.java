@@ -1,7 +1,11 @@
 package grilla;
 
 import java.awt.Point;
+
+import Objetos.Consumible;
 import bloque.Bloque;
+import enemigos.MenteEnemiga;
+import fabricas.FabricaEnemigos;
 import logica.Logica;
 
 public class Grilla {
@@ -11,7 +15,6 @@ public class Grilla {
 	private  int tamanioBloqueGrafico;
 	private MenteEnemiga misEnemigos;
 	private Logica miLogica;
-	private Nivel miNivel;
 	//constructor
 	
 	public Grilla(FabricaEnemigos modo) {
@@ -42,10 +45,11 @@ public class Grilla {
 		return hayEnemigo;
 	}
 	public boolean actualizarEnemigos() {
+		return false;
 		
 	}
 	public Consumible getConsumible(Point ubicacion) {
-		
+	  return null;	
 	}
 	public boolean grillaVacia() {
 		return cantidadInicialDeConsumibles==0;
