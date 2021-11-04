@@ -192,6 +192,10 @@ private void initialize() {
 		for (int i = 0; i<paredes.length; i++) {
 			labels[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
 		}
+		labels[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
 		
 		for (int filas =0; filas < 20; filas++){
 			for (int columna =0; columna < 20; columna++) {
@@ -206,6 +210,10 @@ private void initialize() {
 			labels2[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
 		}
 
+		labels2[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels2[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels2[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels2[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
 		for (int filas =0; filas < 20; filas++){
 			for (int columna =0; columna < 20; columna++) {
 				labels3[filas][columna] = new JLabel("");
@@ -219,7 +227,10 @@ private void initialize() {
 				labels3[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
 		}
 		
-			
+		labels3[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels3[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels3[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
+		labels3[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
 		
 		// acciones botones
 		
