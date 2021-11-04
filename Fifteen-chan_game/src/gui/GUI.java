@@ -286,7 +286,7 @@ private void initialize() {
 		FabricaEnemigos vampiro= new FabricaVampiro();
 		miLogica= new Logica(vampiro);
 		pacMan= vampiro.getPacman();
-		pacMan.setBounds(308, 360, 32, 32);
+		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);
 		grillaNivel1.add(pacMan);
 		

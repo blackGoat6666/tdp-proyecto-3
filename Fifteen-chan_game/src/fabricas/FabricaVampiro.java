@@ -6,7 +6,7 @@ public class FabricaVampiro implements FabricaEnemigos {
 	
 	
 	public FabricaVampiro(){
-	  pacman=new Personaje("/Images/vampiro.png", "/Images/vampiro.png", "/Images/vampiro.png");
+	  pacman=new Personaje("/Images/vampiroadelantemoviendose.gif", "/Images/vampiro.png", "/Images/vampiro.png");
 	}
 	public Enemigo getBlinky() {
 		// TODO Auto-generated method stub
