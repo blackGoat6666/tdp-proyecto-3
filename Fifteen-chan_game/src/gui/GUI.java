@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import fabricas.FabricaEnemigos;
 import fabricas.FabricaVampiro;
 import logica.Logica;
-import personaje.Personaje;
 
 import javax.swing.JLabel;
 
@@ -28,10 +27,12 @@ public class GUI {
 	private JLabel labels[][] = new JLabel[20][20];
 	private JLabel labels2[][] = new JLabel[20][20];
 	private JLabel labels3[][] = new JLabel[20][20];
-	private JLabel pacMan;
-    private Logica miLogica;
+    private JLabel pacMan;
 	private JFrame frame;
+	private JPanel grillaNivel1;
+	private JPanel grillaNivel2;
 	private JPanel grillaNivel3;
+	private Logica miLogica;
 	
 	private Point [] paredes = {new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1), new Point(1,2), new Point(2,2), new Point(3,2), new Point(4,2),new Point(5,4),new Point(14,4),
 			new Point(5,5),new Point(14,5),new Point(5,7),new Point(14,7),
@@ -104,21 +105,19 @@ private void initialize() {
 		panelMenu.setLayout(null);
 		
 		
-		JPanel grillaNivel1 = new Panel("/Images/nivelvampiro1.png");
+		grillaNivel1 = new Panel("/Images/nivelvampiro1.png");
 		grillaNivel1.setBounds(365, 10, 660, 660);
 		panelJuego.add(grillaNivel1);
 		
-		JPanel grillaNivel2 = new Panel("/Images/nivelvampiro2.png");
-		grillaNivel2.setSize(660, 660);
-		grillaNivel2.setLocation(365, 10);
-		grillaNivel1.setBounds(365, 10, 660, 660);
+		grillaNivel2 = new Panel("/Images/nivelvampiro2.png");
+		grillaNivel2.setBounds(365, 10, 660, 660);
 		panelJuego.add(grillaNivel2);
+		grillaNivel2.setLayout(null);
 		
 		grillaNivel3 = new Panel("/Images/nivelvampiro3.png");
-		grillaNivel3.setSize(660, 660);
-		grillaNivel3.setLocation(365, 10);
-		grillaNivel1.setBounds(365, 10, 660, 660);
+		grillaNivel3.setBounds(365, 10, 660, 660);
 		panelJuego.add(grillaNivel3);
+		grillaNivel3.setLayout(null);
 		
 		JButton btnAyuda = new JButton("Ayuda");
 		btnAyuda.setForeground(Color.RED);
@@ -177,14 +176,6 @@ private void initialize() {
 		panelJuego.add(btnVolverMenu);
 		grillaNivel1.setLayout(null);
 		
-		
-		
-		FabricaEnemigos vampiro= new FabricaVampiro();
-		miLogica= new Logica(vampiro);
-		pacMan= vampiro.getPacman();
-		pacMan.setBounds(308, 369, 46, 14);
-		grillaNivel1.add(pacMan);
-		frame.repaint();
 
 		
 		//labels de la grilla
@@ -210,23 +201,23 @@ private void initialize() {
 				labels2[filas][columna].setVisible(true);
 				labels2[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
 			}
-			}
-			for (int i = 0; i<paredes.length; i++) {
-				labels2[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
+		}
+		for (int i = 0; i<paredes.length; i++) {
+			labels2[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
 		}
 
-			for (int filas =0; filas < 20; filas++){
-				for (int columna =0; columna < 20; columna++) {
-					labels3[filas][columna] = new JLabel("");
-				    labels3[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
-					grillaNivel3.add(labels3[filas][columna]);
-					labels3[filas][columna].setVisible(true);
-					labels3[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
-				}
-				}
-				for (int i = 0; i<paredes.length; i++) {
-					labels3[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
-				}
+		for (int filas =0; filas < 20; filas++){
+			for (int columna =0; columna < 20; columna++) {
+				labels3[filas][columna] = new JLabel("");
+			    labels3[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
+				grillaNivel3.add(labels3[filas][columna]);
+				labels3[filas][columna].setVisible(true);
+				labels3[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
+			}
+		}
+		for (int i = 0; i<paredes.length; i++) {
+				labels3[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
+		}
 		
 			
 		
@@ -281,6 +272,12 @@ private void initialize() {
 				panelMenu.setVisible(true);
 			}
 		});
+		FabricaEnemigos vampiro= new FabricaVampiro();
+		miLogica= new Logica(vampiro);
+		pacMan= vampiro.getPacman();
+		pacMan.setBounds(308, 360, 32, 32);
+		frame.setFocusable(true);
+		grillaNivel1.add(pacMan);
 		
 		btnNivel1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -288,7 +285,8 @@ private void initialize() {
 				grillaNivel1.setVisible(true);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
-				
+				pacMan.setLocation(308,369);
+				grillaNivel1.add(pacMan);
 			}
 		});
 		btnNivel2.addMouseListener(new MouseAdapter() {
@@ -297,6 +295,8 @@ private void initialize() {
 				grillaNivel1.setVisible(false);
 				grillaNivel2.setVisible(true);
 				grillaNivel3.setVisible(false);
+				pacMan.setLocation(308,369);
+				grillaNivel2.add(pacMan);
 			}
 		});
 		btnNivel3.addMouseListener(new MouseAdapter() {
@@ -308,44 +308,54 @@ private void initialize() {
 			}
 		});
 		frame.addKeyListener(new KeyListener() {
-	        public void keyTyped(KeyEvent e) {
-	        }
-            public void keyPressed(KeyEvent e) {
+	        public void keyPressed(KeyEvent e) {
 	        	int presiona=e.getKeyCode();
 	        	Point posicion = pacMan.getLocation();	
-	    		int movimiento = 5;
-	        	switch (presiona) 
+	    		int movimiento = 4;
+	    		switch (presiona) 
 	            {
 	      	      case KeyEvent.VK_UP: {
-	      	        int ubicacion = posicion.y - movimiento;
-	      	        posicion.setLocation(posicion.x, ubicacion);
-	      	        System.out.println("llegue putas");
-	      	        frame.repaint();
-	    		    break;
+                    if(posicion.y>=35) {
+                      int ubicacion = posicion.y - movimiento;
+  	      	          posicion.setLocation(posicion.x, ubicacion);
+  	      	          pacMan.setLocation(posicion);
+	      	    	}
+                    break;
 	      	      }
 	      	      case KeyEvent.VK_LEFT:{
-	    		    int ubicacion = posicion.x - movimiento;
-	    		    posicion.setLocation(ubicacion, posicion.y);
-	    		    frame.repaint();
-	    		    break;
-	    		  }	               
+	      	    	if(posicion.x>=25) {
+	      	    	  int ubicacion = posicion.x - movimiento;
+			    	  posicion.setLocation(ubicacion, posicion.y);
+			    	  pacMan.setLocation(posicion);
+			    	}
+	      	        break;	
+	      	      }	               
 	    		  case KeyEvent.VK_RIGHT: {
-		    	    int ubicacion = posicion.x +movimiento;
-		    	    posicion.setLocation(ubicacion, posicion.y);
-		    	    frame.repaint();
+	    			if(posicion.x<=585)  {
+			    	  int ubicacion = posicion.x +movimiento;
+			    	  posicion.setLocation(ubicacion, posicion.y);
+			    	  pacMan.setLocation(posicion);
+			    	}
+	    			break;
+		    	  }
+		          case KeyEvent.VK_DOWN: {
+		    		if(posicion.y<=605){
+		        	  int ubicacion = posicion.y + movimiento;
+		    		  posicion.setLocation(posicion.x, ubicacion);
+		    		  pacMan.setLocation(posicion);
+		    		}
 		    		break;
-		    	}
-		        case KeyEvent.VK_DOWN: {
-		    		int ubicacion = posicion.y + movimiento;
-		    		posicion.setLocation(posicion.x, ubicacion);
-		    		frame.repaint();
-		    		break;
-		    	}
+		    	  }
 	           }
-	         frame.repaint();
+	    	 frame.repaint();
 	        }
 			public void keyReleased(KeyEvent e) {
 			}
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 		});
+		
    }
 }
