@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,6 +16,7 @@ public class GUI {
 
 	private JPanel panelMenu;
 	private JPanel panelJuego;
+	private JLabel labels[][] = new JLabel[20][20];
 
 	private JFrame frame;
 
@@ -55,19 +57,31 @@ public class GUI {
 	 */
 private void initialize() {
 		
-	panelJuego = new Panel("/Images/fondoVampiros.jpg");
-	panelJuego.setBounds(0, 0, 1194, 671);
-	panelJuego.setVisible(false);
-	frame.getContentPane().add(panelJuego);
-	panelJuego.setLayout(null);
-	panelJuego.setVisible(false);
+	    panelJuego = new Panel("/Images/fondoVampiros.jpg");
+	    panelJuego.setBounds(0, 0, 1200, 720);
+	    panelJuego.setVisible(false);
+	    frame.getContentPane().add(panelJuego);
+	    panelJuego.setLayout(null);
+	    panelJuego.setVisible(false);
 	
 		panelMenu = new Panel("/Images/menu.png");
-		panelMenu.setBounds(0, 0, 1194, 671);
+		panelMenu.setBounds(0, 0, 1200, 720);
 		panelMenu.setVisible(true);
 		frame.getContentPane().add(panelMenu);
 		panelMenu.setLayout(null);
 		
+		
+		JPanel grillaNivel1 = new Panel("/Images/nivelvampiro1.png");
+		grillaNivel1.setBounds(365, 10, 660, 660);
+		panelJuego.add(grillaNivel1);
+		
+		JPanel grillaNivel2 = new Panel("/Images/nivelvampiro2.png");
+		grillaNivel1.setBounds(365, 10, 660, 660);
+		panelJuego.add(grillaNivel2);
+		
+		JPanel grillaNivel3 = new Panel("/Images/nivelvampiro3.png");
+		grillaNivel1.setBounds(365, 10, 660, 660);
+		panelJuego.add(grillaNivel3);
 		
 		
 		
@@ -102,20 +116,44 @@ private void initialize() {
 		btnJugarSCP.setBounds(581, 238, 226, 58);
 		panelMenu.add(btnJugarSCP);
 		
+		JButton btnNivel1 = new JButton("Nivel 1");
+		btnNivel1.setForeground(Color.RED);
+		btnNivel1.setBackground(Color.BLACK);
+		btnNivel1.setBounds(74, 237, 226, 58);
+		panelJuego.add(btnNivel1);
+		
+		JButton btnNivel2 = new JButton("Nivel 2");
+		btnNivel2.setForeground(Color.RED);
+		btnNivel2.setBackground(Color.BLACK);
+		btnNivel2.setBounds(72, 314, 226, 58);
+		panelJuego.add(btnNivel2);
+		
+		JButton btnNivel3 = new JButton("Nivel 3");
+		btnNivel3.setForeground(Color.RED);
+		btnNivel3.setBackground(Color.BLACK);
+		btnNivel3.setBounds(74, 410, 226, 58);
+		panelJuego.add(btnNivel3);
+		
 		JButton btnVolverMenu = new JButton("Volver al menu");
 		btnVolverMenu.setForeground(Color.WHITE);
 		btnVolverMenu.setBackground(Color.BLACK);
 		btnVolverMenu.setBounds(50, 100, 226, 58);
 		panelJuego.add(btnVolverMenu);
+		grillaNivel1.setLayout(null);
 		
-		JLabel grillaJuego = new JLabel("New label");
-		grillaJuego.setBounds(365, 10, 914, 675);
-		grillaJuego.setText(null);
-		panelJuego.add(grillaJuego);
-		grillaJuego.setIcon(new ImageIcon(GUI.class.getResource("/Images/nivel vampiro.png")));
-		grillaJuego.setVisible(true);
+
 		
+		//labels de la grilla
 		
+		for (int filas =0; filas < 20; filas++){
+		for (int columna =0; columna < 20; columna++) {
+			labels[filas][columna] = new JLabel("");
+		    labels[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
+			grillaNivel1.add(labels[filas][columna]);
+			labels[filas][columna].setVisible(true);
+			labels[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
+		}
+		}
 		
 		
 		// acciones botones
@@ -168,5 +206,30 @@ private void initialize() {
 			}
 		});
 		
+		btnNivel1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				grillaNivel1.setVisible(true);
+				grillaNivel2.setVisible(false);
+				grillaNivel3.setVisible(false);
+				
+			}
+		});
+		btnNivel2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				grillaNivel1.setVisible(false);
+				grillaNivel2.setVisible(true);
+				grillaNivel3.setVisible(false);
+			}
+		});
+		btnNivel3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				grillaNivel1.setVisible(false);
+				grillaNivel2.setVisible(false);
+				grillaNivel3.setVisible(true);
+			}
+		});
 	}
 }
