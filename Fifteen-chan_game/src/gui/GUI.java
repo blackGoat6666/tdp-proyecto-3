@@ -33,6 +33,7 @@ public class GUI {
 	private JPanel grillaNivel2;
 	private JPanel grillaNivel3;
 	private Logica miLogica;
+	private Thread sonido;
 	
 	private Point [] paredes = {new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1), new Point(1,2), new Point(2,2), new Point(3,2), new Point(4,2),new Point(5,4),new Point(14,4),
 			new Point(5,5),new Point(14,5),new Point(5,7),new Point(14,7),
@@ -81,9 +82,7 @@ public class GUI {
 		frame.setBounds(0, 0, 1200, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		initialize();
+				initialize();
 	}
 
 	/**
