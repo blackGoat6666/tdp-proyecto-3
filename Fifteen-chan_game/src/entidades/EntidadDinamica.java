@@ -12,6 +12,6 @@ public abstract void comido();
 
 public abstract void mover();
 
-public abstract void morir();
+
 	
 }
