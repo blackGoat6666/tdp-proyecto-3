@@ -252,7 +252,7 @@ private void initialize() {
 				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
-				miLogica= new Logica(this, "vampiros");
+				//miLogica= new Logica(this, "vampiros");
 			}
 		});
 		
@@ -287,7 +287,7 @@ private void initialize() {
 			}
 		});
 		FabricaVampiro vampiro= new FabricaVampiro();
-		pacMan= miLogica.getPacman().g;
+		pacMan= miLogica.getPacman().getEntidadGrafica();
 		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);
 		grillaNivel1.add(pacMan);
@@ -374,16 +374,16 @@ private void initialize() {
 		
    }
 
-public void setVida(int vida, String icono) {
+/*public void setVida(int vida, String icono) {
 	switch(vida) {
 		case 1: vida1.setIcon(icono); break;
 		case 2:  vida2.setIcon(icono);break;
 		case 3:  vida3.setIcon(icono); break;
 	}
-}
+}*/
 
-public void actualizar() {
+/*public void actualizar() {
 	this.repaint();
 	
-}
+}*/
 }
