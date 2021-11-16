@@ -3,6 +3,7 @@ package logica;
 import java.awt.Point;
 
 import entidades.Blinky;
+import entidades.Enemigo;
 import entidades.Entidad;
 
 public class MenteEnemiga implements Runnable{
@@ -26,8 +27,12 @@ public class MenteEnemiga implements Runnable{
     	return miLogica.estoyAMitadBloque(ubicacion);
     }
  
-	public void chequearBloque(Entidad visitante, Point direccion) {
+	public void chequearBloque(Enemigo visitante, Point direccion) {
 		miLogica.visitarBloque(visitante,  direccion);
+	}
+	
+	public Point getUbicacionBlinky() {
+		return Blinky.
 	}
 	
 	

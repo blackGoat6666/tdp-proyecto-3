@@ -6,10 +6,6 @@ import entidades.Entidad;
 
 public interface Visitor {
 
-public void visitFantasma(Enemigo fantasma);	
- 
-public void visitPacman();
-	
 public void visitBloque(Bloque casillero);
 
 public void visitDot();
@@ -24,11 +20,10 @@ public void visitInvisibilidad();
 
 public void visitVelocidad();
 
-public void visitEnemigo();
-
 public void visitLadrillo();
 
 public void visitGate();
 
 public void visitBloqueVacio();
+
 }

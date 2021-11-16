@@ -27,33 +27,30 @@ public abstract class Enemigo extends EntidadDinamica {
 
 
 	
-	public void resetear() {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void resetear();
 
-	@Override
-	public void comido() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void mover() {
 		if(miMente.estoyAMitadBloque(ubicacion)) { 
 		  int cambios=intentos;
-		  Point movimiento;
+		  Point vectorMovimiento;
 		  while(!meMovi) {
-			movimiento= this.siguienteDireccion();
-			movimiento= new Point( (movimiento.x*30)+ ubicacion.x ,(movimiento.y*30)+ ubicacion.y);
-		    miMente.chequearBloque(this, movimiento);
+			vectorMovimiento= this.siguienteDireccion();
+			vectorMovimiento= new Point( (vectorMovimiento.x*30)+ ubicacion.x ,(vectorMovimiento.y*30)+ ubicacion.y);
+		    miMente.chequearBloque(this, vectorMovimiento);
+		    intentos++;
 		  }
-		  movimiento=this.siguienteDireccion();
-		  ubicacion.setLocation(ubicacion.x+movimiento.x, ubicacion.y+movimiento.y);
+		  intentos--;
+		  vectorMovimiento=this.siguienteDireccion();
+		  vectorMovimiento.setLocation(vectorMovimiento.x*movimiento, vectorMovimiento.y*movimiento);
+		  ubicacion.setLocation(ubicacion.x+vectorMovimiento.x, ubicacion.y+vectorMovimiento.y);
 		  intentos=0;
 		}
 		else{
-			ubicacion.setLocation(ubicacion.x+ultimaDireccion.x, ubicacion.y+ultimaDireccion.y);
+			
+			ubicacion.setLocation(ubicacion.x+(ultimaDireccion.x *movimiento), ubicacion.y+(ultimaDireccion.y * movimiento));
 		}
 		
 	}
@@ -68,11 +65,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		
 	}
 
-	@Override
-	public void accept(Visitor v) {
-	  v.visitFantasma(this);
-		
-	}
+	
 	
 	protected Point siguienteDireccion() {
 		switch(intentos) {
@@ -93,6 +86,12 @@ public abstract class Enemigo extends EntidadDinamica {
 		}
 		return null;
 		
+	}
+	
+	public Point getUbicacion() {
+		return ubicacion;
+	}
+	public void accept(Visitor v) {
 	}
 
 	public abstract void calcularDir(Point Pacman);

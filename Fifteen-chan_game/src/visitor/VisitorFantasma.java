@@ -6,90 +6,75 @@ import entidades.Entidad;
 import logica.Logica;
 
 public class VisitorFantasma implements Visitor{
-	private Entidad visitante;
+	private Enemigo visitante;
 	protected Logica miLogica;
 	
 	
-	public void setVisitante(Entidad ente) {
+	public void setVisitante(Enemigo ente) {
 		visitante=ente;
 	}
 	
-	public void visitPacman() {
-		if(miLogica.huir()) {
-			visitante.morir();
-		}
-		else {
-			miLogica.perderVida();
-		}
-	}
-		
-    public void visitBloque(Bloque casillero) {
+	public void visitBloque(Bloque casillero) {
 	  casillero.accept(this);
 		
 	}
 
 	@Override
 	public void visitDot() {
-		
+		visitante.seMovio();
 	}
 
 	@Override
 	public void visitFruit() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitPowerPellet() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitBomba() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitInvisibilidad() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitVelocidad() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
-	@Override
-	public void visitEnemigo() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void visitLadrillo() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void visitGate() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitBloqueVacio() {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
-	@Override
-	public void visitFantasma(Enemigo fantasma) {
-		
-	}
+
+
+
+
 
 }

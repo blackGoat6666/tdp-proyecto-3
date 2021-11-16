@@ -3,6 +3,7 @@ package logica;
 import java.awt.Point;
 
 import entidades.Bloque;
+import entidades.Enemigo;
 import entidades.Entidad;
 import fabricas.FabricaEntidades;
 import gui.GUI;
@@ -34,7 +35,7 @@ public class Logica {
        miGUI=gui;
     }
 
-    public void visitarBloque(Entidad visitante, Point direccion) {
+    public void visitarBloque(Enemigo visitante, Point direccion) {
       if(true) { //acá hay que escribir que si el ente es de clase enemigo
     	visitorFantasma.setVisitante(visitante);  
         this.obtenerBloque(direccion).accept(visitorFantasma);	  
@@ -92,6 +93,10 @@ public class Logica {
     
     public Personaje getPacman() {
     	return miPersonaje;
+    }
+    
+    public Boolean colisionan() {
+    	
     }
     
     private Bloque obtenerBloque(Point ubicacion) {
