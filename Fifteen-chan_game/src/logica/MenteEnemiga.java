@@ -32,8 +32,11 @@ public class MenteEnemiga implements Runnable{
 	}
 	
 	public Point getUbicacionBlinky() {
-		return Blinky.
+		return blinky.getUbicacion();
 	}
 	
+	public void murioBlinky() {
+		blinky.morir();
+	}
 	
 }

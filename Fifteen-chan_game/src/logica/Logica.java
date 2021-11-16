@@ -24,6 +24,7 @@ public class Logica {
     private Bloque[][] matriz;
     private Boolean huir;
     private GUI miGUI;
+    private MenteEnemiga megamind;
     //constructor
 
     //metodos
@@ -33,6 +34,7 @@ public class Logica {
        huir=false;
        vidas=3;
        miGUI=gui;
+       megamind= new MenteEnemiga(this, null);
     }
 
     public void visitarBloque(Enemigo visitante, Point direccion) {
@@ -95,8 +97,27 @@ public class Logica {
     	return miPersonaje;
     }
     
-    public Boolean colisionan() {
-    	
+    public void colisionan() {
+      if(huir) {
+        this.colisionanEnHuir();	  
+      }
+      else {
+        if(this.colisionanNormal()){
+        	this.perderVida();
+        }
+      }
+    }
+    
+    private void colisionanEnHuir(){
+      Bloque bloquePacman=obtenerBloque(miPersonaje.getLocation());
+      if(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky())) {
+    	  megamind.murioBlinky();
+      }
+    }
+    
+    private Boolean colisionanNormal(){
+    	Bloque bloquePacman=obtenerBloque(miPersonaje.getLocation());
+    	return(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky()));
     }
     
     private Bloque obtenerBloque(Point ubicacion) {
