@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import fabricas.FabricaEnemigos;
+import fabricas.FabricaEntidades;
 import fabricas.FabricaVampiro;
 import logica.Logica;
 
@@ -282,8 +282,8 @@ private void initialize() {
 				panelMenu.setVisible(true);
 			}
 		});
-		FabricaEnemigos vampiro= new FabricaVampiro();
-		miLogica= new Logica(vampiro);
+		FabricaVampiro vampiro= new FabricaVampiro();
+		miLogica= new Logica(vampiro, null, null);
 		pacMan= vampiro.getPacman();
 		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);

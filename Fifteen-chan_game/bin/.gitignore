@@ -1,12 +1,6 @@
-/Images/
-/Objetos/
-/bloque/
-/enemigos/
-/fabricas/
-/grilla/
-/gui/
-/logica/
-/personaje/
-/resources/
 /entidades/
 /visitor/
+/logica/
+/gui/
+/grilla/
+/fabricas/

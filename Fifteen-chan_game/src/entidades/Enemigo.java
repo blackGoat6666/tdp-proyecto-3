@@ -2,7 +2,10 @@ package entidades;
 
 import java.awt.Point;
 
+import logica.MenteEnemiga;
 import visitor.Visitor;
+import visitor.VisitorFantasma;
+import visitor.VisitorPacman;
 
 public abstract class Enemigo extends EntidadDinamica {
     
@@ -10,10 +13,11 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected Point posicionObjetivo;
 	protected Point ultimaDireccion;
 	protected int intentos;
-	protected int tamanioBloqueGrafico;
+	protected MenteEnemiga miMente;
+	protected int movimiento;
 	
-	public Enemigo(int tamanioBloque) {
-		this.tamanioBloqueGrafico=tamanioBloque;
+	public Enemigo(int mov) {
+		movimiento=mov;
 		intentos=0;
 		ultimaDireccion= new Point(0,0);
 		preferencias= new Point(0,0);
@@ -38,7 +42,9 @@ public abstract class Enemigo extends EntidadDinamica {
 
 	@Override
 	public void mover() {
-		// TODO Auto-generated method stub
+		if(miMente.estoyAMitadBloque(ubicacion)) { 
+		  	
+		}
 		
 	}
 
@@ -50,9 +56,10 @@ public abstract class Enemigo extends EntidadDinamica {
 
 	@Override
 	public void accept(Visitor v) {
-		// TODO Auto-generated method stub
+	  v.visitFantasma();
 		
 	}
+	
 
 	public abstract void calcularDir(Point Pacman);
 }

@@ -1,5 +1,7 @@
 package fabricas;
 
+import javax.swing.JLabel;
+
 import EntidadesGraficas.EntidadDinamicaGrafica;
 import EntidadesGraficas.EntidadGraficaConsumible;
 
@@ -82,6 +84,11 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaConsumible getVelocidad() {
 		// TODO Auto-generated method stub
 		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+	}
+
+	public JLabel getPacman() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
