@@ -54,12 +54,7 @@ public class VisitorPacman implements Visitor {
 		
 	}
 
-	@Override
-	public void visitEnemigo() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void visitLadrillo() {
 		// TODO Auto-generated method stub
@@ -74,26 +69,10 @@ public class VisitorPacman implements Visitor {
 
 
 
-	@Override
-	public void visitPacman() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void visitBloqueVacio() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitFantasma(Enemigo fantasma) {
-		if( miLogica.huir() ) {
-			fantasma.morir();
-		}
-		else {
-			miLogica.perderVida();
-		}
 		
 	}
 
