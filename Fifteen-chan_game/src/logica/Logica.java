@@ -103,7 +103,7 @@ public class Logica {
     	
     }
     
-    private Bloque obtenerBloque(Point ubicacion) {
+    public Bloque obtenerBloque(Point ubicacion) {
     	int x= (ubicacion.x -30)/30;
     	int y= (ubicacion.y-30) /30;
     	return(matriz[x][y]);
@@ -112,6 +112,9 @@ public class Logica {
 	public void agarroInvisibilidad() {
 		
 		
+	}
+	public void eliminarEntidadEstatica(Bloque bloque) {
+		bloque.eliminarEntidadEstatica();
 	}
     
     

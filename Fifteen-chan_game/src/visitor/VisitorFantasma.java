@@ -1,8 +1,12 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
+import entidades.Fruit;
+import entidades.PowerPellet;
+import entidades.Velocidad;
 import logica.Logica;
 
 public class VisitorFantasma implements Visitor{
@@ -19,19 +23,9 @@ public class VisitorFantasma implements Visitor{
 		
 	}
 
-	@Override
-	public void visitDot() {
-		visitante.seMovio();
-	}
 
 	@Override
-	public void visitFruit() {
-		visitante.seMovio();
-		
-	}
-
-	@Override
-	public void visitPowerPellet() {
+	public void visitPowerPellet(PowerPellet power) {
 		visitante.seMovio();
 		
 	}
@@ -49,7 +43,7 @@ public class VisitorFantasma implements Visitor{
 	}
 
 	@Override
-	public void visitVelocidad() {
+	public void visitVelocidad(Velocidad barry) {
 		visitante.seMovio();
 		
 	}
@@ -69,6 +63,18 @@ public class VisitorFantasma implements Visitor{
 	@Override
 	public void visitBloqueVacio() {
 		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitDot(Dot dot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitFruit(Fruit fru) {
+		// TODO Auto-generated method stub
 		
 	}
 

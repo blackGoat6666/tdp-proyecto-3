@@ -36,20 +36,10 @@ public class Personaje extends EntidadDinamica {
 		int ubicacion = posicion.y - movimiento;
 		posicion.setLocation(posicion.x, ubicacion);
 	}
-	public Boolean colisiona(Point ubicacion) {
-		
-		return null;
-	}
-
+	
 	
 	public void resetear() {
-		
-		
-	}
-
-	@Override
-	public void comido() {
-		// TODO Auto-generated method stub
+		ubicacion.setLocation(308, 369);
 		
 	}
 
@@ -67,7 +57,7 @@ public class Personaje extends EntidadDinamica {
 
 	@Override
 	public void accept(Visitor v) {
-		v.visitPacman(this);
+		
 		
 	}
 	

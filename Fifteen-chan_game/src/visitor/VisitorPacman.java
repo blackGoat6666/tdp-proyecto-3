@@ -5,7 +5,11 @@ import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
+import entidades.Gate;
+import entidades.Ladrillo;
 import entidades.Personaje;
+import entidades.PowerPellet;
+import entidades.Velocidad;
 import logica.Logica;
 
 public class VisitorPacman implements Visitor {
@@ -24,19 +28,26 @@ public class VisitorPacman implements Visitor {
 
 	public void visitDot(Dot dot) {
 		miLogica.sumarPuntos(dot.getPuntaje());
-		
+		dot.eliminarImagen();
+		Bloque eliminar=miLogica.obtenerBloque(dot.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 	}
 
 	@Override
 	public void visitFruit(Fruit fru) {
 		miLogica.sumarPuntos(fru.getPuntaje());
+		fru.eliminarImagen();
+		Bloque eliminar=miLogica.obtenerBloque(fru.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		
 	}
 
 	@Override
-	public void visitPowerPellet() {
+	public void visitPowerPellet(PowerPellet power) {
 		miLogica.agarroPowerPellet();
-		
+		power.eliminarImagen();
+		Bloque eliminar=miLogica.obtenerBloque(power.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 	}
 
 	@Override
@@ -51,32 +62,27 @@ public class VisitorPacman implements Visitor {
 		
 	}
 
-	@Override
-	public void visitVelocidad() {
-		miLogica.agarroVelocidad();
+	public void visitBloqueVacio() {
 		
 	}
 
 	
-	@Override
+	public void visitVelocidad(Velocidad barry) {
+		miLogica.agarroVelocidad();
+		barry.eliminarImagen();
+		Bloque eliminar=miLogica.obtenerBloque(barry.getPosicion());
+		eliminar.eliminarEntidadEstatica();
+	}
+
+
 	public void visitLadrillo() {
-		miLogica.();
 		
 	}
 
-	@Override
 	public void visitGate() {
-		miLogica.colisionan();
 		
 	}
 
-
-
-
-	@Override
-	public void visitBloqueVacio() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

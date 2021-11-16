@@ -31,6 +31,9 @@ public class Bloque{
 	public void setEntidadDinamica(Entidad ente) {
 		miEntidadDinamica=(EntidadDinamica) ente;
 	}
+	public void eliminarEntidadEstatica() {
+		miEntidadEstatica=null;
+	}
 	
 	public Boolean tengoEntidadDinamica(){
 	  return (miEntidadDinamica!=null);	

@@ -9,9 +9,15 @@ public class Velocidad extends Potion{
 		return ("my name is barry allen... and i am the fastest man alive");
 	}
 
-	@Override
+	
 	public void accept(Visitor v) {
-		v.visitVelocidad();
+		
+		
+	}
+
+	
+	public void morir() {
+		// TODO Auto-generated method stub
 		
 	}
 
