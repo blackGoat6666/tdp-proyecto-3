@@ -9,5 +9,8 @@ public class EntidadGraficaEstatica extends EntidadGrafica {
 	public void borrar() {
 		this.setIcon(null);
 	}
+	public EntidadGrafica getEntidadGrafica() {
+		return this;
+	}
 
 }

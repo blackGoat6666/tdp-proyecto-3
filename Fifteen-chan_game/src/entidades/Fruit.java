@@ -13,5 +13,10 @@ public class Fruit extends MasPuntos {
 		
 	}
 
+	@Override
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
+
 	
 }

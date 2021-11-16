@@ -20,5 +20,7 @@ public class Velocidad extends Potion{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 }

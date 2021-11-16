@@ -19,5 +19,9 @@ public class Dot extends MasPuntos {
 	public void accept(Visitor v) {
 		v.visitDot(this);
 	}
+	@Override
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 
 }

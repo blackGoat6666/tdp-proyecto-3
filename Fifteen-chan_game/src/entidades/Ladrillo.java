@@ -11,5 +11,7 @@ public class Ladrillo extends EntidadEstatica{
 	public void accept(Visitor v) {
 		v.visitLadrillo();
 	}
-
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 }
