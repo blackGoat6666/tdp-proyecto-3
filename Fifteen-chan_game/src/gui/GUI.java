@@ -282,9 +282,10 @@ private void initialize() {
 				panelMenu.setVisible(true);
 			}
 		});
-		FabricaEnemigos vampiro= new FabricaVampiro();
-		miLogica= new Logica(vampiro);
-		pacMan= vampiro.getPacman();
+		//FabricaEnemigos vampiro= new FabricaVampiro();
+		//miLogica= new Logica(vampiro);
+		pacMan= new JLabel("");
+		pacMan.setIcon(new ImageIcon(GUI.class.getResource("/Images/vampiroadelantemoviendose.gif")));
 		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);
 		grillaNivel1.add(pacMan);
