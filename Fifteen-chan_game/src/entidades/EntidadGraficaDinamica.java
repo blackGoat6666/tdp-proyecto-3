@@ -98,8 +98,10 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 	     case "invisibilidad":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoInvisibilidad[3])));
 	    	 break;
+    	}
 	}
-	}
-    
-
+    public void setModo(String estado) {
+    	modo=estado;
+    }
 }
+

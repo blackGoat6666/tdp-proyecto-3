@@ -5,11 +5,14 @@ import java.awt.Point;
 import entidades.Bloque;
 import entidades.Enemigo;
 import entidades.Entidad;
+import entidades.EntidadDinamica;
+import entidades.Personaje;
 import fabricas.FabricaEntidades;
+import fabricas.FabricaVampiro;
 import gui.GUI;
-import personaje.Personaje;
 import visitor.Visitor;
 import visitor.VisitorFantasma;
+import visitor.VisitorPacman;
 
 public class Logica {
     //atributos de instancia
@@ -25,20 +28,30 @@ public class Logica {
     private Boolean huir;
     private GUI miGUI;
     private int puntos;
+    private MenteEnemiga megamind;
+    private FabricaEntidades miFabrica;
     //constructor
 
     //metodos
-    public Logica(GUI gui, FabricaEntidades fabrica, Visitor fantasma, Visitor pacman) {
-       visitorFantasma=(VisitorFantasma) fantasma;
-       visitorPacman=pacman;
+    public Logica(GUI gui, String fabrica) {
+       visitorFantasma= new VisitorFantasma();
+       visitorPacman= new VisitorPacman(this);
        huir=false;
        vidas=3;
        miGUI=gui;
+       megamind= new MenteEnemiga(this, null);
+       this.getFabrica(fabrica);
+    }
+    
+    private void getFabrica(String fab) {
+    	switch(fab) {
+    	 case "vampiros": miFabrica=new FabricaVampiro();
+    	}
     }
 
-    public void visitarBloque(Enemigo visitante, Point direccion) {
+    public void visitarBloque(EntidadDinamica visitante, Point direccion) {
       if(true) { //acá hay que escribir que si el ente es de clase enemigo
-    	visitorFantasma.setVisitante(visitante);  
+    	visitorFantasma.setVisitante((Enemigo) visitante);  
         this.obtenerBloque(direccion).accept(visitorFantasma);	  
       }
       else {
@@ -64,6 +77,28 @@ public class Logica {
     public void setModoDeJuego(String nombre) {
 
     }
+    public void colisionan() {
+        if(huir) {
+          this.colisionanEnHuir();	  
+        }
+        else {
+          if(this.colisionanNormal()){
+          	this.perderVida();
+          }
+        }
+      }
+
+      private void colisionanEnHuir(){
+        Bloque bloquePacman=obtenerBloque(miPersonaje.getPosicion());
+        if(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky())) {
+      	  megamind.murioBlinky();
+        }
+      }
+
+      private Boolean colisionanNormal(){
+      	Bloque bloquePacman=obtenerBloque(miPersonaje.getPosicion());
+      	return(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky()));
+      }
 
     public void perderVida() {
     	miGUI.setVida(vidas, null);
@@ -99,9 +134,7 @@ public class Logica {
     	return miPersonaje;
     }
     
-    public Boolean colisionan() {
-    	
-    }
+
     
     public Bloque obtenerBloque(Point ubicacion) {
     	int x= (ubicacion.x -30)/30;
@@ -113,11 +146,11 @@ public class Logica {
 		
 		
 	}
-	public void eliminarEntidadEstatica(Bloque bloque) {
-		bloque.eliminarEntidadEstatica();
+
+	public void pacmanPuedeMoverse() {
+		miPersonaje.setMeMuevo(true);
+		
 	}
-	public void pacmanPuedeMoverse(){
-		miPersonaje.setPuedeMoverse(true);
-	}
+    
     
 }

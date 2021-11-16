@@ -34,6 +34,9 @@ public class GUI {
 	private JPanel grillaNivel3;
 	private Logica miLogica;
 	private Thread sonido;
+	private JLabel vida1;
+	private JLabel vida2;
+	private JLabel vida3;
 	
 	private Point [] paredes = {new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1), new Point(1,2), new Point(2,2), new Point(3,2), new Point(4,2),new Point(5,4),new Point(14,4),
 			new Point(5,5),new Point(14,5),new Point(5,7),new Point(14,7),
@@ -239,6 +242,7 @@ private void initialize() {
 				((Panel) panelJuego).changeImage("/Images/fondoMetaleros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				
 			}
 		});
 		
@@ -248,7 +252,7 @@ private void initialize() {
 				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
-				
+				miLogica= new Logica(this, "vampiros");
 			}
 		});
 		
@@ -370,4 +374,12 @@ private void initialize() {
 		});
 		
    }
+
+public void setVida(int vida, String icono) {
+	switch(vida) {
+		case 1: vida1.setIcon(icono); break;
+		case 2:  vida2.setIcon(icono);break;
+		case 3:  vida3.setIcon(icono); break;
+	}
+}
 }

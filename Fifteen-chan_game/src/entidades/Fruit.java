@@ -9,8 +9,9 @@ public class Fruit extends MasPuntos {
 	}
 	
 	public void accept(Visitor v) {
-	
+		v.visitFruit(this);
 		
 	}
+
 	
 }

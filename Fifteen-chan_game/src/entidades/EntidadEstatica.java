@@ -1,8 +1,9 @@
 package entidades;
 
 public abstract class EntidadEstatica extends Entidad{
-	public void eliminarImagen() {
-		imagen=null;
+	protected EntidadGraficaEstatica miImagen;
+	
+	public void morir() {
+		miImagen.borrar();
 	}
-
 }

@@ -28,7 +28,7 @@ public class VisitorPacman implements Visitor {
 
 	public void visitDot(Dot dot) {
 		miLogica.sumarPuntos(dot.getPuntaje());
-		dot.eliminarImagen();
+		dot.morir();
 		Bloque eliminar=miLogica.obtenerBloque(dot.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();
@@ -37,7 +37,7 @@ public class VisitorPacman implements Visitor {
 	@Override
 	public void visitFruit(Fruit fru) {
 		miLogica.sumarPuntos(fru.getPuntaje());
-		fru.eliminarImagen();
+		fru.morir();
 		Bloque eliminar=miLogica.obtenerBloque(fru.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();
@@ -47,7 +47,7 @@ public class VisitorPacman implements Visitor {
 	@Override
 	public void visitPowerPellet(PowerPellet power) {
 		miLogica.agarroPowerPellet();
-		power.eliminarImagen();
+		power.morir();
 		Bloque eliminar=miLogica.obtenerBloque(power.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();
@@ -72,7 +72,7 @@ public class VisitorPacman implements Visitor {
 	
 	public void visitVelocidad(Velocidad barry) {
 		miLogica.agarroVelocidad();
-		barry.eliminarImagen();
+		barry.morir();;
 		Bloque eliminar=miLogica.obtenerBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();

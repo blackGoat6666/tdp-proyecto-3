@@ -4,8 +4,6 @@ import java.awt.Point;
 
 import logica.MenteEnemiga;
 import visitor.Visitor;
-import visitor.VisitorFantasma;
-import visitor.VisitorPacman;
 
 public abstract class Enemigo extends EntidadDinamica {
     
@@ -17,12 +15,13 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected int movimiento;
 	protected Boolean meMovi;
 	
-	public Enemigo(int mov) {
+	public Enemigo(int mov, EntidadGraficaDinamica imagen) {
 		movimiento=mov;
 		intentos=0;
 		ultimaDireccion= new Point(0,0);
 		preferencias= new Point(0,0);
 		meMovi=false;
+		miImagen=imagen;
 	}
 
 
@@ -34,7 +33,6 @@ public abstract class Enemigo extends EntidadDinamica {
 	@Override
 	public void mover() {
 		if(miMente.estoyAMitadBloque(ubicacion)) { 
-		  int cambios=intentos;
 		  Point vectorMovimiento;
 		  while(!meMovi) {
 			vectorMovimiento= this.siguienteDireccion();
@@ -44,6 +42,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		  }
 		  intentos--;
 		  vectorMovimiento=this.siguienteDireccion();
+		  this.actualizarMiEntidadGrafica();
 		  vectorMovimiento.setLocation(vectorMovimiento.x*movimiento, vectorMovimiento.y*movimiento);
 		  ubicacion.setLocation(ubicacion.x+vectorMovimiento.x, ubicacion.y+vectorMovimiento.y);
 		  intentos=0;
@@ -51,6 +50,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		else{
 			
 			ubicacion.setLocation(ubicacion.x+(ultimaDireccion.x *movimiento), ubicacion.y+(ultimaDireccion.y * movimiento));
+			this.actualizarMiEntidadGrafica();
 		}
 		
 	}
@@ -61,10 +61,27 @@ public abstract class Enemigo extends EntidadDinamica {
 
 	@Override
 	public void morir() {
-		// TODO Auto-generated method stub
+		miImagen.setModo("invisibilidad");
+	}
+	protected void actualizarMiEntidadGrafica() {
+		if(this.siguienteDireccion().x==0) {
+			if(this.siguienteDireccion().y==1) {
+				miImagen.setDerecha();
+			}
+			else {
+				miImagen.setIzquierda();
+			}
+		}
+		else {
+			if(this.siguienteDireccion().x==1) {
+				miImagen.setAdelante();
+			}
+			else {
+				miImagen.setAtras();
+			}
+		}
 		
 	}
-
 	
 	
 	protected Point siguienteDireccion() {

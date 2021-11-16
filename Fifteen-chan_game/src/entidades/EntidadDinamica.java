@@ -1,11 +1,12 @@
 package entidades;
 
-import java.awt.Point;
 
 import visitor.Visitor;
 
 public abstract class EntidadDinamica extends Entidad {
-
+protected EntidadGraficaDinamica miImagen;
+	
+	
 public abstract void resetear();
 
 public abstract void mover();
