@@ -4,9 +4,12 @@ import entidades.Bloque;
 import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
+import entidades.Fruit;
+import entidades.Personaje;
 import logica.Logica;
 
 public class VisitorPacman implements Visitor {
+	protected Personaje visitante ;
 	protected Logica miLogica;
 	
 	public VisitorPacman(Logica logi) {
@@ -20,50 +23,50 @@ public class VisitorPacman implements Visitor {
 	}
 
 	public void visitDot(Dot dot) {
-		
+		miLogica.sumarPuntos(dot.getPuntaje());
 		
 	}
 
 	@Override
-	public void visitFruit() {
-		// TODO Auto-generated method stub
+	public void visitFruit(Fruit fru) {
+		miLogica.sumarPuntos(fru.getPuntaje());
 		
 	}
 
 	@Override
 	public void visitPowerPellet() {
-		// TODO Auto-generated method stub
+		miLogica.agarroPowerPellet();
 		
 	}
 
 	@Override
 	public void visitBomba() {
-		// TODO Auto-generated method stub
+		miLogica.agarroBomba();
 		
 	}
 
 	@Override
 	public void visitInvisibilidad() {
-		// TODO Auto-generated method stub
+		miLogica.agarroInvisibilidad();
 		
 	}
 
 	@Override
 	public void visitVelocidad() {
-		// TODO Auto-generated method stub
+		miLogica.agarroVelocidad();
 		
 	}
 
 	
 	@Override
 	public void visitLadrillo() {
-		// TODO Auto-generated method stub
+		miLogica.();
 		
 	}
 
 	@Override
 	public void visitGate() {
-		// TODO Auto-generated method stub
+		miLogica.colisionan();
 		
 	}
 
