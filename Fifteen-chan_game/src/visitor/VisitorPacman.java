@@ -1,6 +1,7 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
 import logica.Logica;
@@ -18,9 +19,8 @@ public class VisitorPacman implements Visitor {
 		
 	}
 
-	@Override
-	public void visitDot() {
-	 
+	public void visitDot(Dot dot) {
+		
 		
 	}
 
