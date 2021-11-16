@@ -1,5 +1,7 @@
 package Nivel;
 
-public abstract class NivelAbstracto {
+import entidades.Bloque;
 
+public abstract class NivelAbstracto {
+	public abstract Bloque [][] getMatriz();
 }
