@@ -2,6 +2,7 @@ package logica;
 
 import java.awt.Point;
 
+import entidades.Blinky;
 import entidades.Bloque;
 import entidades.Enemigo;
 import entidades.Entidad;
@@ -41,8 +42,10 @@ public class Logica {
        huir=false;
        vidas=3;
        miGUI=gui;
-       megamind= new MenteEnemiga(this, null);
        this.getFabrica(fabrica);
+       megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
+       miPersonaje= new Personaje(this);
+       
        
     }
     
@@ -72,7 +75,8 @@ public class Logica {
     	miGUI.actualizar();
     }
     public void comenzarJuego() {
-
+      jugando=true;
+      megamind.run();
     }
     public void terminarJuego() {
 

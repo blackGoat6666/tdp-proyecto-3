@@ -6,6 +6,9 @@ import visitor.Visitor;
 public abstract class EntidadDinamica extends Entidad {
 protected EntidadGraficaDinamica miImagen;
 	
+public EntidadDinamica() {
+	super();
+}
 	
 public abstract void resetear();
 

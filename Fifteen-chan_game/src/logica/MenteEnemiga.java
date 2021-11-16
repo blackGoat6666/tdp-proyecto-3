@@ -6,7 +6,7 @@ import entidades.Blinky;
 import entidades.Enemigo;
 import entidades.Entidad;
 
-public class MenteEnemiga implements Runnable{
+public class MenteEnemiga extends Thread{
 
 	private Logica miLogica;
 	private Blinky blinky;
@@ -19,8 +19,15 @@ public class MenteEnemiga implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		while(miLogica.jugando()) {
+			blinky.mover();
+			try {
+				this.sleep(NORM_PRIORITY);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public boolean estoyAMitadBloque(Point ubicacion) {

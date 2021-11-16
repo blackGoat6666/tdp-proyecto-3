@@ -14,6 +14,10 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 
 	public EntidadGraficaDinamica(String url []) {
 		super(url[0]);
+		modoNormal= new String[4];
+		modoPowerPellet= new String[4];
+		modoVelocidad= new String[4];
+		modoInvisibilidad= new String[4];
 		for (int i = 0; i < 4; i++) {
 			modoNormal [i] = url [i];
 		}

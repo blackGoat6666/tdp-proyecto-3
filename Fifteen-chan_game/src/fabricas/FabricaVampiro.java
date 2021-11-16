@@ -2,93 +2,106 @@ package fabricas;
 
 import javax.swing.JLabel;
 
-import EntidadesGraficas.EntidadDinamicaGrafica;
-import EntidadesGraficas.EntidadGraficaConsumible;
+import entidades.EntidadGraficaDinamica;
+import entidades.EntidadGraficaEstatica;
+
 
 public class FabricaVampiro implements FabricaEntidades {
 
 	@Override
-	public EntidadDinamicaGrafica getBlinky() {
+	public EntidadGraficaDinamica getBlinky() {
 		// TODO Auto-generated method stub
-		return new EntidadDinamicaGrafica ("/Images/vampiroadelantemoviendose.gif");
+		String[] retorno= new String[16];
+		for(int i=0; i<16; i++) {
+			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+		}
+		return new EntidadGraficaDinamica(retorno);
 	}
 
 	@Override
-	public EntidadDinamicaGrafica getInky() {
-		// TODO Auto-generated method stub
-		return new EntidadDinamicaGrafica ("/Images/vampiroadelantemoviendose.gif");
+	public EntidadGraficaDinamica getInky() {
+		String[] retorno= new String[16];
+		for(int i=0; i<16; i++) {
+			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+		}
+		return new EntidadGraficaDinamica(retorno);
 	}
 
 	@Override
-	public EntidadDinamicaGrafica getPinky() {
-		// TODO Auto-generated method stub
-		return new EntidadDinamicaGrafica ("/Images/vampiroadelantemoviendose.gif");
+	public EntidadGraficaDinamica getPinky() {
+		String[] retorno= new String[16];
+		for(int i=0; i<16; i++) {
+			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+		}
+		return new EntidadGraficaDinamica(retorno);
 	}
 
 	@Override
-	public EntidadDinamicaGrafica getClyde() {
-		// TODO Auto-generated method stub
-		return new EntidadDinamicaGrafica ("/Images/vampiroadelantemoviendose.gif");
+	public EntidadGraficaDinamica getClyde() {
+		String[] retorno= new String[16];
+		for(int i=0; i<16; i++) {
+			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+		}
+		return new EntidadGraficaDinamica(retorno);
 	}
 
 	@Override
-	public EntidadDinamicaGrafica getPersonaje() {
-		// TODO Auto-generated method stub
-		return new EntidadDinamicaGrafica ("/Images/vampiroadelantemoviendose.gif");
-		
+	public EntidadGraficaDinamica getPersonaje() {
+		String[] retorno= new String[16];
+		for(int i=0; i<16; i++) {
+			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+		}
+		return new EntidadGraficaDinamica(retorno);
 	}
 
 	@Override
-	public EntidadGraficaConsumible getDot() {
+	public EntidadGraficaEstatica getDot() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getPowerPellet() {
+	public EntidadGraficaEstatica getPowerPellet() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getFruit1() {
+	public EntidadGraficaEstatica getFruit1() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getFruit2() {
+	public EntidadGraficaEstatica getFruit2() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getFruit3() {
+	public EntidadGraficaEstatica getFruit3() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getBomba() {
+	public EntidadGraficaEstatica getBomba() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getInvisibilidad() {
+	public EntidadGraficaEstatica getInvisibilidad() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
 	}
 
 	@Override
-	public EntidadGraficaConsumible getVelocidad() {
+	public EntidadGraficaEstatica getVelocidad() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaConsumible ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
 	}
 
-	public JLabel getPacman() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 }

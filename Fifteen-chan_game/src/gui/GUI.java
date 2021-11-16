@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import entidades.EntidadGrafica;
+import entidades.Personaje;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaVampiro;
 import logica.Logica;
@@ -27,7 +29,7 @@ public class GUI {
 	private JLabel labels[][] = new JLabel[20][20];
 	private JLabel labels2[][] = new JLabel[20][20];
 	private JLabel labels3[][] = new JLabel[20][20];
-    private JLabel pacMan;
+    private EntidadGrafica pacMan;
 	private JFrame frame;
 	private JPanel grillaNivel1;
 	private JPanel grillaNivel2;
@@ -92,7 +94,7 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 private void initialize() {
-		
+	    miLogica= new Logica(this, "vampiros");
 	    panelJuego = new Panel("/Images/fondoVampiros.jpg");
 	    panelJuego.setBounds(0, 0, 1200, 720);
 	    panelJuego.setVisible(false);
@@ -245,14 +247,12 @@ private void initialize() {
 				
 			}
 		});
-		
 		btnJugarVampiros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
-				miLogica= new Logica(this, "vampiros");
 			}
 		});
 		
@@ -286,8 +286,7 @@ private void initialize() {
 				panelMenu.setVisible(true);
 			}
 		});
-		FabricaVampiro vampiro= new FabricaVampiro();
-		pacMan= miLogica.getPacman().g;
+		pacMan= miLogica.getPacman().getEntidadGrafica();
 		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);
 		grillaNivel1.add(pacMan);
@@ -376,14 +375,13 @@ private void initialize() {
 
 public void setVida(int vida, String icono) {
 	switch(vida) {
-		case 1: vida1.setIcon(icono); break;
-		case 2:  vida2.setIcon(icono);break;
-		case 3:  vida3.setIcon(icono); break;
+		case 1: vida1.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
+		case 2: vida2.setIcon(new ImageIcon(GUI.class.getResource(icono)));break;
+		case 3: vida3.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
 	}
 }
 
 public void actualizar() {
-	this.repaint();
 	
 }
 }

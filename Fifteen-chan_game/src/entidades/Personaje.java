@@ -14,10 +14,11 @@ public class Personaje extends EntidadDinamica {
 	
 	//constructor
 	public Personaje(Logica miLog) {
+		super();
 		miLogica=miLog;
 		ubicacion.setLocation(300, 345);
 		meMuevo=false;
-		movimiento=4;
+		movimiento=5;
 	}
 	
 	public void setMovimiento(int mov) {
@@ -101,6 +102,12 @@ public class Personaje extends EntidadDinamica {
 
 	@Override
 	public void accept(Visitor v) {
+	}
+
+	@Override
+	public EntidadGrafica getEntidadGrafica() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
