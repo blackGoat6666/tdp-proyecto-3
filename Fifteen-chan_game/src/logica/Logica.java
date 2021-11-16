@@ -31,20 +31,25 @@ public class Logica {
     private int puntos;
     private MenteEnemiga megamind;
     private FabricaEntidades miFabrica;
+    private Boolean jugando;
     //constructor
 
     //metodos
-    public Logica(GUI gui, String fabrica) {
+    public Logica(GUI gui) {
        visitorFantasma= new VisitorFantasma();
        visitorPacman= new VisitorPacman(this);
        huir=false;
        vidas=3;
        miGUI=gui;
-       this.getFabrica(fabrica);
-       megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
-       miPersonaje= new Personaje(this);
+      
        
-       
+    }
+    
+    public void setFabrica(String fab) {
+    	this.getFabrica(fab);
+    	megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
+        miPersonaje= new Personaje(this, miFabrica.getPersonaje());
+        
     }
     
     private void getFabrica(String fab) {
@@ -151,10 +156,18 @@ public class Logica {
 		
 		
 	}
+	
+	public Boolean jugando() {
+		return jugando;
+	}
 
 	public void pacmanPuedeMoverse() {
 		miPersonaje.setMeMuevo(true);
 		
+	}
+	
+	public void moverPacman(Point direccion) {
+		miPersonaje.setMeMuevo(huir);
 	}
     
     

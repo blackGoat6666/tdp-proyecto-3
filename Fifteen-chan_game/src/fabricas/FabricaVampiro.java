@@ -8,7 +8,11 @@ import entidades.EntidadGraficaEstatica;
 
 public class FabricaVampiro implements FabricaEntidades {
 
-	@Override
+	public FabricaVampiro() {
+		
+	}
+	
+	
 	public EntidadGraficaDinamica getBlinky() {
 		// TODO Auto-generated method stub
 		String[] retorno= new String[16];

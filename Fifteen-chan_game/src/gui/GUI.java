@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import entidades.EntidadGrafica;
+import entidades.EntidadGraficaDinamica;
 import entidades.Personaje;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaVampiro;
@@ -29,7 +30,7 @@ public class GUI {
 	private JLabel labels[][] = new JLabel[20][20];
 	private JLabel labels2[][] = new JLabel[20][20];
 	private JLabel labels3[][] = new JLabel[20][20];
-    private EntidadGrafica pacMan;
+    private EntidadGraficaDinamica pacMan;
 	private JFrame frame;
 	private JPanel grillaNivel1;
 	private JPanel grillaNivel2;
@@ -87,14 +88,14 @@ public class GUI {
 		frame.setBounds(0, 0, 1200, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-				initialize();
+		miLogica= new Logica(this);
+		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 private void initialize() {
-	    miLogica= new Logica(this, "vampiros");
 	    panelJuego = new Panel("/Images/fondoVampiros.jpg");
 	    panelJuego.setBounds(0, 0, 1200, 720);
 	    panelJuego.setVisible(false);
@@ -253,6 +254,7 @@ private void initialize() {
 				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				miLogica.setFabrica("vampiros");
 			}
 		});
 		
@@ -286,10 +288,6 @@ private void initialize() {
 				panelMenu.setVisible(true);
 			}
 		});
-		pacMan= miLogica.getPacman().getEntidadGrafica();
-		pacMan.setBounds(308, 360, 60, 60);
-		frame.setFocusable(true);
-		grillaNivel1.add(pacMan);
 		
 		btnNivel1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -297,8 +295,7 @@ private void initialize() {
 				grillaNivel1.setVisible(true);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
-				pacMan.setLocation(308,369);
-				grillaNivel1.add(pacMan);
+				grillaNivel1.add(miLogica.getPacman().getEntidadGrafica());
 			}
 		});
 		btnNivel2.addMouseListener(new MouseAdapter() {
@@ -325,38 +322,29 @@ private void initialize() {
 	        public void keyPressed(KeyEvent e) {
 	        	int presiona=e.getKeyCode();
 	        	Point posicion = pacMan.getLocation();	
-	    		int movimiento = 4;
 	    		switch (presiona) 
 	            {
 	      	      case KeyEvent.VK_UP: {
                     if(posicion.y>=35) {
-                      int ubicacion = posicion.y - movimiento;
-  	      	          posicion.setLocation(posicion.x, ubicacion);
-  	      	          pacMan.setLocation(posicion);
+                      miLogica.moverPacman(new Point(0, -1));
 	      	    	}
                     break;
 	      	      }
 	      	      case KeyEvent.VK_LEFT:{
 	      	    	if(posicion.x>=25) {
-	      	    	  int ubicacion = posicion.x - movimiento;
-			    	  posicion.setLocation(ubicacion, posicion.y);
-			    	  pacMan.setLocation(posicion);
+	      	    		miLogica.moverPacman(new Point(-1, 0));
 			    	}
 	      	        break;	
 	      	      }	               
 	    		  case KeyEvent.VK_RIGHT: {
 	    			if(posicion.x<=585)  {
-			    	  int ubicacion = posicion.x +movimiento;
-			    	  posicion.setLocation(ubicacion, posicion.y);
-			    	  pacMan.setLocation(posicion);
+	    				miLogica.moverPacman(new Point(1, 0));
 			    	}
 	    			break;
 		    	  }
 		          case KeyEvent.VK_DOWN: {
 		    		if(posicion.y<=605){
-		        	  int ubicacion = posicion.y + movimiento;
-		    		  posicion.setLocation(posicion.x, ubicacion);
-		    		  pacMan.setLocation(posicion);
+		    			miLogica.moverPacman(new Point(0, 1));
 		    		}
 		    		break;
 		    	  }
