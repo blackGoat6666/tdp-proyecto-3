@@ -31,6 +31,7 @@ public class VisitorPacman implements Visitor {
 		dot.eliminarImagen();
 		Bloque eliminar=miLogica.obtenerBloque(dot.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogica.pacmanPuedeMoverse();
 	}
 
 	@Override
@@ -39,6 +40,7 @@ public class VisitorPacman implements Visitor {
 		fru.eliminarImagen();
 		Bloque eliminar=miLogica.obtenerBloque(fru.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogica.pacmanPuedeMoverse();
 		
 	}
 
@@ -48,6 +50,7 @@ public class VisitorPacman implements Visitor {
 		power.eliminarImagen();
 		Bloque eliminar=miLogica.obtenerBloque(power.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogica.pacmanPuedeMoverse();
 	}
 
 	@Override
@@ -72,6 +75,7 @@ public class VisitorPacman implements Visitor {
 		barry.eliminarImagen();
 		Bloque eliminar=miLogica.obtenerBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogica.pacmanPuedeMoverse();
 	}
 
 

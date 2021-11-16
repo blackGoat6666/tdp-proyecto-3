@@ -116,6 +116,8 @@ public class Logica {
 	public void eliminarEntidadEstatica(Bloque bloque) {
 		bloque.eliminarEntidadEstatica();
 	}
-    
+	public void pacmanPuedeMoverse(){
+		miPersonaje.setPuedeMoverse(true);
+	}
     
 }
