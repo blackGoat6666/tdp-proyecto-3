@@ -255,6 +255,8 @@ private void initialize() {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				miLogica.setFabrica("vampiros");
+				pacMan=(EntidadGraficaDinamica) miLogica.getPacman().getEntidadGrafica();
+				grillaNivel1Añadir(pacMan);
 			}
 		});
 		
@@ -295,7 +297,7 @@ private void initialize() {
 				grillaNivel1.setVisible(true);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
-				grillaNivel1.add(miLogica.getPacman().getEntidadGrafica());
+				grillaNivel1.add(pacMan);
 			}
 		});
 		btnNivel2.addMouseListener(new MouseAdapter() {
@@ -318,6 +320,7 @@ private void initialize() {
 				grillaNivel3.add(pacMan);
 			}
 		});
+		frame.setFocusable(true);
 		frame.addKeyListener(new KeyListener() {
 	        public void keyPressed(KeyEvent e) {
 	        	int presiona=e.getKeyCode();
@@ -370,6 +373,11 @@ public void setVida(int vida, String icono) {
 }
 
 public void actualizar() {
-	
+	frame.repaint();
+}
+
+public void grillaNivel1Añadir(JLabel add) {
+	this.grillaNivel1.add(add);
+	frame.repaint();
 }
 }
