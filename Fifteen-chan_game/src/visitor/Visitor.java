@@ -1,11 +1,12 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Enemigo;
 import entidades.Entidad;
 
 public interface Visitor {
 
-public void visitFantasma();	
+public void visitFantasma(Enemigo fantasma);	
  
 public void visitPacman();
 	

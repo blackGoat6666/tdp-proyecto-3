@@ -1,10 +1,16 @@
 package visitor;
 
+import entidades.Bloque;
+import entidades.Enemigo;
 import entidades.Entidad;
-import grilla.Bloque;
+import logica.Logica;
 
 public class VisitorPacman implements Visitor {
-
+	protected Logica miLogica;
+	
+	public VisitorPacman(Logica logi) {
+		miLogica=logi;
+	}
 
 	@Override
 	public void visitBloque(Bloque casillero) {
@@ -66,15 +72,28 @@ public class VisitorPacman implements Visitor {
 		
 	}
 
-	@Override
-	public void visitFantasma() {
-	  
-		
-	}
+
 
 	@Override
 	public void visitPacman() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitBloqueVacio() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitFantasma(Enemigo fantasma) {
+		if( miLogica.huir() ) {
+			fantasma.morir();
+		}
+		else {
+			miLogica.perderVida();
+		}
 		
 	}
 

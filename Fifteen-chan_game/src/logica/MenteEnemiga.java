@@ -26,8 +26,8 @@ public class MenteEnemiga implements Runnable{
     	return miLogica.estoyAMitadBloque(ubicacion);
     }
  
-	public void chequearBloque(Entidad visitante, Point ubicacion, Point direccion) {
-		miLogica.visitarBloque(visitante, ubicacion, direccion);
+	public void chequearBloque(Entidad visitante, Point direccion) {
+		miLogica.visitarBloque(visitante,  direccion);
 	}
 	
 	

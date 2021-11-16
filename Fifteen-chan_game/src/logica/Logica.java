@@ -2,10 +2,10 @@ package logica;
 
 import java.awt.Point;
 
+import entidades.Bloque;
 import entidades.Entidad;
-import fabricas.FabricaEnemigos;
 import fabricas.FabricaEntidades;
-import grilla.Grilla;
+import gui.GUI;
 import personaje.Personaje;
 import visitor.Visitor;
 import visitor.VisitorFantasma;
@@ -20,21 +20,27 @@ public class Logica {
     private Personaje miPersonaje;
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
+    private Bloque[][] matriz;
+    private Boolean huir;
+    private GUI miGUI;
     //constructor
 
     //metodos
-    public Logica(FabricaEntidades fabrica, Visitor fantasma, Visitor pacman) {
+    public Logica(GUI gui, FabricaEntidades fabrica, Visitor fantasma, Visitor pacman) {
        visitorFantasma=(VisitorFantasma) fantasma;
        visitorPacman=pacman;
+       huir=false;
+       vidas=3;
+       miGUI=gui;
     }
 
-    public void visitarBloque(Entidad visitante, Point ubicacion, Point direccion) {
+    public void visitarBloque(Entidad visitante, Point direccion) {
       if(true) { //acá hay que escribir que si el ente es de clase enemigo
     	visitorFantasma.setVisitante(visitante);  
-        miGrilla.obtenerBloque(new Point(ubicacion.x+ direccion.x*(tamanioBloqueGrafico/2))).accept(visitorFantasma);	  
+        this.obtenerBloque(direccion).accept(visitorFantasma);	  
       }
       else {
-    	miGrilla.obtenerBloque(ubicacion).accept(visitorPacman);	  
+    	this.obtenerBloque(direccion).accept(visitorPacman);	  
       }
     }
     
@@ -58,7 +64,8 @@ public class Logica {
     }
 
     public void perderVida() {
-
+    	miGUI.setVida(vidas, null);
+    	
     }
    
     public void terminoTiempoConsumible() {
@@ -71,10 +78,27 @@ public class Logica {
 
     }
     public void agarroPowerPellet() {
+    	huir=true;
 
     }
     
-    public boolean estoyAMitadBloque(Point ubicacion) {
-    	return 
+    public boolean estoyAMitadBloque(Point ubicacion){
+    	return (ubicacion.x %15==0 && ubicacion.x % 30!=0 && ubicacion.y % 15==0 && ubicacion.y % 30 !=0); 
     }
+    
+    public boolean huir() {
+    	return huir;
+    }
+    
+    public Personaje getPacman() {
+    	return miPersonaje;
+    }
+    
+    private Bloque obtenerBloque(Point ubicacion) {
+    	int x= (ubicacion.x -30)/30;
+    	int y= (ubicacion.y-30) /30;
+    	return(matriz[x][y]);
+    }
+    
+    
 }
