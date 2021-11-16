@@ -12,6 +12,8 @@ public abstract class Entidad {
 	}
 
 	public abstract void accept(Visitor v);
+	
+	public abstract EntidadGrafica getEntidadGrafica();
 
 	public abstract void morir();
 	

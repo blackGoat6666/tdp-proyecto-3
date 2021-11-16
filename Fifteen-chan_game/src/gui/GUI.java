@@ -287,8 +287,7 @@ private void initialize() {
 			}
 		});
 		FabricaVampiro vampiro= new FabricaVampiro();
-		miLogica= new Logica(vampiro, null, null);
-		pacMan= vampiro.getPacman();
+		pacMan= miLogica.getPacman().g;
 		pacMan.setBounds(308, 360, 60, 60);
 		frame.setFocusable(true);
 		grillaNivel1.add(pacMan);

@@ -30,10 +30,12 @@ public class Logica {
     private int puntos;
     private MenteEnemiga megamind;
     private FabricaEntidades miFabrica;
+    private boolean jugando;
     //constructor
 
     //metodos
     public Logica(GUI gui, String fabrica) {
+       jugando = false;
        visitorFantasma= new VisitorFantasma();
        visitorPacman= new VisitorPacman(this);
        huir=false;
@@ -74,6 +76,9 @@ public class Logica {
     }
     public void terminarJuego() {
 
+    }
+    public Boolean jugando(){ 
+    	return jugando;
     }
     public void setModoDeJuego(String nombre) {
 
