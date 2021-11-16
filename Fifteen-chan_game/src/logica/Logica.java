@@ -41,6 +41,7 @@ public class Logica {
        miGUI=gui;
        megamind= new MenteEnemiga(this, null);
        this.getFabrica(fabrica);
+       
     }
     
     private void getFabrica(String fab) {
@@ -62,11 +63,11 @@ public class Logica {
     public void aumentarPuntos(int puntos) {
 
     }
-    public void cambiarNivel() {
-
+    public void cambiarNivel(int niv) {
+    	
     }
     public void actualizarPantalla() {
-
+    	miGUI.actualizar();
     }
     public void comenzarJuego() {
 

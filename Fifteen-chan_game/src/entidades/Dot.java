@@ -7,9 +7,10 @@ import visitor.Visitor;
 public class Dot extends MasPuntos {
 	int puntaje;
 	
-	public Dot(Point posicion) {
+	public Dot(Point posicion, EntidadGraficaEstatica imagen) {
 		puntaje=10;
 		ubicacion=posicion;
+		miImagen=imagen;
 	}
 	public int getPuntaje() {
 		return puntaje;

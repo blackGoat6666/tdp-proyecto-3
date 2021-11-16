@@ -1,21 +1,21 @@
 package fabricas;
 
-import EntidadesGraficas.EntidadDinamicaGrafica;
-import EntidadesGraficas.EntidadGraficaConsumible;
+import entidades.EntidadGraficaDinamica;
+import entidades.EntidadGraficaEstatica;
 
 public abstract interface FabricaEntidades {
-	public abstract EntidadDinamicaGrafica getBlinky();
-	public abstract EntidadDinamicaGrafica getInky();
-	public abstract EntidadDinamicaGrafica getPinky();
-	public abstract EntidadDinamicaGrafica getClyde();
-	public abstract EntidadDinamicaGrafica getPersonaje();
-	public abstract EntidadGraficaConsumible getDot();
-	public abstract EntidadGraficaConsumible getPowerPellet();
-	public abstract EntidadGraficaConsumible getFruit1();
-	public abstract EntidadGraficaConsumible getFruit2();
-	public abstract EntidadGraficaConsumible getFruit3();
-	public abstract EntidadGraficaConsumible getBomba();
-	public abstract EntidadGraficaConsumible getInvisibilidad();
-	public abstract EntidadGraficaConsumible getVelocidad();
+	public abstract EntidadGraficaDinamica getBlinky();
+	public abstract EntidadGraficaDinamica getInky();
+	public abstract EntidadGraficaDinamica getPinky();
+	public abstract EntidadGraficaDinamica getClyde();
+	public abstract EntidadGraficaDinamica getPersonaje();
+	public abstract EntidadGraficaEstatica getDot();
+	public abstract EntidadGraficaEstatica getPowerPellet();
+	public abstract EntidadGraficaEstatica getFruit1();
+	public abstract EntidadGraficaEstatica getFruit2();
+	public abstract EntidadGraficaEstatica getFruit3();
+	public abstract EntidadGraficaEstatica getBomba();
+	public abstract EntidadGraficaEstatica getInvisibilidad();
+	public abstract EntidadGraficaEstatica getVelocidad();
 	
 }

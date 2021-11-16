@@ -382,4 +382,9 @@ public void setVida(int vida, String icono) {
 		case 3:  vida3.setIcon(icono); break;
 	}
 }
+
+public void actualizar() {
+	this.repaint();
+	
+}
 }
