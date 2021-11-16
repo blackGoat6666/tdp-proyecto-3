@@ -102,7 +102,9 @@ public class Personaje extends EntidadDinamica {
 	@Override
 	public void accept(Visitor v) {
 	}
-
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 
 	
 }

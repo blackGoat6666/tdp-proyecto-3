@@ -11,5 +11,7 @@ public class Gate extends EntidadEstatica{
 	public void accept(Visitor v) {
 		v.visitGate();
 	}
-
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 }

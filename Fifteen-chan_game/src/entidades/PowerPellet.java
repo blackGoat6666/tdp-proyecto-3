@@ -19,5 +19,7 @@ public class PowerPellet extends MasHabilidad {
 	@Override
 	public void accept(Visitor v) {
 	}
-
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+	}
 }

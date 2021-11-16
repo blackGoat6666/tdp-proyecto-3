@@ -34,6 +34,12 @@ public class Blinky extends Enemigo {
 		miImagen.setModo("normal");
 	}
 
+	@Override
+	public EntidadGrafica getEntidadGrafica() {
+		return imagen;
+		
+	}
+
 
 
 	
