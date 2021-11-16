@@ -1,6 +1,10 @@
 package Nivel;
 
 import entidades.Bloque;
+import entidades.Dot;
+import entidades.Gate;
+import entidades.Ladrillo;
+import entidades.PowerPellet;
 
 public class Nivel1 extends NivelAbstracto{
 	private int [][] matrizNivel;
@@ -34,7 +38,7 @@ public class Nivel1 extends NivelAbstracto{
 			for (int j = 0; j < 20; j++) {
 				switch (matrizNivel[i][j]) {
 				case 0:
-					matriz[i][j] = new Bloque(new Pared());
+					matriz[i][j] = new Bloque(new Ladrillo());
 					break;
 				case 1:
 					matriz[i][j] = new Bloque(new Dot());
