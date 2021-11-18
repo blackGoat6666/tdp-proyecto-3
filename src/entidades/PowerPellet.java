@@ -4,11 +4,12 @@ import java.awt.Point;
 
 import visitor.Visitor;
 
-public class PowerPellet extends MasHabilidad {
+public class PowerPellet extends EntidadEstatica {
 
-	public PowerPellet(Point ub, EntidadGraficaEstatica imagen){
+	public PowerPellet(Point posicion, EntidadGraficaEstatica imagen){
 		super(imagen);
-		ubicacion=ub;
+		ubicacion=posicion;
+		imagen.setLocation(posicion);
 	}
 	
 	@Override
@@ -18,6 +19,7 @@ public class PowerPellet extends MasHabilidad {
 
 	@Override
 	public void accept(Visitor v) {
+		v.visitPowerPellet(this);
 	}
 
 }
