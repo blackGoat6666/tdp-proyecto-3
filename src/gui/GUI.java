@@ -310,11 +310,10 @@ public void actualizar() {
 
 
 public void addGrillaNivel1(JLabel imagen) {
-	this.frame.add(imagen);
+	this.frame.getContentPane().add(imagen);
 	this.grillaNivel1.add(imagen);
 	imagen.setSize(30, 30);
 	this.frame.repaint();
 	
 }
-
 }

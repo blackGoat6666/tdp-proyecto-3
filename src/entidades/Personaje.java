@@ -11,15 +11,17 @@ public class Personaje extends EntidadDinamica {
 	private Boolean meMuevo;
 	private int movimiento;
 	private Point dir;
+	private int acomodarIzquierda;
 	
 	//constructor
 	public Personaje(Logica miLog, EntidadGraficaDinamica imagen) {
 		super(imagen);
-		ubicacion= new Point((320), (360));
+		ubicacion= new Point((315), (375));
 		miLogica=miLog;
 		meMuevo=false;
 		movimiento=5;
-		miImagen.setLocation(ubicacion.x, ubicacion.y-30);
+		miImagen.setLocation(ubicacion.x-15, ubicacion.y-50);
+		acomodarIzquierda=0;
 	}
 	
 	public void setMovimiento(int mov) {
@@ -37,7 +39,10 @@ public class Personaje extends EntidadDinamica {
 		Point vectorMovimiento;
 		vectorMovimiento= new Point( (dir.x*30)+ ubicacion.x ,(dir.y*30)+ ubicacion.y);
 		System.out.println("x "+ vectorMovimiento.x+" y "+vectorMovimiento.y);
-		if( (vectorMovimiento.x>=0) && (vectorMovimiento.y>=0) && (vectorMovimiento.x<=21*30)&& (vectorMovimiento.y<=21*30)) {
+		if( (vectorMovimiento.x>=0) && (vectorMovimiento.y>=0) && (vectorMovimiento.x<=22*30)&& (vectorMovimiento.y<=22*30)) {
+			if(vectorMovimiento.x==-1) {
+				vectorMovimiento.setLocation(vectorMovimiento.x,vectorMovimiento.y);
+			}
 			miLogica.visitarBloque(this, vectorMovimiento);
 			if(meMuevo) {
 				this.moverPosicion(dir);
@@ -58,34 +63,40 @@ public class Personaje extends EntidadDinamica {
 				else {
 					this.moverArriba();
 				}
-	}
+		}
 	}
 	
 	private void moverDerecha() {
-		Point posicion= this.getPosicion();
-		int ubicacion = posicion.x + movimiento;
-		posicion.setLocation(ubicacion, posicion.y);
-		miImagen.setLocation(ubicacion, posicion.y-30);
+		ubicacion.setLocation(this.getPosicion().x+movimiento, this.getPosicion().y);
+		if(acomodarIzquierda>0) {
+			miImagen.setLocation(miImagen.getLocation().x+movimiento+5, miImagen.getLocation().y);
+			acomodarIzquierda--;
+		}else {
+			miImagen.setLocation(miImagen.getLocation().x+movimiento, miImagen.getLocation().y);
+		}
 	}
 	private void moverIzquierda() {
-		Point posicion= this.getPosicion();			
-		int ubicacion = posicion.x - movimiento;
-		posicion.setLocation(ubicacion, posicion.y);
-		miImagen.setLocation(ubicacion, posicion.y-30);
+		ubicacion.setLocation(this.getPosicion().x-movimiento, this.getPosicion().y);
+		if(acomodarIzquierda<=3) {
+			miImagen.setLocation(miImagen.getLocation().x-movimiento-5, miImagen.getLocation().y);
+			acomodarIzquierda++;
+		}
+		else {
+			miImagen.setLocation(miImagen.getLocation().x-movimiento, miImagen.getLocation().y);
+		}
 	}
 	
 	private void moverAbajo() {
-		Point posicion= this.getPosicion();
-		int ubicacion = posicion.y + movimiento;
-		posicion.setLocation(posicion.x, ubicacion);
-		miImagen.setLocation(posicion.x, ubicacion-30);
+		ubicacion.setLocation(this.getPosicion().x, this.getPosicion().y+movimiento);
+		miImagen.setLocation(miImagen.getLocation().x, miImagen.getLocation().y+movimiento);
 	}
+	
 	private void moverArriba() {
-		Point posicion= this.getPosicion();
-		int ubicacion = posicion.y - movimiento;
-		posicion.setLocation(posicion.x, ubicacion);
-		miImagen.setLocation(posicion.x,ubicacion-30);
+		ubicacion.setLocation(this.getPosicion().x, this.getPosicion().y-movimiento);
+		miImagen.setLocation(miImagen.getLocation().x, miImagen.getLocation().y-movimiento);
 	}
+	
+	
 	public Boolean colisiona(Point ubicacion) {
 		
 		return null;
