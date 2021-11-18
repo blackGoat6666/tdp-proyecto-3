@@ -158,7 +158,6 @@ public class Logica {
     public Bloque obtenerBloque(Point ubicacion) {
     	int x=(ubicacion.x)/30;
     	int y=(ubicacion.y)/30;
-    	System.out.println("x "+ (x-1) +" y "+(y-1));
     	return(matriz[x-1][y-1]);
     }
 
