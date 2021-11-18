@@ -1,0 +1,86 @@
+package visitor;
+
+import entidades.Bloque;
+import entidades.Dot;
+import entidades.Enemigo;
+import entidades.Entidad;
+import entidades.Fruit;
+import entidades.PowerPellet;
+import entidades.Velocidad;
+import logica.Logica;
+
+public class VisitorFantasma implements Visitor{
+	private Enemigo visitante;
+	protected Logica miLogica;
+	
+	
+	public void setVisitante(Enemigo ente) {
+		visitante=ente;
+	}
+	
+	public void visitBloque(Bloque casillero) {
+	  casillero.accept(this);
+		
+	}
+
+
+	@Override
+	public void visitPowerPellet(PowerPellet power) {
+		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitBomba() {
+		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitInvisibilidad() {
+		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitVelocidad(Velocidad barry) {
+		visitante.seMovio();
+		
+	}
+
+
+	@Override
+	public void visitLadrillo() {
+		
+	}
+
+	@Override
+	public void visitGate() {
+		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitBloqueVacio() {
+		visitante.seMovio();
+		
+	}
+
+	@Override
+	public void visitDot(Dot dot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitFruit(Fruit fru) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+}
