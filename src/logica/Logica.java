@@ -52,11 +52,6 @@ public class Logica {
     
     public void setFabrica(String fab) {
     	this.getFabrica(fab);
-    	megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
-        miPersonaje= new Personaje(this, miFabrica.getPersonaje());
-        NivelAbstracto puta= new Nivel1(this);
-        matriz=puta.getMatriz(miFabrica);
-        miGUI.actualizar();
       
     }
     
@@ -87,8 +82,13 @@ public class Logica {
     }
     public void comenzarJuego() {
       jugando=true;
+      miPersonaje= new Personaje(this, miFabrica.getPersonaje());
+      miGUI.addGrillaNivel1(miPersonaje.getEntidadGrafica());
+      NivelAbstracto nivel1= new Nivel1(this);
+      matriz=nivel1.getMatriz(miFabrica);
+      megamind= new MenteEnemiga(this,  miFabrica.getBlinky());
+      megamind.start();  
       miGUI.actualizar();
-      
     }
     public void terminarJuego() {
 
@@ -158,6 +158,7 @@ public class Logica {
     public Bloque obtenerBloque(Point ubicacion) {
     	int x=(ubicacion.x)/30;
     	int y=(ubicacion.y)/30;
+    	System.out.println("Estoy tratando de entrar al bloque x: "+x+" y "+y);
     	return(matriz[x-1][y-1]);
     }
 
@@ -182,11 +183,14 @@ public class Logica {
 
 	public void pacmanNoPuedeMoverse() {
 		miPersonaje.setMeMuevo(false);
-		
 	}
    public void graficar(JLabel imagen) {
 	   miGUI.addGrillaNivel1(imagen);
 	   
+   }
+   
+   public Point getUbicacionPacman() {
+	   return miPersonaje.getPosicion();
    }
     
 }

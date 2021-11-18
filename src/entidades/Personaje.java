@@ -37,7 +37,7 @@ public class Personaje extends EntidadDinamica {
 	public void mover() {
 		Point vectorMovimiento;
 		vectorMovimiento= new Point( (dir.x*30)+ ubicacion.x ,(dir.y*30)+ ubicacion.y);
-		if( (vectorMovimiento.x>=0) && (vectorMovimiento.y>=0) && (vectorMovimiento.x<=22*30)&& (vectorMovimiento.y<=22*30)) {
+		if( (vectorMovimiento.x>0) && (vectorMovimiento.y>0) && (vectorMovimiento.x<=22*30)&& (vectorMovimiento.y<=22*30)) {
 			if(vectorMovimiento.x==-1) {
 				vectorMovimiento.setLocation(vectorMovimiento.x,vectorMovimiento.y);
 			}

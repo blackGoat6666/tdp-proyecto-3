@@ -4,6 +4,7 @@ public class EntidadGraficaEstatica extends EntidadGrafica {
 
 	public EntidadGraficaEstatica(String url) {
 		super(url);
+		this.setSize(30,30);
 		// TODO Auto-generated constructor stub
 	}
 	public void borrar() {

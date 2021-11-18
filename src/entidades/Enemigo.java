@@ -14,14 +14,18 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected MenteEnemiga miMente;
 	protected int movimiento;
 	protected Boolean meMovi;
+	protected Point ubicacion;
 	
-	public Enemigo(int mov, EntidadGraficaDinamica imagen) {
+	public Enemigo(int mov, EntidadGraficaDinamica imagen, MenteEnemiga megamind) {
 		super(imagen);
 		movimiento=mov;
 		intentos=0;
 		ultimaDireccion= new Point(0,0);
 		preferencias= new Point(0,0);
 		meMovi=false;
+		miMente=megamind;
+		ubicacion= new Point(0,0);
+		posicionObjetivo= new Point(0,0);
 	}
 
 
@@ -32,26 +36,28 @@ public abstract class Enemigo extends EntidadDinamica {
 
 	@Override
 	public void mover() {
-		if(miMente.estoyAMitadBloque(ubicacion)) { 
+		  
 		  Point vectorMovimiento;
-		  while(!meMovi) {
+		  while(!meMovi && intentos<=2) {
 			vectorMovimiento= this.siguienteDireccion();
-			vectorMovimiento= new Point( (vectorMovimiento.x*30)+ ubicacion.x ,(vectorMovimiento.y*30)+ ubicacion.y);
-		    miMente.chequearBloque(this, vectorMovimiento);
+			System.out.println("vector movimiento x "+vectorMovimiento.x+" y: "+vectorMovimiento.y);
+			vectorMovimiento= new Point( ((vectorMovimiento.x)*30)+ ubicacion.x ,(vectorMovimiento.y*30)+ ubicacion.y);
+			System.out.println("vector movimiento x "+vectorMovimiento.x+" y: "+vectorMovimiento.y);
+		    if((vectorMovimiento.x>=31) && (vectorMovimiento.y>=31) && (vectorMovimiento.x<=22*30)&& (vectorMovimiento.y<=22*30)) {
+		    	miMente.chequearBloque(this, vectorMovimiento);
+			}
 		    intentos++;
 		  }
 		  intentos--;
 		  vectorMovimiento=this.siguienteDireccion();
+		  ultimaDireccion.setLocation(vectorMovimiento);
 		  this.actualizarMiEntidadGrafica();
 		  vectorMovimiento.setLocation(vectorMovimiento.x*movimiento, vectorMovimiento.y*movimiento);
 		  ubicacion.setLocation(ubicacion.x+vectorMovimiento.x, ubicacion.y+vectorMovimiento.y);
+		  miImagen.setLocation(ubicacion);
+		  meMovi=false;
 		  intentos=0;
-		}
-		else{
-			
-			ubicacion.setLocation(ubicacion.x+(ultimaDireccion.x *movimiento), ubicacion.y+(ultimaDireccion.y * movimiento));
-			this.actualizarMiEntidadGrafica();
-		}
+		
 		
 	}
 	
@@ -93,7 +99,7 @@ public abstract class Enemigo extends EntidadDinamica {
 						return new Point(0, preferencias.y);
 					}
 			case 1: return ultimaDireccion;
-			case 2: if(ultimaDireccion.x==0) {
+			case 2: if(ultimaDireccion.y==0) {
 						return new Point(0, -(preferencias.y));
 					}
 					else {
@@ -101,7 +107,7 @@ public abstract class Enemigo extends EntidadDinamica {
 					}
 			 
 		}
-		return null;
+		return new Point(0,0);
 		
 	}
 	
@@ -115,5 +121,8 @@ public abstract class Enemigo extends EntidadDinamica {
 	
 	public String toString() {
 		return "Enemigo";
+	}
+	public void setNoSeMovio() {
+		meMovi=false;
 	}
 }

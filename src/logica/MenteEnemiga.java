@@ -5,6 +5,7 @@ import java.awt.Point;
 import entidades.Blinky;
 import entidades.Enemigo;
 import entidades.Entidad;
+import entidades.EntidadGraficaDinamica;
 
 public class MenteEnemiga extends Thread{
 
@@ -12,18 +13,23 @@ public class MenteEnemiga extends Thread{
 	private Blinky blinky;
 	
 	
-	public MenteEnemiga(Logica logica, Blinky rojito) {
+	public MenteEnemiga(Logica logica, EntidadGraficaDinamica rojito) {
 		miLogica=logica;
-		blinky=rojito;
+		blinky=new Blinky(5,rojito, this );
+		miLogica.graficar(rojito);
+		miLogica.actualizarPantalla();
+		blinky.moverPrimeraVez(miLogica.getUbicacionPacman());
 	}
 	
 	@Override
 	public void run() {
 		while(miLogica.jugando()) {
+			
+			blinky.calcularDir(miLogica.getUbicacionPacman());
 			blinky.mover();
 			miLogica.actualizarPantalla();
 			try {
-				this.sleep(NORM_PRIORITY);
+				this.sleep(1000);
 			} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();

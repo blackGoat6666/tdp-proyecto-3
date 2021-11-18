@@ -186,7 +186,6 @@ private void initialize() {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				miLogica.setFabrica("vampiros");
-				pacMan=(EntidadGraficaDinamica) miLogica.getPacman().getEntidadGrafica();
 			}
 		});
 		
@@ -228,9 +227,6 @@ private void initialize() {
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
 				frame.repaint();
-				pacMan= (EntidadGraficaDinamica) miLogica.getPacman().getEntidadGrafica();
-				pacMan.setSize(60, 60);
-				grillaNivel1.add(pacMan);
 				miLogica.comenzarJuego();
 			}
 		});
@@ -259,8 +255,7 @@ private void initialize() {
 		frame.addKeyListener(new KeyListener() {
 	        public void keyPressed(KeyEvent e) {
 	        	int presiona=e.getKeyCode();
-	        	Point posicion = pacMan.getLocation();	
-	    		switch (presiona) 
+	        	switch (presiona) 
 	            {
 	      	      case KeyEvent.VK_UP: {
                     miLogica.moverPacman(new Point(0, -1));
@@ -312,7 +307,6 @@ public void actualizar() {
 public void addGrillaNivel1(JLabel imagen) {
 	this.frame.getContentPane().add(imagen);
 	this.grillaNivel1.add(imagen);
-	imagen.setSize(30, 30);
 	this.frame.repaint();
 	
 }

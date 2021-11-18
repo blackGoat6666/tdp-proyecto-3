@@ -10,7 +10,6 @@ public class EntidadGrafica extends JLabel {
 		super(".");
 		this.setText(null);
 		this.setIcon(new ImageIcon(GUI.class.getResource(url)));
-		this.setSize(30, 30);
 	}
 
 }

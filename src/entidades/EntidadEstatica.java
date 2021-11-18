@@ -5,6 +5,7 @@ public abstract class EntidadEstatica extends Entidad{
 	
 	public EntidadEstatica(EntidadGraficaEstatica imagen) {
 		this.miImagen=imagen;
+		
 	}
 	
 	public void morir() {

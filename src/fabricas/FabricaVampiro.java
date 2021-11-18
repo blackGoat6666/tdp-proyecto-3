@@ -14,7 +14,6 @@ public class FabricaVampiro implements FabricaEntidades {
 	
 	
 	public EntidadGraficaDinamica getBlinky() {
-		// TODO Auto-generated method stub
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
 			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
