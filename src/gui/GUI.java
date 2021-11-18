@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -14,29 +13,23 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import entidades.EntidadGrafica;
 import entidades.EntidadGraficaDinamica;
-import entidades.Personaje;
-import fabricas.FabricaEntidades;
-import fabricas.FabricaVampiro;
 import logica.Logica;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class GUI {
 
 	private JPanel panelMenu;
 	private JPanel panelJuego;
-	private JLabel labels[][] = new JLabel[20][20];
-	private JLabel labels2[][] = new JLabel[20][20];
-	private JLabel labels3[][] = new JLabel[20][20];
     private JLabel pacMan;
 	private JFrame frame;
 	private JPanel grillaNivel1;
 	private JPanel grillaNivel2;
 	private JPanel grillaNivel3;
 	private Logica miLogica;
-	private Thread sonido;
 	private JLabel vida1;
 	private JLabel vida2;
 	private JLabel vida3;
@@ -77,7 +70,7 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 private void initialize() {
-	    panelJuego = new Panel("/Images/fondoVampiros.jpg");
+	    panelJuego = new Panel("/Images/fondo.png");
 	    panelJuego.setBounds(0, 0, 1200, 720);
 	    panelJuego.setVisible(false);
 	    frame.getContentPane().add(panelJuego);
@@ -152,7 +145,7 @@ private void initialize() {
 		JButton btnNivel3 = new JButton("Nivel 3");
 		btnNivel3.setForeground(Color.RED);
 		btnNivel3.setBackground(Color.BLACK);
-		btnNivel3.setBounds(74, 410, 226, 58);
+		btnNivel3.setBounds(74, 398, 226, 58);
 		panelJuego.add(btnNivel3);
 		
 		JButton btnVolverMenu = new JButton("Volver al menu");
@@ -161,6 +154,13 @@ private void initialize() {
 		btnVolverMenu.setBounds(50, 100, 226, 58);
 		panelJuego.add(btnVolverMenu);
 		grillaNivel1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Puntuacion");
+		lblNewLabel.setFont(new Font("Chiller", Font.BOLD | Font.ITALIC, 70));
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(70, 500, 250, 130);
+		panelJuego.add(lblNewLabel);
 		
 
 		
@@ -173,7 +173,7 @@ private void initialize() {
 		btnJugarMetalero.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoMetaleros.jpg");
+				((Panel) panelJuego).changeImage("/Images/fondo.png");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				
@@ -182,7 +182,7 @@ private void initialize() {
 		btnJugarVampiros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
+				((Panel) panelJuego).changeImage("/Images/fondo.png");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				miLogica.setFabrica("vampiros");
@@ -194,7 +194,7 @@ private void initialize() {
 		btnJugarSCP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoSCP.jpg");
+				((Panel) panelJuego).changeImage("/Images/fondo.png");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 			}
