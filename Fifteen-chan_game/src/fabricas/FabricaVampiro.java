@@ -17,7 +17,7 @@ public class FabricaVampiro implements FabricaEntidades {
 		// TODO Auto-generated method stub
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
@@ -53,7 +53,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaDinamica getPersonaje() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
@@ -61,13 +61,13 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaEstatica getDot() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica("/resources/Vampiro/dotVampiro.png");
 	}
 
 	@Override
 	public EntidadGraficaEstatica getPowerPellet() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
 	}
 
 	@Override

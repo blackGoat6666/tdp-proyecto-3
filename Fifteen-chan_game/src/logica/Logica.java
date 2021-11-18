@@ -2,6 +2,11 @@ package logica;
 
 import java.awt.Point;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import Nivel.Nivel1;
+import Nivel.NivelAbstracto;
 import entidades.Blinky;
 import entidades.Bloque;
 import entidades.Enemigo;
@@ -41,7 +46,7 @@ public class Logica {
        huir=false;
        vidas=3;
        miGUI=gui;
-      
+     
        
     }
     
@@ -49,7 +54,10 @@ public class Logica {
     	this.getFabrica(fab);
     	megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
         miPersonaje= new Personaje(this, miFabrica.getPersonaje());
-        
+        NivelAbstracto puta= new Nivel1(this);
+        matriz=puta.getMatriz(miFabrica);
+        miGUI.actualizar();
+      
     }
     
     private void getFabrica(String fab) {
@@ -59,7 +67,7 @@ public class Logica {
     }
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
-      if(true) { //acá hay que escribir que si el ente es de clase enemigo
+      if(visitante.toString()=="Enemigo") { 
     	visitorFantasma.setVisitante((Enemigo) visitante);  
         this.obtenerBloque(direccion).accept(visitorFantasma);	  
       }
@@ -79,7 +87,8 @@ public class Logica {
     }
     public void comenzarJuego() {
       jugando=true;
-      megamind.run();
+      miGUI.actualizar();
+      
     }
     public void terminarJuego() {
 
@@ -147,9 +156,10 @@ public class Logica {
 
     
     public Bloque obtenerBloque(Point ubicacion) {
-    	int x= (ubicacion.x -30)/30;
-    	int y= (ubicacion.y-30) /30;
-    	return(matriz[x][y]);
+    	int x=(ubicacion.x)/30;
+    	int y=(ubicacion.y)/30;
+    	System.out.println("x "+ (x-1) +" y "+(y-1));
+    	return(matriz[x-1][y-1]);
     }
 
 	public void agarroInvisibilidad() {
@@ -167,8 +177,17 @@ public class Logica {
 	}
 	
 	public void moverPacman(Point direccion) {
-		miPersonaje.setMeMuevo(huir);
+		miPersonaje.setDireccion(direccion);
+		miPersonaje.mover();
 	}
-    
+
+	public void pacmanNoPuedeMoverse() {
+		miPersonaje.setMeMuevo(false);
+		
+	}
+   public void graficar(JLabel imagen) {
+	   miGUI.addGrillaNivel1(imagen);
+	   
+   }
     
 }

@@ -21,6 +21,7 @@ public class MenteEnemiga extends Thread{
 	public void run() {
 		while(miLogica.jugando()) {
 			blinky.mover();
+			miLogica.actualizarPantalla();
 			try {
 				this.sleep(NORM_PRIORITY);
 			} catch (InterruptedException e) {

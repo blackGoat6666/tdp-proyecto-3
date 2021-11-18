@@ -14,11 +14,12 @@ public class Personaje extends EntidadDinamica {
 	
 	//constructor
 	public Personaje(Logica miLog, EntidadGraficaDinamica imagen) {
-		ubicacion= new Point(300, 345);
+		super(imagen);
+		ubicacion= new Point((320), (360));
 		miLogica=miLog;
 		meMuevo=false;
 		movimiento=5;
-		miImagen=imagen;
+		miImagen.setLocation(ubicacion.x, ubicacion.y-30);
 	}
 	
 	public void setMovimiento(int mov) {
@@ -33,18 +34,16 @@ public class Personaje extends EntidadDinamica {
 	}
 	
 	public void mover() {
-		if(miLogica.estoyAMitadBloque(ubicacion)){ 
-			Point vectorMovimiento;
-			vectorMovimiento= new Point( (dir.x*30)+ ubicacion.x ,(dir.y*30)+ ubicacion.y);
-		    miLogica.visitarBloque(this, vectorMovimiento);
+		Point vectorMovimiento;
+		vectorMovimiento= new Point( (dir.x*30)+ ubicacion.x ,(dir.y*30)+ ubicacion.y);
+		System.out.println("x "+ vectorMovimiento.x+" y "+vectorMovimiento.y);
+		if( (vectorMovimiento.x>=0) && (vectorMovimiento.y>=0) && (vectorMovimiento.x<=21*30)&& (vectorMovimiento.y<=21*30)) {
+			miLogica.visitarBloque(this, vectorMovimiento);
 			if(meMuevo) {
 				this.moverPosicion(dir);
 			}
+			meMuevo=false;
 		}
-		else {
-			this.moverPosicion(dir);
-		}
-		
 	}
 	
 	private void moverPosicion(Point dir) {
@@ -66,22 +65,26 @@ public class Personaje extends EntidadDinamica {
 		Point posicion= this.getPosicion();
 		int ubicacion = posicion.x + movimiento;
 		posicion.setLocation(ubicacion, posicion.y);
+		miImagen.setLocation(ubicacion, posicion.y-30);
 	}
 	private void moverIzquierda() {
 		Point posicion= this.getPosicion();			
 		int ubicacion = posicion.x - movimiento;
 		posicion.setLocation(ubicacion, posicion.y);
+		miImagen.setLocation(ubicacion, posicion.y-30);
 	}
 	
 	private void moverAbajo() {
 		Point posicion= this.getPosicion();
 		int ubicacion = posicion.y + movimiento;
 		posicion.setLocation(posicion.x, ubicacion);
+		miImagen.setLocation(posicion.x, ubicacion-30);
 	}
 	private void moverArriba() {
 		Point posicion= this.getPosicion();
 		int ubicacion = posicion.y - movimiento;
 		posicion.setLocation(posicion.x, ubicacion);
+		miImagen.setLocation(posicion.x,ubicacion-30);
 	}
 	public Boolean colisiona(Point ubicacion) {
 		
@@ -104,10 +107,13 @@ public class Personaje extends EntidadDinamica {
 	public void accept(Visitor v) {
 	}
 
-	@Override
 	public EntidadGrafica getEntidadGrafica() {
 		// TODO Auto-generated method stub
 		return miImagen;
+	}
+	
+	public String toString() {
+		return "Personaje";
 	}
 
 

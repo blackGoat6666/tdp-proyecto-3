@@ -1,6 +1,8 @@
 package entidades;
 import java.awt.Point;
 
+import javax.swing.JFrame;
+
 import entidades.Entidad;
 import entidades.EntidadDinamica;
 import entidades.EntidadEstatica;
@@ -37,8 +39,17 @@ public class Bloque{
 	}
 
 	public void eliminarEntidadEstatica() {
-		miEntidadEstatica=null;
+		if(miEntidadEstatica!=null) {
+			miEntidadEstatica.morir();
+			miEntidadEstatica=null;
+		}
 		
+	}
+	
+	public void graficar(JFrame juego) {
+		if(miEntidadEstatica!=null) {
+			juego.add(this.miEntidadEstatica.getEntidadGrafica());
+		}
 	}
 	
 	

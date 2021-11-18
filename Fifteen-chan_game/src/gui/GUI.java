@@ -30,7 +30,7 @@ public class GUI {
 	private JLabel labels[][] = new JLabel[20][20];
 	private JLabel labels2[][] = new JLabel[20][20];
 	private JLabel labels3[][] = new JLabel[20][20];
-    private EntidadGraficaDinamica pacMan;
+    private JLabel pacMan;
 	private JFrame frame;
 	private JPanel grillaNivel1;
 	private JPanel grillaNivel2;
@@ -41,25 +41,6 @@ public class GUI {
 	private JLabel vida2;
 	private JLabel vida3;
 	
-	private Point [] paredes = {new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1), new Point(1,2), new Point(2,2), new Point(3,2), new Point(4,2),new Point(5,4),new Point(14,4),
-			new Point(5,5),new Point(14,5),new Point(5,7),new Point(14,7),
-			new Point(15,1), new Point(16,1), new Point(17,1), new Point(18,1), new Point(15,2), new Point(16,2), new Point(17,2), new Point(18,2),
-			new Point(0,4), new Point(1,4), new Point(2,4), new Point(3,4),  new Point(16,4), new Point(17,4), new Point(18,4), new Point(19,4),
-			new Point(10,0),new Point(10,1), new Point(10,2),new Point(9,0),new Point(9,1), new Point(9,2),new Point(7,1),new Point(7,2), new Point(6,2),
-			new Point(12,2),new Point(12,1),new Point(13,2),new Point(7,4),  new Point(8,4), new Point(9,4), new Point(10,4), new Point(11,4),new Point(12,4),
-			new Point(9,5),new Point(9,6),new Point(12,2),new Point(12,1),new Point(1,18),new Point(2,18),new Point(3,18),new Point(4,18),new Point(5,18),new Point(6,18),
-			new Point(7,18),new Point(9,18),new Point(11,18),new Point(12,18),new Point(13,18),new Point(14,18),new Point(15,18),new Point(16,18),new Point(17,18),new Point(18,18),
-			new Point(1,6),new Point(2,6),new Point(3,6),new Point(4,6),new Point(5,6),new Point(6,6),new Point(7,6),new Point(18,6),new Point(17,6),new Point(16,6),new Point(15,6),new Point(14,6),
-			new Point(12,6),new Point(13,6),
-			new Point(0,8),new Point(1,8),new Point(2,8),new Point(3,8),new Point(5,8),new Point(7,8),new Point(8,8),new Point(9,8),new Point(10,8),new Point(11,8),new Point(12,8),
-			new Point(14,8),new Point(16,8),new Point(17,8),new Point(18,8),new Point(19,8),new Point(0,9),new Point(1,9),new Point(2,9),new Point(3,9),new Point(7,9),new Point(8,9),new Point(9,9),new Point(10,9),new Point(11,9),new Point(12,9),
-			new Point(16,9),new Point(17,9),new Point(18,9),new Point(19,9), new Point(0,11),new Point(1,11),new Point(2,11),new Point(3,11),new Point(5,10),new Point(7,10),new Point(8,10),new Point(9,10),new Point(10,10),new Point(11,10),new Point(12,10),
-			new Point(14,10),new Point(14,11),new Point(5,11),new Point(16,11),new Point(17,11),new Point(18,11),new Point(19,11),
-			new Point(0,12),new Point(1,12),new Point(2,12),new Point(3,12),new Point(5,12),new Point(7,12),new Point(8,12),new Point(9,12),new Point(10,12),new Point(11,12),new Point(12,12),
-			new Point(14,12),new Point(16,12),new Point(17,12),new Point(18,12),new Point(19,12),new Point(10,13),new Point(10,14),
-			new Point(7,14),new Point(6,14),new Point(5,14),new Point(3,14),new Point(2,14),new Point(1,14),new Point(12,14),new Point(13,14),new Point(14,14),new Point(16,14),new Point(17,14),new Point(18,14),new Point(3,15),new Point(16,15),
-			new Point(0,16),new Point(1,16),new Point(3,16),new Point(5,16),new Point(7,16),new Point(8,16),new Point(9,16),new Point(10,16),new Point(11,16),new Point(12,16),new Point(14,16),new Point(16,16),new Point(18,16),new Point(19,16),
-			new Point(5,17),new Point(9,17),new Point(14,17)};
 
 	/**
 	 * Launch the application.
@@ -185,57 +166,7 @@ private void initialize() {
 		
 		//labels de la grilla
 		
-		for (int filas =0; filas < 20; filas++){
-		for (int columna =0; columna < 20; columna++) {
-			labels[filas][columna] = new JLabel("");
-		    labels[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
-			grillaNivel1.add(labels[filas][columna]);
-			labels[filas][columna].setVisible(true);
-			labels[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
-		}
-		}
-		for (int i = 0; i<paredes.length; i++) {
-			labels[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
-		}
-		labels[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
 		
-		for (int filas =0; filas < 20; filas++){
-			for (int columna =0; columna < 20; columna++) {
-				labels2[filas][columna] = new JLabel("");
-			    labels2[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
-				grillaNivel2.add(labels2[filas][columna]);
-				labels2[filas][columna].setVisible(true);
-				labels2[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
-			}
-		}
-		for (int i = 0; i<paredes.length; i++) {
-			labels2[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
-		}
-
-		labels2[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels2[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels2[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels2[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		for (int filas =0; filas < 20; filas++){
-			for (int columna =0; columna < 20; columna++) {
-				labels3[filas][columna] = new JLabel("");
-			    labels3[filas][columna].setBounds(40+30*columna, 30+30*filas , 30, 30);
-				grillaNivel3.add(labels3[filas][columna]);
-				labels3[filas][columna].setVisible(true);
-				labels3[filas][columna].setIcon(new ImageIcon(GUI.class.getResource("/Images/dotVampiro.png")));
-			}
-		}
-		for (int i = 0; i<paredes.length; i++) {
-				labels3[(int) paredes[i].getY()][(int) paredes[i].getX()].setVisible(false);
-		}
-		
-		labels3[0][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels3[0][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels3[19][0].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
-		labels3[19][19].setIcon(new ImageIcon(GUI.class.getResource("/Images/ppVampiro.png")));
 		
 		// acciones botones
 		
@@ -256,7 +187,6 @@ private void initialize() {
 				panelMenu.setVisible(false);
 				miLogica.setFabrica("vampiros");
 				pacMan=(EntidadGraficaDinamica) miLogica.getPacman().getEntidadGrafica();
-				grillaNivel1Añadir(pacMan);
 			}
 		});
 		
@@ -297,7 +227,11 @@ private void initialize() {
 				grillaNivel1.setVisible(true);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
+				frame.repaint();
+				pacMan= (EntidadGraficaDinamica) miLogica.getPacman().getEntidadGrafica();
+				pacMan.setSize(60, 60);
 				grillaNivel1.add(pacMan);
+				miLogica.comenzarJuego();
 			}
 		});
 		btnNivel2.addMouseListener(new MouseAdapter() {
@@ -306,7 +240,7 @@ private void initialize() {
 				grillaNivel1.setVisible(false);
 				grillaNivel2.setVisible(true);
 				grillaNivel3.setVisible(false);
-				pacMan.setLocation(308,369);
+				pacMan.setLocation(300, 345);
 				grillaNivel2.add(pacMan);
 			}
 		});
@@ -316,10 +250,11 @@ private void initialize() {
 				grillaNivel1.setVisible(false);
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(true);
-				pacMan.setLocation(308,369);
+				pacMan.setLocation(300, 345);
 				grillaNivel3.add(pacMan);
 			}
 		});
+		
 		frame.setFocusable(true);
 		frame.addKeyListener(new KeyListener() {
 	        public void keyPressed(KeyEvent e) {
@@ -328,27 +263,24 @@ private void initialize() {
 	    		switch (presiona) 
 	            {
 	      	      case KeyEvent.VK_UP: {
-                    if(posicion.y>=35) {
-                      miLogica.moverPacman(new Point(0, -1));
-	      	    	}
+                    miLogica.moverPacman(new Point(0, -1));
+                    frame.repaint();
                     break;
 	      	      }
 	      	      case KeyEvent.VK_LEFT:{
-	      	    	if(posicion.x>=25) {
-	      	    		miLogica.moverPacman(new Point(-1, 0));
-			    	}
-	      	        break;	
+	      	    	miLogica.moverPacman(new Point(-1, 0));
+	      	    	frame.repaint();
+	      	    	break;	
 	      	      }	               
 	    		  case KeyEvent.VK_RIGHT: {
-	    			if(posicion.x<=585)  {
-	    				miLogica.moverPacman(new Point(1, 0));
-			    	}
+	    			miLogica.moverPacman(new Point(1, 0));
+	    			frame.repaint();
+			    	
 	    			break;
 		    	  }
 		          case KeyEvent.VK_DOWN: {
-		    		if(posicion.y<=605){
-		    			miLogica.moverPacman(new Point(0, 1));
-		    		}
+		    		miLogica.moverPacman(new Point(0, 1));
+		    		frame.repaint();
 		    		break;
 		    	  }
 	           }
@@ -376,8 +308,13 @@ public void actualizar() {
 	frame.repaint();
 }
 
-public void grillaNivel1Añadir(JLabel add) {
-	this.grillaNivel1.add(add);
-	frame.repaint();
+
+public void addGrillaNivel1(JLabel imagen) {
+	this.frame.add(imagen);
+	this.grillaNivel1.add(imagen);
+	imagen.setSize(30, 30);
+	this.frame.repaint();
+	
 }
+
 }

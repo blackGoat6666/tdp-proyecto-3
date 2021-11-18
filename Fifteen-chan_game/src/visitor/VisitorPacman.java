@@ -22,13 +22,12 @@ public class VisitorPacman implements Visitor {
 
 	@Override
 	public void visitBloque(Bloque casillero) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	public void visitDot(Dot dot) {
 		miLogica.sumarPuntos(dot.getPuntaje());
-		dot.morir();
 		Bloque eliminar=miLogica.obtenerBloque(dot.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();
@@ -56,23 +55,26 @@ public class VisitorPacman implements Visitor {
 	@Override
 	public void visitBomba() {
 		miLogica.agarroBomba();
+		miLogica.pacmanPuedeMoverse();
 		
 	}
 
 	@Override
 	public void visitInvisibilidad() {
 		miLogica.agarroInvisibilidad();
+		miLogica.pacmanPuedeMoverse();
 		
 	}
 
 	public void visitBloqueVacio() {
-		
+		miLogica.pacmanPuedeMoverse();
+		miLogica.pacmanPuedeMoverse();
 	}
 
 	
 	public void visitVelocidad(Velocidad barry) {
 		miLogica.agarroVelocidad();
-		barry.morir();;
+		barry.morir();
 		Bloque eliminar=miLogica.obtenerBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogica.pacmanPuedeMoverse();
@@ -80,11 +82,12 @@ public class VisitorPacman implements Visitor {
 
 
 	public void visitLadrillo() {
-		
+		System.out.println("llegue a Ladrillo");
+		miLogica.pacmanNoPuedeMoverse();
 	}
 
 	public void visitGate() {
-		
+		miLogica.pacmanNoPuedeMoverse();
 	}
 
 	

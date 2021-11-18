@@ -8,9 +8,11 @@ public class Dot extends MasPuntos {
 	int puntaje;
 	
 	public Dot(Point posicion, EntidadGraficaEstatica imagen) {
+		super(imagen);
 		puntaje=10;
 		ubicacion=posicion;
-		miImagen=imagen;
+		imagen.setLocation(posicion);
+		
 	}
 	public int getPuntaje() {
 		return puntaje;
@@ -18,10 +20,6 @@ public class Dot extends MasPuntos {
 	
 	public void accept(Visitor v) {
 		v.visitDot(this);
-	}
-	@Override
-	public EntidadGrafica getEntidadGrafica() {
-		return imagen;
 	}
 
 }

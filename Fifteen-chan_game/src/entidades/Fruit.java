@@ -3,6 +3,10 @@ package entidades;
 import visitor.Visitor;
 
 public class Fruit extends MasPuntos {
+	public Fruit(EntidadGraficaEstatica imagen) {
+		super(imagen);
+	}
+
 	int puntaje;
 	public int getPuntaje() {
 		return puntaje;
@@ -11,11 +15,6 @@ public class Fruit extends MasPuntos {
 	public void accept(Visitor v) {
 		v.visitFruit(this);
 		
-	}
-
-	@Override
-	public EntidadGrafica getEntidadGrafica() {
-		return imagen;
 	}
 
 	

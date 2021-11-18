@@ -11,6 +11,8 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 	private String [] modoVelocidad;
 	private String [] modoInvisibilidad;
 	private String modo;
+	
+	
 
 	public EntidadGraficaDinamica(String url []) {
 		super(url[0]);
@@ -31,6 +33,7 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 			modoInvisibilidad [i] = url [i+12];
 		}
 		modo = "normal";
+		this.setIcon(new ImageIcon(GUI.class.getResource("/resources/Vampiro/vampiroadelantemoviendose.gif")));
 	}
 	
 	

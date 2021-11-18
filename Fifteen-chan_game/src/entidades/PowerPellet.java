@@ -7,8 +7,8 @@ import visitor.Visitor;
 public class PowerPellet extends MasHabilidad {
 
 	public PowerPellet(Point ub, EntidadGraficaEstatica imagen){
+		super(imagen);
 		ubicacion=ub;
-		miImagen= imagen;
 	}
 	
 	@Override
@@ -19,7 +19,5 @@ public class PowerPellet extends MasHabilidad {
 	@Override
 	public void accept(Visitor v) {
 	}
-	public EntidadGrafica getEntidadGrafica() {
-		return imagen;
-	}
+
 }

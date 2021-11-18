@@ -16,12 +16,12 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected Boolean meMovi;
 	
 	public Enemigo(int mov, EntidadGraficaDinamica imagen) {
+		super(imagen);
 		movimiento=mov;
 		intentos=0;
 		ultimaDireccion= new Point(0,0);
 		preferencias= new Point(0,0);
 		meMovi=false;
-		miImagen=imagen;
 	}
 
 
@@ -112,4 +112,8 @@ public abstract class Enemigo extends EntidadDinamica {
 	}
 
 	public abstract void calcularDir(Point Pacman);
+	
+	public String toString() {
+		return "Enemigo";
+	}
 }

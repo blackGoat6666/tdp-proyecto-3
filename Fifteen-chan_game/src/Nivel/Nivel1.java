@@ -4,15 +4,19 @@ import java.awt.Point;
 
 import entidades.Bloque;
 import entidades.Dot;
+import entidades.EntidadGraficaEstatica;
 import entidades.Gate;
 import entidades.Ladrillo;
 import entidades.PowerPellet;
 import fabricas.FabricaEntidades;
+import logica.Logica;
 
 public class Nivel1 extends NivelAbstracto{
 	private int [][] matrizNivel;
+	private Logica miLogica;
 	
-	public Nivel1 () {
+	public Nivel1 (Logica log) {
+		miLogica=log;
 		matrizNivel = new int[][] {{2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2},
 			{1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1},
@@ -37,20 +41,26 @@ public class Nivel1 extends NivelAbstracto{
 	
 	public Bloque [][] getMatriz(FabricaEntidades fab) {
 		Bloque [][] matriz = new Bloque [20][20];
+		EntidadGraficaEstatica imagen;
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				switch (matrizNivel[i][j]) {
 				case 0:
-					matriz[i][j] = new Bloque(new Ladrillo());
+					matriz[j][i] = new Bloque(new Ladrillo(null));
 					break;
 				case 1:
-					matriz[i][j] = new Bloque(new Dot(new Point( (i*30)+15, (j*30) +15 ), fab.getDot()));
+					imagen= fab.getDot();
+					matriz[j][i] = new Bloque(new Dot(new Point( ((j+1)*30)+5, ((i+1)*30)+5 ), imagen));
+					miLogica.graficar(imagen);
 					break;
 				case 2:
-					matriz[i][j] = new Bloque(new PowerPellet(new Point( (i*30)+15, (j*30) +15 ), fab.getPowerPellet()));
+					imagen= fab.getPowerPellet();
+					matriz[j][i] = new Bloque(new PowerPellet(new Point( ((j+1)*30)+5, ((i+1)*30) +5 ),imagen));
+					miLogica.graficar(imagen);
+					
 					break;
 				case 3:
-					matriz[i][j] = new Bloque(new Gate());
+					matriz[j][i] = new Bloque(new Gate(null));
 					break;
 				}
 			}

@@ -6,7 +6,6 @@ import visitor.Visitor;
 
 public abstract class Entidad {
 	protected  Point ubicacion;
-	protected EntidadGrafica imagen;
 	
 	public Point getPosicion() {
 		return ubicacion;
@@ -14,8 +13,7 @@ public abstract class Entidad {
 
 	public abstract void accept(Visitor v);
 	
-	public abstract EntidadGrafica getEntidadGrafica();
-
+	
 	public abstract void morir();
 	
 }
