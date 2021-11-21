@@ -25,7 +25,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaDinamica getInky() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
@@ -34,7 +34,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaDinamica getPinky() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
@@ -43,7 +43,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaDinamica getClyde() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/Images/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
@@ -103,6 +103,19 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaEstatica getVelocidad() {
 		// TODO Auto-generated method stub
 		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
+	}
+
+
+	@Override
+	public String getVida() {
+		
+		return "/resources/Vampiro/vampiro.png";
+	}
+
+
+	@Override
+	public String getVidaMuerta() {
+		return "/resources/Vampiro/vampiro ripeado.png";
 	}
 
 

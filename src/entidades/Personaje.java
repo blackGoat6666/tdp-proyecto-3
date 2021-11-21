@@ -18,7 +18,7 @@ public class Personaje extends EntidadDinamica {
 		ubicacion= new Point((315), (375));
 		miLogica=miLog;
 		meMuevo=false;
-		movimiento=5;
+		movimiento=4;
 		miImagen.setLocation(ubicacion.x-15, ubicacion.y-50);
 		acomodarIzquierda=0;
 	}
@@ -37,7 +37,7 @@ public class Personaje extends EntidadDinamica {
 	public void mover() {
 		Point vectorMovimiento;
 		vectorMovimiento= new Point( (dir.x*30)+ ubicacion.x ,(dir.y*30)+ ubicacion.y);
-		if( (vectorMovimiento.x>0) && (vectorMovimiento.y>0) && (vectorMovimiento.x<=22*30)&& (vectorMovimiento.y<=22*30)) {
+		if( (vectorMovimiento.x>0) && (vectorMovimiento.y>0) && (vectorMovimiento.x<=21*30)&& (vectorMovimiento.y<=21*30)) {
 			if(vectorMovimiento.x==-1) {
 				vectorMovimiento.setLocation(vectorMovimiento.x,vectorMovimiento.y);
 			}
@@ -102,8 +102,8 @@ public class Personaje extends EntidadDinamica {
 
 	
 	public void resetear() {
-		
-		
+		ubicacion= new Point((315), (375));
+		miImagen.setLocation(ubicacion.x-15, ubicacion.y-50);
 	}
 
 
@@ -125,7 +125,9 @@ public class Personaje extends EntidadDinamica {
 		return "Personaje";
 	}
 
+	public Point getDireccion() {
+		return this.dir;
+	}
 
 	
 }
-
