@@ -76,7 +76,14 @@ public class MenteEnemiga extends Thread{
 		blinky.resetear();
 		inky.resetear();
 		pinky.resetear();
-		
+	}
+	
+	public void fantasmasModoNormal() {
+		blinky.volverModoNormal();
+		inky.volverModoNormal();
+		pinky.volverModoNormal();
+		huir=false;
+		miLogica.actualizarPantalla();
 	}
 	public Point getDireccionPacman() {
 		if(miLogica.getDireccionPacman()==null) {

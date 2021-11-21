@@ -25,9 +25,7 @@ public class Logica {
     //atributos de instancia
     private int nivel;
     private int vidas;
-    private int tamanioBloqueGrafico;
     private boolean truncarPantalla;
-    private String consumibleEnUso;
     private Personaje miPersonaje;
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
@@ -37,6 +35,7 @@ public class Logica {
     private MenteEnemiga megamind;
     private FabricaEntidades miFabrica;
     private Boolean jugando;
+    private Timer miTimer;
     //constructor
 
     //metodos
@@ -45,9 +44,7 @@ public class Logica {
        visitorPacman= new VisitorPacman(this);
        vidas=3;
        miGUI=gui;
-     
-       
-    }
+     }
     
     public void setFabrica(String fab) {
     	this.getFabrica(fab);
@@ -82,6 +79,7 @@ public class Logica {
     
     private void nivel1() {
     	jugando=true;
+    	this.nivel=1;
         miPersonaje= new Personaje(this, miFabrica.getPersonaje());
         miGUI.addGrillaNivel1(miPersonaje.getEntidadGrafica());
         NivelAbstracto nivel1= new Nivel1(this);
@@ -122,7 +120,6 @@ public class Logica {
     public void sumarPuntos(int i) {
     	puntos=puntos+i;
     	miGUI.actualizarPuntos(puntos);
-    	System.out.println(puntos);
     }
     
    
@@ -131,10 +128,16 @@ public class Logica {
     }
     public void agarroPowerPellet() {
     	megamind.setHuir(true);
-        
+        miTimer= new Timer(this);
+    	miTimer.timearPowerPellet();
+    	miTimer.start();
     }
     
-    
+    public void volverAModoNormal() {
+    	megamind.fantasmasModoNormal();
+    	miTimer.terminar();
+    	miTimer=null;
+    }
     
     public Personaje getPacman() {
     	return miPersonaje;
