@@ -84,6 +84,13 @@ public abstract class Enemigo extends EntidadDinamica {
 		  }
 		  
 	}
+	public void volverModoNormal() {
+		this.movimiento=this.movimientoOriginal;
+		huir=false;
+		if(!muerto) {
+			this.miImagen.setModo("normal");
+		}
+	}
 	
 	public Boolean puedoAtravesarGate() {
 		return(!saliDeGate || muerto);
@@ -189,6 +196,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		huir=estado;
 		this.calcularDir(miMente.getPosicionPacman());
 		movimiento=movimientoOriginal-1;
+		this.miImagen.setModo("powerPellet");
 	}
 	
 	public String toString() {

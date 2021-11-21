@@ -19,7 +19,7 @@ public class Personaje extends EntidadDinamica {
 		miLogica=miLog;
 		meMuevo=false;
 		movimiento=4;
-		miImagen.setLocation(ubicacion.x-15, ubicacion.y-50);
+		miImagen.setLocation(ubicacion.x-17, ubicacion.y-50);
 		acomodarIzquierda=0;
 	}
 	
@@ -108,6 +108,7 @@ public class Personaje extends EntidadDinamica {
 	public void resetear() {
 		ubicacion= new Point((315), (375));
 		miImagen.setLocation(ubicacion.x-15, ubicacion.y-50);
+		acomodarIzquierda=0;
 	}
 
 
