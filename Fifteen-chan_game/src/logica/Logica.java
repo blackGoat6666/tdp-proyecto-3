@@ -12,6 +12,7 @@ import entidades.Bloque;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.EntidadDinamica;
+import entidades.Ladrillo;
 import entidades.Personaje;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaVampiro;
@@ -31,7 +32,6 @@ public class Logica {
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
     private Bloque[][] matriz;
-    private Boolean huir;
     private GUI miGUI;
     private int puntos;
     private MenteEnemiga megamind;
@@ -43,7 +43,6 @@ public class Logica {
     public Logica(GUI gui) {
        visitorFantasma= new VisitorFantasma();
        visitorPacman= new VisitorPacman(this);
-       huir=false;
        vidas=3;
        miGUI=gui;
      
@@ -52,11 +51,6 @@ public class Logica {
     
     public void setFabrica(String fab) {
     	this.getFabrica(fab);
-    	megamind= new MenteEnemiga(this, new Blinky(5, miFabrica.getBlinky()));
-        miPersonaje= new Personaje(this, miFabrica.getPersonaje());
-        NivelAbstracto puta= new Nivel1(this);
-        matriz=puta.getMatriz(miFabrica);
-        miGUI.actualizar();
       
     }
     
@@ -86,42 +80,40 @@ public class Logica {
     	miGUI.actualizar();
     }
     public void comenzarJuego() {
-      jugando=true;
-      miGUI.actualizar();
-      
+      this.nivel1();
+    }
+    
+    private void nivel1() {
+    	jugando=true;
+        miPersonaje= new Personaje(this, miFabrica.getPersonaje());
+        miGUI.addGrillaNivel1(miPersonaje.getEntidadGrafica());
+        NivelAbstracto nivel1= new Nivel1(this);
+        matriz=nivel1.getMatriz(miFabrica);
+        megamind= new MenteEnemiga(this,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky());
+        megamind.start();  
+        for(int i=1; i<=3; i++) {
+        	miGUI.setVida(i, miFabrica.getVida());
+        }
+        miGUI.actualizar();	
     }
     public void terminarJuego() {
 
     }
-    public void setModoDeJuego(String nombre) {
-
-    }
-    public void colisionan() {
-        if(huir) {
-          this.colisionanEnHuir();	  
-        }
-        else {
-          if(this.colisionanNormal()){
-          	this.perderVida();
-          }
-        }
+    public Boolean colisionaConPacman(Point Ubicacion) {
+    	return (this.obtenerBloque(Ubicacion)==this.obtenerBloque(miPersonaje.getPosicion()));
       }
 
-      private void colisionanEnHuir(){
-        Bloque bloquePacman=obtenerBloque(miPersonaje.getPosicion());
-        if(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky())) {
-      	  megamind.murioBlinky();
-        }
-      }
-
-      private Boolean colisionanNormal(){
-      	Bloque bloquePacman=obtenerBloque(miPersonaje.getPosicion());
-      	return(bloquePacman==obtenerBloque(megamind.getUbicacionBlinky()));
-      }
+      
 
     public void perderVida() {
-    	miGUI.setVida(vidas, null);
-    	
+    	miGUI.setVida(vidas, miFabrica.getVidaMuerta());
+    	megamind.resetearFantasmas();
+    	miPersonaje.resetear();
+    	miGUI.actualizar();
+    	vidas--;
+    	if(vidas==0) {
+    		this.terminarJuego();
+    	}
     }
    
     public void terminoTiempoConsumible() {
@@ -137,17 +129,11 @@ public class Logica {
     	miPersonaje.setMovimiento(15);
     }
     public void agarroPowerPellet() {
-    	huir=true;
-
+    	megamind.setHuir(true);
+        
     }
     
-    public boolean estoyAMitadBloque(Point ubicacion){
-    	return (ubicacion.x %15==0 && ubicacion.x % 30!=0 && ubicacion.y % 15==0 && ubicacion.y % 30 !=0); 
-    }
     
-    public boolean huir() {
-    	return huir;
-    }
     
     public Personaje getPacman() {
     	return miPersonaje;
@@ -158,9 +144,14 @@ public class Logica {
     public Bloque obtenerBloque(Point ubicacion) {
     	int x=(ubicacion.x)/30;
     	int y=(ubicacion.y)/30;
-    	System.out.println("x "+ (x-1) +" y "+(y-1));
+    	if(x==0 || y==0 || x==21 || y==21) {
+    		return new Bloque(new Ladrillo(null));
+    	}
     	return(matriz[x-1][y-1]);
     }
+    public Boolean mismoBloque(Point ubicacion1, Point ubicacion2) {
+		return (obtenerBloque(ubicacion1)==obtenerBloque(ubicacion2));
+	}
 
 	public void agarroInvisibilidad() {
 		
@@ -183,11 +174,28 @@ public class Logica {
 
 	public void pacmanNoPuedeMoverse() {
 		miPersonaje.setMeMuevo(false);
-		
 	}
    public void graficar(JLabel imagen) {
 	   miGUI.addGrillaNivel1(imagen);
 	   
    }
+   
+   public Point getUbicacionPacman() {
+	   return miPersonaje.getPosicion();
+   }
+   
+   public Point getDireccionPacman() {
+	   return miPersonaje.getDireccion();
+   }
+   
+   public Boolean llegoAGate(Point Ubicacion) {
+	   Bloque comparar=this.obtenerBloque(Ubicacion);
+	   return  (comparar==matriz[10][10] ||comparar==matriz[9][10] ||comparar==matriz[11][10]);
+   }
+   public Boolean salioDeGate(Point Ubicacion) {
+	   Bloque comparar=this.obtenerBloque(Ubicacion);
+	   return  ( comparar==matriz[9][8] || comparar==matriz[11][8] ||  comparar==matriz[10][8]);
+   }
     
+   
 }

@@ -2,23 +2,24 @@ package entidades;
 
 import java.awt.Point;
 
+import logica.MenteEnemiga;
+
 
 public class Blinky extends Enemigo {
 
-	public Blinky(int mov, EntidadGraficaDinamica grafico) {
-		super(mov,grafico);
-		ubicacion= new Point((9*30)+30, (9*30)+30);
-		ubicacion.setLocation(ubicacion.x, ubicacion.y+mov);
-		ultimaDireccion= new Point(0,-1);
+	public Blinky(int mov, EntidadGraficaDinamica grafico, MenteEnemiga megamind) {
+		super(mov,grafico, megamind);
+		ubicacion.setLocation(310,310);
+		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
 	}
 
-	public void calcularDir(Point Pacman) {
-		posicionObjetivo=Pacman;
+	protected void calcularDirNormal(Point Pacman) {
+		posicionObjetivo.setLocation(Pacman);
 		if(ubicacion.x<=posicionObjetivo.x){
-		  preferencias.setLocation(1, preferencias.y);
+		  preferencias.setLocation(1, 0);
 		}
 		else{
-		  preferencias.setLocation(-1, preferencias.y);
+		  preferencias.setLocation(-1, 0);
 		}
 		if(ubicacion.y<=posicionObjetivo.y){
 		  preferencias.setLocation(preferencias.x, 1); 	
@@ -29,9 +30,14 @@ public class Blinky extends Enemigo {
 	}
 	
 	public void resetear() {
-		ubicacion.setLocation((9*30)+30,(9*30)+30);
-		intentos=0;
+		ubicacion.setLocation(310,310);
 		miImagen.setModo("normal");
+		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
+		intentos=0;
+		meMovi=false;
+		huir=false;
+		muerto=false;
+		saliDeGate=false;
 	}
 
 	public EntidadGrafica getEntidadGrafica() {

@@ -17,5 +17,7 @@ public abstract interface FabricaEntidades {
 	public abstract EntidadGraficaEstatica getBomba();
 	public abstract EntidadGraficaEstatica getInvisibilidad();
 	public abstract EntidadGraficaEstatica getVelocidad();
+	public abstract String getVida();
+	public abstract String getVidaMuerta();
 	
 }

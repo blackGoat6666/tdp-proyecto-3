@@ -20,7 +20,6 @@ public class VisitorPacman implements Visitor {
 		miLogica=logi;
 	}
 
-	@Override
 	public void visitBloque(Bloque casillero) {
 		
 		
@@ -82,7 +81,6 @@ public class VisitorPacman implements Visitor {
 
 
 	public void visitLadrillo() {
-		System.out.println("llegue a Ladrillo");
 		miLogica.pacmanNoPuedeMoverse();
 	}
 

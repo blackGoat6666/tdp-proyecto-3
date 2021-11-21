@@ -51,12 +51,17 @@ public class VisitorFantasma implements Visitor{
 
 	@Override
 	public void visitLadrillo() {
-		
+		visitante.setNoSeMovio();
 	}
 
 	@Override
 	public void visitGate() {
-		visitante.seMovio();
+		if(visitante.puedoAtravesarGate()) {
+			visitante.seMovio();
+		}
+		else {
+			visitante.setNoSeMovio();
+		}
 		
 	}
 
@@ -68,13 +73,13 @@ public class VisitorFantasma implements Visitor{
 
 	@Override
 	public void visitDot(Dot dot) {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
 	@Override
 	public void visitFruit(Fruit fru) {
-		// TODO Auto-generated method stub
+		visitante.seMovio();
 		
 	}
 
