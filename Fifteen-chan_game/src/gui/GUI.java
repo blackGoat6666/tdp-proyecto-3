@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import entidades.EntidadGrafica;
 import entidades.EntidadGraficaDinamica;
@@ -40,6 +42,7 @@ public class GUI {
 	private JLabel vida1;
 	private JLabel vida2;
 	private JLabel vida3;
+	private JLabel lblPuntuacion;
 	
 
 	/**
@@ -77,7 +80,7 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 private void initialize() {
-	    panelJuego = new Panel("/Images/fondoVampiros.jpg");
+	    panelJuego = new Panel("/Images/fondo.png");
 	    panelJuego.setBounds(0, 0, 1200, 720);
 	    panelJuego.setVisible(false);
 	    frame.getContentPane().add(panelJuego);
@@ -173,6 +176,19 @@ private void initialize() {
 		panelJuego.add(vida3);
 		
 		
+		JLabel lblPuntuacionLetra = new JLabel("Puntuacion");
+		lblPuntuacionLetra.setFont(new Font("Chiller", Font.BOLD | Font.ITALIC, 70));
+		lblPuntuacionLetra.setForeground(Color.RED);
+		lblPuntuacionLetra.setVerticalAlignment(SwingConstants.TOP);
+		lblPuntuacionLetra.setBounds(25, 500, 340, 170);
+		panelJuego.add(lblPuntuacionLetra);
+		
+		lblPuntuacion = new JLabel("0");
+		lblPuntuacion.setFont(new Font("Chiller", Font.BOLD | Font.ITALIC, 70));
+		lblPuntuacion.setForeground(Color.RED);
+		lblPuntuacion.setVerticalAlignment(SwingConstants.TOP);
+		lblPuntuacion.setBounds(72, 574, 259, 186);
+		panelJuego.add(lblPuntuacion);
 		
 		
 		
@@ -181,7 +197,6 @@ private void initialize() {
 		btnJugarMetalero.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoMetaleros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				
@@ -190,7 +205,6 @@ private void initialize() {
 		btnJugarVampiros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoVampiros.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				miLogica.setFabrica("vampiros");
@@ -201,7 +215,6 @@ private void initialize() {
 		btnJugarSCP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				((Panel) panelJuego).changeImage("/Images/fondoSCP.jpg");
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 			}
@@ -305,6 +318,11 @@ public void setVida(int vida, String icono) {
 		case 2: vida2.setIcon(new ImageIcon(GUI.class.getResource(icono)));break;
 		case 3: vida3.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
 	}
+}
+
+
+public void actualizarPuntos(int ptos) {
+	lblPuntuacion.setText(String.valueOf(ptos));
 }
 
 public void actualizar() {

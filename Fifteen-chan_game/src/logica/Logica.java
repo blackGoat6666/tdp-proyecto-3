@@ -70,9 +70,6 @@ public class Logica {
       }
     }
     
-    public void aumentarPuntos(int puntos) {
-
-    }
     public void cambiarNivel(int niv) {
     	
     }
@@ -123,8 +120,12 @@ public class Logica {
 
     }
     public void sumarPuntos(int i) {
-    	puntos=puntos+1;
+    	puntos=puntos+i;
+    	miGUI.actualizarPuntos(puntos);
+    	System.out.println(puntos);
     }
+    
+   
     public void agarroVelocidad() {
     	miPersonaje.setMovimiento(15);
     }
