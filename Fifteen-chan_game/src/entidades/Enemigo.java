@@ -97,6 +97,7 @@ public abstract class Enemigo extends EntidadDinamica {
 	public void morir() {
 		miImagen.setModo("invisibilidad");
 		muerto=true;
+		saliDeGate=false;
 		meAtore=0;
 		intentos=0;
 		movimiento=movimientoOriginal+3;
@@ -105,18 +106,18 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected void actualizarMiEntidadGrafica() {
 		if(this.siguienteDireccion().x==0) {
 			if(this.siguienteDireccion().y==1) {
-				miImagen.setDerecha();
-			}
-			else {
-				miImagen.setIzquierda();
-			}
-		}
-		else {
-			if(this.siguienteDireccion().x==1) {
 				miImagen.setAdelante();
 			}
 			else {
 				miImagen.setAtras();
+			}
+		}
+		else {
+			if(this.siguienteDireccion().x==1) {
+				miImagen.setDerecha();
+			}
+			else {
+				miImagen.setIzquierda();
 			}
 		}
 		
@@ -136,10 +137,8 @@ public abstract class Enemigo extends EntidadDinamica {
 						return new Point(0, -(preferencias.y));
 					}
 					else {
-						meAtore=1;
 						return new Point(-(preferencias.x), 0);
 					}
-			 
 		}
 		return ultimaDireccion;
 		

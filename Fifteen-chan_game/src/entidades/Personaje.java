@@ -66,6 +66,7 @@ public class Personaje extends EntidadDinamica {
 	
 	private void moverDerecha() {
 		ubicacion.setLocation(this.getPosicion().x+movimiento, this.getPosicion().y);
+		miImagen.setDerecha();
 		if(acomodarIzquierda>0) {
 			miImagen.setLocation(miImagen.getLocation().x+movimiento+5, miImagen.getLocation().y);
 			acomodarIzquierda--;
@@ -74,6 +75,7 @@ public class Personaje extends EntidadDinamica {
 		}
 	}
 	private void moverIzquierda() {
+		miImagen.setIzquierda();
 		ubicacion.setLocation(this.getPosicion().x-movimiento, this.getPosicion().y);
 		if(acomodarIzquierda<=3) {
 			miImagen.setLocation(miImagen.getLocation().x-movimiento-5, miImagen.getLocation().y);
@@ -85,11 +87,13 @@ public class Personaje extends EntidadDinamica {
 	}
 	
 	private void moverAbajo() {
+		miImagen.setAdelante();
 		ubicacion.setLocation(this.getPosicion().x, this.getPosicion().y+movimiento);
 		miImagen.setLocation(miImagen.getLocation().x, miImagen.getLocation().y+movimiento);
 	}
 	
 	private void moverArriba() {
+		miImagen.setAtras();
 		ubicacion.setLocation(this.getPosicion().x, this.getPosicion().y-movimiento);
 		miImagen.setLocation(miImagen.getLocation().x, miImagen.getLocation().y-movimiento);
 	}
@@ -128,6 +132,7 @@ public class Personaje extends EntidadDinamica {
 	public Point getDireccion() {
 		return this.dir;
 	}
+
 
 	
 }

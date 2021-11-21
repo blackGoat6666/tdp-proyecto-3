@@ -15,9 +15,22 @@ public class FabricaVampiro implements FabricaEntidades {
 	
 	public EntidadGraficaDinamica getBlinky() {
 		String[] retorno= new String[16];
-		for(int i=0; i<16; i++) {
-			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
-		}
+		retorno[0]="/resources/Vampiro/papa adelante.gif";
+		retorno[1]="/resources/Vampiro/papa atras.gif";
+		retorno[2]="/resources/Vampiro/papa adelante.gif";
+		retorno[3]="/resources/Vampiro/papa adelante.gif";
+		retorno[4]="/resources/Vampiro/papa power pellet adelante.gif";
+		retorno[5]="/resources/Vampiro/papa power pellet atras.gif";
+		retorno[6]="/resources/Vampiro/papa power pellet adelante.gif";
+		retorno[7]="/resources/Vampiro/papa power pellet atras.gif";
+		retorno[8]="/resources/Vampiro/papa bomba adelante.gif";
+		retorno[9]="/resources/Vampiro/papa bomba atras.gif";
+		retorno[10]="/resources/Vampiro/papa bomba adelante.gif";
+		retorno[11]="/resources/Vampiro/papa bomba atras.gif";
+		retorno[12]="/resources/Vampiro/papa adelante.gif";
+		retorno[13]="/resources/Vampiro/papa atras.gif";
+		retorno[14]="/resources/Vampiro/papa adelante.gif";
+		retorno[15]="/resources/Vampiro/papa atras.gif";
 		return new EntidadGraficaDinamica(retorno);
 	}
 
@@ -51,9 +64,22 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaDinamica getPersonaje() {
 		String[] retorno= new String[16];
-		for(int i=0; i<16; i++) {
-			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
-		}
+		retorno[0]="/resources/Vampiro/vampiroadelantemoviendose.gif";
+		retorno[1]="/resources/Vampiro/vampiro mirando atras.gif";
+		retorno[2]="/resources/Vampiro/vampiroadelantemoviendose.gif";
+		retorno[3]="/resources/Vampiro/vampiroadelantemoviendose.gif";
+		retorno[4]="/resources/Vampiro/power pellet.gif";
+		retorno[5]="/resources/Vampiro/power pellet atras.gif";
+		retorno[6]="/resources/Vampiro/power pellet.gif";
+		retorno[7]="/resources/Vampiro/power pellet atras.gif";
+		retorno[8]="/resources/Vampiro/vampiro bomba adelante.gif";
+		retorno[9]="/resources/Vampiro/vampiro bomba atras.gif";
+		retorno[10]="/resources/Vampiro/vampiro bomba adelante.gif";
+		retorno[11]="/resources/Vampiro/vampiro bomba atras.gif";
+		retorno[12]="/resources/Vampiro/papa adelante.gif";
+		retorno[13]="/resources/Vampiro/papa atras.gif";
+		retorno[14]="/resources/Vampiro/papa adelante.gif";
+		retorno[15]="/resources/Vampiro/papa atras.gif";
 		return new EntidadGraficaDinamica(retorno);
 	}
 
