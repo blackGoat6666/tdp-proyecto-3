@@ -2,18 +2,18 @@ package entidades;
 
 import java.awt.Point;
 
-import logica.Logica;
+import logica.LogicaColisiones;
 import visitor.Visitor;
 
 public class Personaje extends EntidadDinamica {
-	private Logica miLogica;
+	private LogicaColisiones miLogica;
 	private Boolean meMuevo;
 	private int movimiento;
 	private Point dir;
 	private int acomodarIzquierda;
 	
 	//constructor
-	public Personaje(Logica miLog, EntidadGraficaDinamica imagen) {
+	public Personaje(LogicaColisiones miLog, EntidadGraficaDinamica imagen) {
 		super(imagen);
 		ubicacion= new Point((315), (375));
 		miLogica=miLog;

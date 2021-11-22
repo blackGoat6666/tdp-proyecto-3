@@ -10,14 +10,17 @@ import entidades.Ladrillo;
 import entidades.Personaje;
 import entidades.PowerPellet;
 import entidades.Velocidad;
-import logica.Logica;
+import logica.LogicaColisiones;
+import logica.LogicaGeneral;
 
 public class VisitorPacman implements Visitor {
 	protected Personaje visitante ;
-	protected Logica miLogica;
+	protected LogicaColisiones miLogicaColisiones;
+	protected LogicaGeneral miLogicaGeneral;
 	
-	public VisitorPacman(Logica logi) {
-		miLogica=logi;
+	public VisitorPacman(LogicaColisiones logicaColisiones,LogicaGeneral logicaGeneral) {
+		miLogicaColisiones=logicaColisiones;
+		miLogicaGeneral= logicaGeneral;
 	}
 
 	public void visitBloque(Bloque casillero) {
@@ -26,66 +29,66 @@ public class VisitorPacman implements Visitor {
 	}
 
 	public void visitDot(Dot dot) {
-		miLogica.sumarPuntos(dot.getPuntaje());
-		Bloque eliminar=miLogica.obtenerBloque(dot.getPosicion());
+		miLogicaGeneral.sumarPuntos(dot.getPuntaje());
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(dot.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
 	}
 
 	@Override
 	public void visitFruit(Fruit fru) {
-		miLogica.sumarPuntos(fru.getPuntaje());
+		miLogicaGeneral.sumarPuntos(fru.getPuntaje());
 		fru.morir();
-		Bloque eliminar=miLogica.obtenerBloque(fru.getPosicion());
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(fru.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
 		
 	}
 
 	@Override
 	public void visitPowerPellet(PowerPellet power) {
-		miLogica.agarroPowerPellet();
+		miLogicaColisiones.agarroPowerPellet();
 		power.morir();
-		Bloque eliminar=miLogica.obtenerBloque(power.getPosicion());
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(power.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
 	}
 
 	@Override
 	public void visitBomba() {
-		miLogica.agarroBomba();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.agarroBomba();
+		miLogicaColisiones.pacmanPuedeMoverse();
 		
 	}
 
 	@Override
 	public void visitInvisibilidad() {
-		miLogica.agarroInvisibilidad();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.agarroInvisibilidad();
+		miLogicaColisiones.pacmanPuedeMoverse();
 		
 	}
 
 	public void visitBloqueVacio() {
-		miLogica.pacmanPuedeMoverse();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
 	}
 
 	
 	public void visitVelocidad(Velocidad barry) {
-		miLogica.agarroVelocidad();
+		miLogicaColisiones.agarroVelocidad();
 		barry.morir();
-		Bloque eliminar=miLogica.obtenerBloque(barry.getPosicion());
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		miLogica.pacmanPuedeMoverse();
+		miLogicaColisiones.pacmanPuedeMoverse();
 	}
 
 
 	public void visitLadrillo() {
-		miLogica.pacmanNoPuedeMoverse();
+		miLogicaColisiones.pacmanNoPuedeMoverse();
 	}
 
 	public void visitGate() {
-		miLogica.pacmanNoPuedeMoverse();
+		miLogicaColisiones.pacmanNoPuedeMoverse();
 	}
 
 	

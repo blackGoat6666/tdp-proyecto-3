@@ -7,11 +7,11 @@ import entidades.Entidad;
 import entidades.Fruit;
 import entidades.PowerPellet;
 import entidades.Velocidad;
-import logica.Logica;
+import logica.LogicaColisiones;
 
 public class VisitorFantasma implements Visitor{
 	private Enemigo visitante;
-	protected Logica miLogica;
+	protected LogicaColisiones miLogica;
 	
 	
 	public void setVisitante(Enemigo ente) {

@@ -21,7 +21,8 @@ import entidades.EntidadGraficaDinamica;
 import entidades.Personaje;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaVampiro;
-import logica.Logica;
+import logica.LogicaColisiones;
+import logica.LogicaGeneral;
 
 import javax.swing.JLabel;
 
@@ -37,7 +38,8 @@ public class GUI {
 	private JPanel grillaNivel1;
 	private JPanel grillaNivel2;
 	private JPanel grillaNivel3;
-	private Logica miLogica;
+	private LogicaColisiones miLogicaColisiones;
+	private LogicaGeneral miLogicaGeneral;
 	private Thread sonido;
 	private JLabel vida1;
 	private JLabel vida2;
@@ -72,7 +74,10 @@ public class GUI {
 		frame.setBounds(0, 0, 1200, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		miLogica= new Logica(this);
+		miLogicaGeneral=new LogicaGeneral(this);
+		miLogicaColisiones= new LogicaColisiones(this,miLogicaGeneral);
+		miLogicaGeneral.setLogicaColisiones(miLogicaColisiones);
+		
 		initialize();
 	}
 
@@ -207,7 +212,7 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
-				miLogica.setFabrica("vampiros");
+				miLogicaGeneral.setFabrica("vampiros");
 			}
 		});
 		
@@ -248,7 +253,7 @@ private void initialize() {
 				grillaNivel2.setVisible(false);
 				grillaNivel3.setVisible(false);
 				frame.repaint();
-				miLogica.comenzarJuego();
+				miLogicaGeneral.comenzarJuego();
 			}
 		});
 		btnNivel2.addMouseListener(new MouseAdapter() {
@@ -279,23 +284,23 @@ private void initialize() {
 	        	switch (presiona) 
 	            {
 	      	      case KeyEvent.VK_UP: {
-                    miLogica.moverPacman(new Point(0, -1));
+                    miLogicaColisiones.moverPacman(new Point(0, -1));
                     frame.repaint();
                     break;
 	      	      }
 	      	      case KeyEvent.VK_LEFT:{
-	      	    	miLogica.moverPacman(new Point(-1, 0));
+	      	    	miLogicaColisiones.moverPacman(new Point(-1, 0));
 	      	    	frame.repaint();
 	      	    	break;	
 	      	      }	               
 	    		  case KeyEvent.VK_RIGHT: {
-	    			miLogica.moverPacman(new Point(1, 0));
+	    			miLogicaColisiones.moverPacman(new Point(1, 0));
 	    			frame.repaint();
 			    	
 	    			break;
 		    	  }
 		          case KeyEvent.VK_DOWN: {
-		    		miLogica.moverPacman(new Point(0, 1));
+		    		miLogicaColisiones.moverPacman(new Point(0, 1));
 		    		frame.repaint();
 		    		break;
 		    	  }

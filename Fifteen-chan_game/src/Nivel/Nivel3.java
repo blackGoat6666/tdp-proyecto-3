@@ -10,7 +10,7 @@ import entidades.PowerPellet;
 import fabricas.FabricaEntidades;
 
 public class Nivel3 extends NivelAbstracto{
-	private int [][] matrizNivel;
+	private int[][] matrizNivel;
 	
 	public Nivel3 () {
 		matrizNivel = new int[][] {{2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2},
@@ -35,7 +35,7 @@ public class Nivel3 extends NivelAbstracto{
 			{2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}};
 	}
 	
-	public Bloque [][] getMatriz(FabricaEntidades fab) {
+	public Bloque[][] getMatriz(FabricaEntidades fab) {
 		Bloque [][] matriz = new Bloque [20][20];
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {

@@ -9,13 +9,13 @@ import entidades.Gate;
 import entidades.Ladrillo;
 import entidades.PowerPellet;
 import fabricas.FabricaEntidades;
-import logica.Logica;
+import logica.LogicaColisiones;
 
 public class Nivel1 extends NivelAbstracto{
-	private int [][] matrizNivel;
-	private Logica miLogica;
+	private int[][] matrizNivel;
+	private LogicaColisiones miLogica;
 	
-	public Nivel1 (Logica log) {
+	public Nivel1 (LogicaColisiones log) {
 		miLogica=log;
 		matrizNivel = new int[][] {{2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2},
 			{1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1},
@@ -39,7 +39,7 @@ public class Nivel1 extends NivelAbstracto{
 			{2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}};
 	}
 	
-	public Bloque [][] getMatriz(FabricaEntidades fab) {
+	public Bloque[][] getMatriz(FabricaEntidades fab) {
 		Bloque [][] matriz = new Bloque [20][20];
 		EntidadGraficaEstatica imagen;
 		for (int i = 0; i < 20; i++) {

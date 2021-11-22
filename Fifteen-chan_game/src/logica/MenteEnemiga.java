@@ -12,7 +12,8 @@ import entidades.Pinky;
 
 public class MenteEnemiga extends Thread{
 
-	private Logica miLogica;
+	private LogicaGeneral miLogicaGeneral;
+	private LogicaColisiones miLogicaColisiones;
 	private Blinky blinky;
 	private Inky inky;
 	private Pinky pinky;
@@ -21,29 +22,30 @@ public class MenteEnemiga extends Thread{
 	private Point pacman;
 	
 	
-	public MenteEnemiga(Logica logica, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita) {
-		miLogica=logica;
+	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita) {
+		miLogicaGeneral= logicaGeneral;
+		miLogicaColisiones =logicaColisiones;
 		blinky=new Blinky(5,rojito, this );
 		inky= new Inky(3, celestito, this);
 		pinky= new Pinky(3,rosita,this);
-		miLogica.graficar(rojito);
-		miLogica.graficar(celestito);
-		miLogica.graficar(rosita);
-		miLogica.actualizarPantalla();
+		miLogicaColisiones.graficar(rojito);
+		miLogicaColisiones.graficar(celestito);
+		miLogicaColisiones.graficar(rosita);
+		miLogicaColisiones.actualizarPantalla();
 		huir=false;
 	}
 	
 	@Override
 	public void run() {
-		while(miLogica.jugando()) {
-			this.pacman=miLogica.getUbicacionPacman();
+		while(miLogicaColisiones.jugando()) {
+			this.pacman=miLogicaColisiones.getUbicacionPacman();
 			blinky.calcularDir(pacman);
 			inky.calcularDir(pacman);
 			pinky.calcularDir(pacman);
 			blinky.mover();
 			inky.mover();
 			pinky.mover();
-			miLogica.actualizarPantalla();
+			miLogicaColisiones.actualizarPantalla();
 			this.chequearColisiones();
 			 try {
 		    	this.sleep(100);
@@ -58,14 +60,14 @@ public class MenteEnemiga extends Thread{
 		return pacman;
 	}
 	public Boolean llegueAGate(Point ubicacion) {
-		return miLogica.llegoAGate(ubicacion);
+		return miLogicaColisiones.llegoAGate(ubicacion);
 	}
 	public Boolean saliDeGate(Point ubicacion) {
-		return miLogica.salioDeGate(ubicacion);
+		return miLogicaColisiones.salioDeGate(ubicacion);
 	}
 
 	public void chequearBloque(Enemigo visitante, Point direccion) {
-		miLogica.visitarBloque(visitante,  direccion);
+		miLogicaColisiones.visitarBloque(visitante,  direccion);
 	}
 	
 	public Point getUbicacionBlinky() {
@@ -83,13 +85,13 @@ public class MenteEnemiga extends Thread{
 		inky.volverModoNormal();
 		pinky.volverModoNormal();
 		huir=false;
-		miLogica.actualizarPantalla();
+		miLogicaColisiones.actualizarPantalla();
 	}
 	public Point getDireccionPacman() {
-		if(miLogica.getDireccionPacman()==null) {
+		if(miLogicaColisiones.getDireccionPacman()==null) {
 			return( new Point(0,-1));
 		}
-		return miLogica.getDireccionPacman();
+		return miLogicaColisiones.getDireccionPacman();
 	}
 	
 	public void setHuir(Boolean estado) {
@@ -100,7 +102,7 @@ public class MenteEnemiga extends Thread{
 	}
 	
 	public Boolean cambioDeBloque(Point ubicacion1, Point ubicacion2) {
-		return !miLogica.mismoBloque(ubicacion1, ubicacion2);
+		return !miLogicaColisiones.mismoBloque(ubicacion1, ubicacion2);
 	}
 	
 	
@@ -114,23 +116,23 @@ public class MenteEnemiga extends Thread{
 
 	}
 	private void fantasmasMuertos() {
-		if(miLogica.colisionaConPacman(blinky.getUbicacion())) {
+		if(miLogicaColisiones.colisionaConPacman(blinky.getUbicacion())) {
 			blinky.morir();
-			miLogica.sumarPuntos(200);
+			miLogicaGeneral.sumarPuntos(200);
 		}
-		if(miLogica.colisionaConPacman(inky.getUbicacion())) {
+		if(miLogicaColisiones.colisionaConPacman(inky.getUbicacion())) {
 			inky.morir();
-			miLogica.sumarPuntos(200);
+			miLogicaGeneral.sumarPuntos(200);
 		}
-		if(miLogica.colisionaConPacman(pinky.getUbicacion())) {
+		if(miLogicaColisiones.colisionaConPacman(pinky.getUbicacion())) {
 			pinky.morir();
-			miLogica.sumarPuntos(200);
+			miLogicaGeneral.sumarPuntos(200);
 		}
 		
 	}
 	private void pacmanMuerto() {
-		if(miLogica.colisionaConPacman(blinky.getUbicacion()) ||miLogica.colisionaConPacman(inky.getUbicacion()) ||miLogica.colisionaConPacman(pinky.getUbicacion()) ) {
-			miLogica.perderVida();
+		if(miLogicaColisiones.colisionaConPacman(blinky.getUbicacion()) ||miLogicaColisiones.colisionaConPacman(inky.getUbicacion()) ||miLogicaColisiones.colisionaConPacman(pinky.getUbicacion()) ) {
+			miLogicaColisiones.perderVida();
 		}
 	}
 	

@@ -1,17 +1,17 @@
 package logica;
 
-import logica.Logica;
+import logica.LogicaColisiones;
 
 public class Timer extends Thread {
     // atributos
    
-	private Logica miLogica;
+	private LogicaColisiones miLogica;
     boolean correr;
     private String timear;
     private int vueltas;
     //constructor
     
-    public Timer(Logica log) {
+    public Timer(LogicaColisiones log) {
       miLogica=log;
       correr=true;
       timear=null;
