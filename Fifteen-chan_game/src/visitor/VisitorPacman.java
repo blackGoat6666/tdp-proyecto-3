@@ -33,11 +33,10 @@ public class VisitorPacman implements Visitor {
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(dot.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
-
 		miLogicaColisiones.restarDots();
 		System.out.println(miLogicaColisiones.getCantidadDots());
 		if(miLogicaColisiones.noQuedanDots()) {
-			miLogicaGeneral.cambiarNivel(miLogicaGeneral.getNivel()+1);
+			miLogicaGeneral.cambiarNivel(	);
 		}
 	}
 

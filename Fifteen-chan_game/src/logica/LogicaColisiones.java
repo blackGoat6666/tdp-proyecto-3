@@ -22,24 +22,14 @@ import visitor.VisitorFantasma;
 import visitor.VisitorPacman;
 
 public class LogicaColisiones extends Logica {
-    //atributos de instancia
-    //private int nivel;
-    
+
     private boolean truncarPantalla;
-    
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
 	protected int cantidadDots;
-    private GUI miGUI;
-    //private int puntos;
-    
-    //private FabricaEntidades miFabrica;
-    
     private Timer miTimer;
     protected LogicaGeneral miLogicaGeneral;
-    //constructor
 
-    //metodos
     public LogicaColisiones(GUI gui,LogicaGeneral logicaGeneral) {
        visitorFantasma= new VisitorFantasma();
        miLogicaGeneral = logicaGeneral;
@@ -48,17 +38,6 @@ public class LogicaColisiones extends Logica {
        miGUI=gui;
       
      }
-    
-   /* public void setFabrica(String fab) {
-    	this.getFabrica(fab);
-      
-    }
-    
-    private void getFabrica(String fab) {
-    	switch(fab) {
-    	 case "vampiros": miFabrica=new FabricaVampiro();
-    	}
-    }*/
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
       if(visitante.toString()=="Enemigo") { 
@@ -70,44 +49,18 @@ public class LogicaColisiones extends Logica {
       }
     }
     
-    /*public void cambiarNivel(int niv) {
-    	
-    }*/
+   
     public void actualizarPantalla() {
     	miGUI.actualizar();
     }
-    /*public void comenzarJuego() {
-        this.nivel1();
-      }*/
-    
-    /*private void nivel1() {
-    	jugando=true;
-    	this.nivel=1;
-        miPersonaje= new Personaje(this, miFabrica.getPersonaje());
-        miGUI.addGrillaNivel1(miPersonaje.getEntidadGrafica());
-        NivelAbstracto nivel1= new Nivel1(this);
-        matriz=nivel1.getMatriz(miFabrica);
-        megamind= new MenteEnemiga(this,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky());
-        megamind.start();  
-        for(int i=1; i<=3; i++) {
-        	miGUI.setVida(i, miFabrica.getVida());
-        }
-        miGUI.actualizar();	
-    }*/
-    /*public void terminarJuego() {
-
-    }*/
+   
     public Boolean colisionaConPacman(Point Ubicacion) {
     	return (this.obtenerBloque(Ubicacion)==this.obtenerBloque(miPersonaje.getPosicion()));
       }
 
-      
-
     public void perderVida() {
     	miGUI.setVida(vidas, miLogicaGeneral.miFabrica.getVidaMuerta());
-    	megamind.resetearFantasmas();
-    	miPersonaje.resetear();
-    	miGUI.actualizar();
+    	this.reset();
     	vidas--;
     	if(vidas==0) {
     		miLogicaGeneral.terminarJuego();
@@ -120,11 +73,7 @@ public class LogicaColisiones extends Logica {
     public void agarroBomba() {
 
     }
-    /*public void sumarPuntos(int i) {
-    	puntos=puntos+i;
-    	miGUI.actualizarPuntos(puntos);
-    }*/
-    
+        
    
     public void agarroVelocidad() {
     	miPersonaje.setMovimiento(15);

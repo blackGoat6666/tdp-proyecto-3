@@ -317,28 +317,35 @@ private void initialize() {
 		
    }
 
-public void setVida(int vida, String icono) {
-	switch(vida) {
-		case 1: vida1.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
-		case 2: vida2.setIcon(new ImageIcon(GUI.class.getResource(icono)));break;
-		case 3: vida3.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
+	public void setVida(int vida, String icono) {
+		switch(vida) {
+			case 1: vida1.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
+			case 2: vida2.setIcon(new ImageIcon(GUI.class.getResource(icono)));break;
+			case 3: vida3.setIcon(new ImageIcon(GUI.class.getResource(icono))); break;
+		}
 	}
-}
 
 
-public void actualizarPuntos(int ptos) {
-	lblPuntuacion.setText(String.valueOf(ptos));
-}
+	public void actualizarPuntos(int ptos) {
+		lblPuntuacion.setText(String.valueOf(ptos));
+	}
 
-public void actualizar() {
-	frame.repaint();
-}
+	public void actualizar() {
+		frame.repaint();
+	}
 
 
-public void addGrillaNivel1(JLabel imagen) {
-	this.frame.getContentPane().add(imagen);
-	this.grillaNivel1.add(imagen);
-	this.frame.repaint();
+	public void addGrillaNivel1(JLabel imagen) {
+		this.frame.getContentPane().add(imagen);
+		this.grillaNivel1.add(imagen);
+		this.frame.repaint();
 	
-}
+	}
+	public void cambiarNivel(int i) {
+		if(i==2) {
+			grillaNivel1=new Panel("/Images/nivelvampiro2.png");
+			this.actualizar();
+		}
+		
+	}
 }
