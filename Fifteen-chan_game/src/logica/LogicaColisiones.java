@@ -9,9 +9,11 @@ import Nivel.Nivel1;
 import Nivel.NivelAbstracto;
 import entidades.Blinky;
 import entidades.Bloque;
+import entidades.Bomba;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.EntidadDinamica;
+import entidades.Fruit;
 import entidades.Ladrillo;
 import entidades.Personaje;
 import fabricas.FabricaEntidades;
@@ -29,6 +31,10 @@ public class LogicaColisiones extends Logica {
 	protected int cantidadDots;
     private Timer miTimer;
     protected LogicaGeneral miLogicaGeneral;
+    private Boolean bomba;
+    private Point ubicacionBomba; 
+    private boolean coloqueFruit;
+    private boolean coloquePotion;
 
     public LogicaColisiones(GUI gui,LogicaGeneral logicaGeneral) {
        visitorFantasma= new VisitorFantasma();
@@ -36,7 +42,7 @@ public class LogicaColisiones extends Logica {
        visitorPacman= new VisitorPacman(this, miLogicaGeneral);
        vidas=3;
        miGUI=gui;
-      
+       bomba=false;
      }
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
@@ -71,15 +77,28 @@ public class LogicaColisiones extends Logica {
 
     }
     public void agarroBomba() {
-
+    	this.bomba=true;
     }
-        
+    public void activarBomba() {
+    	if(bomba){
+    		this.ubicacionBomba.setLocation(getUbicacionPacman());
+    		this.obtenerBloque(ubicacionBomba).setEntidadEstatica(new Bomba(ubicacionBomba,miLogicaGeneral.getFabrica().getBomba()));
+    		miTimer= new Timer(this);
+    		miTimer.timearBomba();
+    	}
+      }
+      public void explotarBomba() {
+    	  megamind.explotoBomba(ubicacionBomba);
+    	  obtenerBloque(ubicacionBomba).eliminarEntidadEstatica();
+    	  miGUI.actualizar();
+      }
+    
    
     public void agarroVelocidad() {
     	miPersonaje.setMovimiento(15);
     }
     public void agarroPowerPellet() {
-    	megamind.setHuir(true);
+    	megamind.setHuir();
         miTimer= new Timer(this);
     	miTimer.timearPowerPellet();
     	miTimer.start();
@@ -109,8 +128,9 @@ public class LogicaColisiones extends Logica {
 		return (obtenerBloque(ubicacion1)==obtenerBloque(ubicacion2));
 	}
 
-	public void agarroInvisibilidad() {
-		
+    public void agarroInvisibilidad() {
+		megamind.setPacmanInvisible();
+		miTimer.timearInvisibilidad();
 		
 	}
 	
@@ -169,11 +189,19 @@ public class LogicaColisiones extends Logica {
    }
    public void restarDots() {
 	   cantidadDots--;
+	   if(!coloquePotion && this.cantidadDots<=100 && !(matriz[10][12].tengoEntidadEstatica()) ) {
+		   matriz[10][12].setEntidadEstatica(this.getFruit());
+	   }
+	   if(this.cantidadDots<=30 && !(matriz[10][12].tengoEntidadEstatica())) {
+		   matriz[10][12].setEntidadEstatica(this.getFruit());
+	   }
+	   if(this.cantidadDots==0) {
+			miLogicaGeneral.cambiarNivel();
+	    }
    }
-   public int getCantidadDots() {
-	   return cantidadDots;
-   }
-   public boolean noQuedanDots() {
-	   return (this.getCantidadDots()==0);
-   }
+    private Fruit getFruit() {
+		return null;
+    	
+    }
+ 
 }

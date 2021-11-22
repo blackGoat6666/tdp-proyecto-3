@@ -10,9 +10,7 @@ import visitor.Visitor;
 
 public class Bloque{
 
-	private Point ubicacion;
 	private EntidadEstatica miEntidadEstatica;
-	private EntidadDinamica miEntidadDinamica;
 	
 	public Bloque(EntidadEstatica ente) {
 		miEntidadEstatica=ente;  	
@@ -25,17 +23,14 @@ public class Bloque{
 		else {
 			visitante.visitBloqueVacio();
 		}
-		if(miEntidadDinamica!=null) {
-			miEntidadDinamica.accept(visitante);
-		}
 	}
 	
-	public void setEntidadDinamica(Entidad ente) {
-		miEntidadDinamica=(EntidadDinamica) ente;
+	public void setEntidadEstatica(EntidadEstatica ente) {
+		miEntidadEstatica=ente;
 	}
 	
-	public Boolean tengoEntidadDinamica(){
-	  return (miEntidadDinamica!=null);	
+	public Boolean tengoEntidadEstatica(){
+		return (miEntidadEstatica!=null);	
 	}
 
 	public void eliminarEntidadEstatica() {
@@ -46,12 +41,6 @@ public class Bloque{
 		
 	}
 	
-	public void graficar(JFrame juego) {
-		if(miEntidadEstatica!=null) {
-			juego.add(this.miEntidadEstatica.getEntidadGrafica());
-		}
-	}
-	
-	
+
 	
 }

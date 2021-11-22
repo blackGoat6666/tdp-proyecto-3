@@ -19,5 +19,7 @@ public abstract interface FabricaEntidades {
 	public abstract EntidadGraficaEstatica getVelocidad();
 	public abstract String getVida();
 	public abstract String getVidaMuerta();
-	
+	public abstract String musicaNivel1();
+	public abstract String musicaNivel2();
+	public abstract String musicaNivel3();
 }

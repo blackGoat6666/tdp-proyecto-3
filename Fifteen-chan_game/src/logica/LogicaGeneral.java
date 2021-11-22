@@ -63,7 +63,7 @@ public class LogicaGeneral extends Logica {
         miGUI.addGrillaNivel1(miPersonaje.getEntidadGrafica());
         nivelAbstracto = new Nivel1(miLogicaColisiones);
         matriz=nivelAbstracto.getMatriz(miFabrica);
-        miLogicaColisiones.setCantidadDots(3);
+        miLogicaColisiones.setCantidadDots(221);
         miLogicaColisiones.setMatriz(matriz);
         megamind= new MenteEnemiga(this,miLogicaColisiones,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky());
         miLogicaColisiones.setMenteEnemiga(megamind);
@@ -85,5 +85,8 @@ public class LogicaGeneral extends Logica {
     }
     public void reset() {
     	
+    }
+    public FabricaEntidades getFabrica() {
+    	return this.miFabrica;
     }
 }

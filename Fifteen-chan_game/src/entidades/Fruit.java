@@ -2,7 +2,7 @@ package entidades;
 
 import visitor.Visitor;
 
-public class Fruit extends MasPuntos {
+public class Fruit extends EntidadEstatica {
 	public Fruit(EntidadGraficaEstatica imagen) {
 		super(imagen);
 	}

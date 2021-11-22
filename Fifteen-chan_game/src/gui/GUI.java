@@ -303,7 +303,13 @@ private void initialize() {
 		    		miLogicaColisiones.moverPacman(new Point(0, 1));
 		    		frame.repaint();
 		    		break;
-		    	  }
+		          }
+		          case KeyEvent.VK_F: {
+			    	miLogicaColisiones.activarBomba();
+			    	frame.repaint();
+			    	break;
+			      }
+		          
 	           }
 	    	 frame.repaint();
 	        }

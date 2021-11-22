@@ -145,5 +145,26 @@ public class FabricaVampiro implements FabricaEntidades {
 	}
 
 
+	@Override
+	public String musicaNivel1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String musicaNivel2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String musicaNivel3() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 }

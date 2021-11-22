@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import visitor.Visitor;
 
-public class Dot extends MasPuntos {
+public class Dot extends EntidadEstatica {
 	int puntaje;
 	
 	public Dot(Point posicion, EntidadGraficaEstatica imagen) {

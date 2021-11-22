@@ -16,13 +16,7 @@ public class Pinky extends Enemigo{
 	@Override
 	public void resetear() {
 		ubicacion.setLocation(330,310);
-		miImagen.setModo("normal");
-		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
-		intentos=0;
-		meMovi=false;
-		huir=false;
-		muerto=false;
-		saliDeGate=false;
+		this.resetearGeneral();
 	}
 
 	@Override

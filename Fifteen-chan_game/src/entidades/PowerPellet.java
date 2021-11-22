@@ -12,14 +12,15 @@ public class PowerPellet extends EntidadEstatica {
 		imagen.setLocation(posicion);
 	}
 	
-	@Override
 	public String toString() {
 		return ("esto es un pellet");
 	}
 
-	@Override
 	public void accept(Visitor v) {
 		v.visitPowerPellet(this);
+	}
+	public int getPuntaje() {
+		return 100;
 	}
 
 }

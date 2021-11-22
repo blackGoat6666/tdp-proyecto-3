@@ -5,14 +5,14 @@ import logica.LogicaColisiones;
 public class Timer extends Thread {
     // atributos
    
-	private LogicaColisiones miLogica;
+	private LogicaColisiones miLogicaColisiones;
     boolean correr;
     private String timear;
     private int vueltas;
     //constructor
     
     public Timer(LogicaColisiones log) {
-      miLogica=log;
+      miLogicaColisiones=log;
       correr=true;
       timear=null;
       vueltas=0;
@@ -47,27 +47,36 @@ public class Timer extends Thread {
     private int getTiempoAMimir() {
     	if(timear!=null) {
     		switch(timear) {
-    			case "Power Pellet": return 6000;
-    	
+    			case "Power Pellet": return 10000;
+    			case "Bomba": return 3000;
+    			case "Invisibilidad": return 10000;
     		}
     	}
-    	return Thread.MIN_PRIORITY;
+    	return 1000;
     }
-   
     
-    public void timearPowerPellet() {
-    	timear="Power Pellet";
+    public void timearBomba() {
+    	timear="Bomba";
     }
     
     private void terminoElTiempo() {
     	if(timear=="Bomba") {
-    		
-    	}
-    	else {
+    		miLogicaColisiones.explotarBomba();
     		timear=null;
-    		miLogica.volverAModoNormal();
     		this.terminar();
     	}
-    }
+    	else {
+    		this.terminar();
+    		miLogicaColisiones.volverAModoNormal();
+    	}
+     }
+
+
+	public void timearPowerPellet() {
+		this.timear="Power Pellet";
+	}
+	public void timearInvisibilidad() {
+		this.timear="Invisibilidad";
+	}
 
 }

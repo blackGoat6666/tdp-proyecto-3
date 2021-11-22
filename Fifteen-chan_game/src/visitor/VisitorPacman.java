@@ -34,16 +34,12 @@ public class VisitorPacman implements Visitor {
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
 		miLogicaColisiones.restarDots();
-		System.out.println(miLogicaColisiones.getCantidadDots());
-		if(miLogicaColisiones.noQuedanDots()) {
-			miLogicaGeneral.cambiarNivel(	);
-		}
+		
 	}
 
 	@Override
 	public void visitFruit(Fruit fru) {
 		miLogicaGeneral.sumarPuntos(fru.getPuntaje());
-		fru.morir();
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(fru.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
@@ -53,9 +49,9 @@ public class VisitorPacman implements Visitor {
 	@Override
 	public void visitPowerPellet(PowerPellet power) {
 		miLogicaColisiones.agarroPowerPellet();
-		power.morir();
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(power.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogicaGeneral.sumarPuntos(power.getPuntaje());
 		miLogicaColisiones.pacmanPuedeMoverse();
 	}
 
@@ -81,7 +77,6 @@ public class VisitorPacman implements Visitor {
 	
 	public void visitVelocidad(Velocidad barry) {
 		miLogicaColisiones.agarroVelocidad();
-		barry.morir();
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();

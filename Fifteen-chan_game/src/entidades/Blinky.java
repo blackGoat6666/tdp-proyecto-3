@@ -31,13 +31,7 @@ public class Blinky extends Enemigo {
 	
 	public void resetear() {
 		ubicacion.setLocation(310,310);
-		miImagen.setModo("normal");
-		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
-		intentos=0;
-		meMovi=false;
-		huir=false;
-		muerto=false;
-		saliDeGate=false;
+		this.resetearGeneral();
 	}
 
 	public EntidadGrafica getEntidadGrafica() {

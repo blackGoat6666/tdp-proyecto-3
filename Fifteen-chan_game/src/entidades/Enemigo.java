@@ -85,10 +85,10 @@ public abstract class Enemigo extends EntidadDinamica {
 		  
 	}
 	public void volverModoNormal() {
-		this.movimiento=this.movimientoOriginal;
 		huir=false;
 		if(!muerto) {
 			this.miImagen.setModo("normal");
+			this.movimiento=this.movimientoOriginal;
 		}
 	}
 	
@@ -105,6 +105,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		miImagen.setModo("invisibilidad");
 		muerto=true;
 		saliDeGate=false;
+		huir=false;
 		meAtore=0;
 		intentos=0;
 		movimiento=movimientoOriginal+3;
@@ -192,11 +193,13 @@ public abstract class Enemigo extends EntidadDinamica {
 		}
 	}
 	
-	public void setHuir(Boolean estado) {
-		huir=estado;
-		this.calcularDir(miMente.getPosicionPacman());
-		movimiento=movimientoOriginal-1;
-		this.miImagen.setModo("powerPellet");
+	public void setHuir() {
+		if(!this.muerto) {
+			huir=true;
+			this.calcularDir(miMente.getPosicionPacman());
+			movimiento=movimientoOriginal-1;
+			this.miImagen.setModo("powerPellet");
+		}
 	}
 	
 	public String toString() {
@@ -206,5 +209,21 @@ public abstract class Enemigo extends EntidadDinamica {
 		meMovi=false;
 	}
 	
+	public boolean estoyMuerto() {
+		return this.muerto;
+	}
+	protected void resetearGeneral() {
+		miImagen.setModo("normal");
+		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
+		movimiento=this.movimientoOriginal;
+		intentos=0;
+		meMovi=false;
+		huir=false;
+		muerto=false;
+		saliDeGate=false;
+	}
+
 	protected abstract void calcularDirNormal(Point Pacman);
+	
+	
 }
