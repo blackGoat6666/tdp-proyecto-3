@@ -1,11 +1,13 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Bomba;
 import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
 import entidades.Gate;
+import entidades.Invisibilidad;
 import entidades.Ladrillo;
 import entidades.PowerPellet;
 import entidades.Velocidad;
@@ -20,9 +22,9 @@ public void visitFruit(Fruit fru);
 
 public void visitPowerPellet(PowerPellet power);
 
-public void visitBomba();
+public void visitBomba(Bomba bombastic);
 
-public void visitInvisibilidad();
+public void visitInvisibilidad(Invisibilidad invi);
 
 public void visitVelocidad(Velocidad barry);
 

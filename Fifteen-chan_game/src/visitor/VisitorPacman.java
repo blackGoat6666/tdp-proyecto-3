@@ -1,11 +1,13 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Bomba;
 import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
 import entidades.Gate;
+import entidades.Invisibilidad;
 import entidades.Ladrillo;
 import entidades.Personaje;
 import entidades.PowerPellet;
@@ -56,15 +58,19 @@ public class VisitorPacman implements Visitor {
 	}
 
 	@Override
-	public void visitBomba() {
+	public void visitBomba(Bomba bombastic) {
 		miLogicaColisiones.agarroBomba();
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(bombastic.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
 		
 	}
 
 	@Override
-	public void visitInvisibilidad() {
+	public void visitInvisibilidad(Invisibilidad invi) {
 		miLogicaColisiones.agarroInvisibilidad();
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(invi.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
 		
 	}

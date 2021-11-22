@@ -1,7 +1,5 @@
 package fabricas;
 
-import javax.swing.JLabel;
-
 import entidades.EntidadGraficaDinamica;
 import entidades.EntidadGraficaEstatica;
 
@@ -96,23 +94,16 @@ public class FabricaVampiro implements FabricaEntidades {
 	}
 
 	@Override
-	public EntidadGraficaEstatica getFruit1() {
-		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
+	public EntidadGraficaEstatica getFruit(int nivel) {
+		switch(nivel) {
+			case 1: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
+			case 2: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
+			case 3: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
+		}
+		return null;
 	}
 
-	@Override
-	public EntidadGraficaEstatica getFruit2() {
-		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
-	}
-
-	@Override
-	public EntidadGraficaEstatica getFruit3() {
-		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica("/Images/vampiroadelantemoviendose.gif");
-	}
-
+	
 	@Override
 	public EntidadGraficaEstatica getBomba() {
 		// TODO Auto-generated method stub
@@ -122,7 +113,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaEstatica getInvisibilidad() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/resources/Vampiro/vampiroInvisibilidad.png");
 	}
 
 	@Override
@@ -146,22 +137,21 @@ public class FabricaVampiro implements FabricaEntidades {
 
 
 	@Override
-	public String musicaNivel1() {
-		// TODO Auto-generated method stub
+	public String getMusica(int nivel) {
+		switch(nivel) {
+			case 1: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Dragula8bit.wav";
+			case 2: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Toccata 8 Bit.wav";
+			case 3: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Dragula8bit.wav";
+		}
 		return null;
 	}
 
-
-	@Override
-	public String musicaNivel2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public String musicaNivel3() {
-		// TODO Auto-generated method stub
+	public String getFondo(int nivel) {
+		switch(nivel) {
+			case 1: return "/resources/Vampiro/nivelvampiro1.png";
+			case 2: return "/resources/Vampiro/nivelvampiro2.png";
+			case 3: return "/resources/Vampiro/nivelvampiro3.png";
+		}
 		return null;
 	}
 

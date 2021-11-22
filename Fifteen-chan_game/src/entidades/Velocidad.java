@@ -1,12 +1,15 @@
 package entidades;
 
+import java.awt.Point;
+
 import visitor.Visitor;
 
 public class Velocidad extends Potion{
 
-	public Velocidad(EntidadGraficaEstatica imagen) {
+	public Velocidad(Point point, EntidadGraficaEstatica imagen) {
 		super(imagen);
-		// TODO Auto-generated constructor stub
+		ubicacion=point;
+		imagen.setLocation(point);
 	}
 
 
@@ -17,13 +20,7 @@ public class Velocidad extends Potion{
 
 	
 	public void accept(Visitor v) {
-		
-		
+		v.visitVelocidad(this);
 	}
 
-	
-	public void morir() {
-		// TODO Auto-generated method stub
-		
-	}
 }

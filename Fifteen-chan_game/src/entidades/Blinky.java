@@ -34,14 +34,4 @@ public class Blinky extends Enemigo {
 		this.resetearGeneral();
 	}
 
-	public EntidadGrafica getEntidadGrafica() {
-		return miImagen;
-		
-	}
-
-
-
-	
-
-	
 }

@@ -160,5 +160,10 @@ public class MenteEnemiga extends Thread{
 	public void setPacmanInvisible() {
 		this.pacmanInvisible=true;
 	}
+	public void graficarFantasmitas() {
+		miLogicaColisiones.graficar(blinky.getEntidadGrafica());
+		miLogicaColisiones.graficar(this.inky.getEntidadGrafica());
+		miLogicaColisiones.graficar(this.pinky.getEntidadGrafica());
+	}
 	
 }

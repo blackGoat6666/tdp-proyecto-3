@@ -1,7 +1,7 @@
 package entidades;
 import java.awt.Point;
 import visitor.Visitor;
-public class Bomba extends EntidadEstatica {
+public class Bomba extends Potion{
 	
 	public Bomba(Point posicion, EntidadGraficaEstatica imagen) {
 		super(imagen);
@@ -10,6 +10,6 @@ public class Bomba extends EntidadEstatica {
 		
 	}
 	public void accept(Visitor v) {
-		v.visitBomba();
+		v.visitBomba(this);
 	}
 }

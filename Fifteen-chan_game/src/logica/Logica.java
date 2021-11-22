@@ -1,6 +1,6 @@
 package logica;
 
-import Nivel.Nivel1;
+import Nivel.Niveles;
 import entidades.Bloque;
 import entidades.Personaje;
 import gui.GUI;
@@ -12,7 +12,7 @@ public abstract class Logica {
 	protected MenteEnemiga megamind;
 	protected int vidas;
 	protected GUI miGUI;
-	protected Nivel1 nivelAbstracto;
+	protected Niveles niveles;
 	
 	
 	//metodos
@@ -20,5 +20,7 @@ public abstract class Logica {
 		megamind.resetearFantasmas();
     	miPersonaje.resetear();
     	miGUI.actualizar();
+    	this.resetearLogicaPropia();
 	}
+	protected abstract void resetearLogicaPropia();
  }

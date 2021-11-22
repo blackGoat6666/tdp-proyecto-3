@@ -11,15 +11,12 @@ public abstract interface FabricaEntidades {
 	public abstract EntidadGraficaDinamica getPersonaje();
 	public abstract EntidadGraficaEstatica getDot();
 	public abstract EntidadGraficaEstatica getPowerPellet();
-	public abstract EntidadGraficaEstatica getFruit1();
-	public abstract EntidadGraficaEstatica getFruit2();
-	public abstract EntidadGraficaEstatica getFruit3();
+	public abstract EntidadGraficaEstatica getFruit(int nivel);
 	public abstract EntidadGraficaEstatica getBomba();
 	public abstract EntidadGraficaEstatica getInvisibilidad();
 	public abstract EntidadGraficaEstatica getVelocidad();
 	public abstract String getVida();
 	public abstract String getVidaMuerta();
-	public abstract String musicaNivel1();
-	public abstract String musicaNivel2();
-	public abstract String musicaNivel3();
+	public abstract String getMusica(int nivel);
+	public abstract String getFondo(int nivel);
 }

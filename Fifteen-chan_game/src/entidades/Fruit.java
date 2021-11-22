@@ -1,15 +1,18 @@
 package entidades;
 
+import java.awt.Point;
+
 import visitor.Visitor;
 
 public class Fruit extends EntidadEstatica {
-	public Fruit(EntidadGraficaEstatica imagen) {
+	public Fruit(Point point, EntidadGraficaEstatica imagen) {
 		super(imagen);
+		ubicacion=point;
+		miImagen.setLocation(ubicacion);
 	}
 
-	int puntaje;
 	public int getPuntaje() {
-		return puntaje;
+		return 400;
 	}
 	
 	public void accept(Visitor v) {

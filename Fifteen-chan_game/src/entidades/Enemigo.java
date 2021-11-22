@@ -225,5 +225,8 @@ public abstract class Enemigo extends EntidadDinamica {
 
 	protected abstract void calcularDirNormal(Point Pacman);
 	
-	
+	public EntidadGrafica getEntidadGrafica() {
+		return miImagen;
+		
+	}
 }

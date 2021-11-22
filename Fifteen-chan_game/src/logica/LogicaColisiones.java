@@ -2,22 +2,14 @@ package logica;
 
 import java.awt.Point;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Nivel.Nivel1;
-import Nivel.NivelAbstracto;
-import entidades.Blinky;
 import entidades.Bloque;
 import entidades.Bomba;
 import entidades.Enemigo;
-import entidades.Entidad;
 import entidades.EntidadDinamica;
-import entidades.Fruit;
 import entidades.Ladrillo;
 import entidades.Personaje;
-import fabricas.FabricaEntidades;
-import fabricas.FabricaVampiro;
 import gui.GUI;
 import visitor.Visitor;
 import visitor.VisitorFantasma;
@@ -25,7 +17,6 @@ import visitor.VisitorPacman;
 
 public class LogicaColisiones extends Logica {
 
-    private boolean truncarPantalla;
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
 	protected int cantidadDots;
@@ -43,6 +34,8 @@ public class LogicaColisiones extends Logica {
        vidas=3;
        miGUI=gui;
        bomba=false;
+       coloqueFruit=false;
+       coloquePotion=false;
      }
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
@@ -152,8 +145,12 @@ public class LogicaColisiones extends Logica {
 		miPersonaje.setMeMuevo(false);
 	}
    public void graficar(JLabel imagen) {
-	   miGUI.addGrillaNivel1(imagen);
+	   miGUI.addGrilla(imagen);
 	   
+   }
+   public void graficarEntidadesDinamicas() {
+	   megamind.graficarFantasmitas();
+	   this.graficar(this.miPersonaje.getEntidadGrafica());
    }
    
    public Point getUbicacionPacman() {
@@ -190,18 +187,24 @@ public class LogicaColisiones extends Logica {
    public void restarDots() {
 	   cantidadDots--;
 	   if(!coloquePotion && this.cantidadDots<=100 && !(matriz[10][12].tengoEntidadEstatica()) ) {
-		   matriz[10][12].setEntidadEstatica(this.getFruit());
+		   matriz[10][12].setEntidadEstatica(miLogicaGeneral.getPotion());
+		   this.coloquePotion=true;
 	   }
-	   if(this.cantidadDots<=30 && !(matriz[10][12].tengoEntidadEstatica())) {
-		   matriz[10][12].setEntidadEstatica(this.getFruit());
+	   if(!coloqueFruit && this.cantidadDots<=30 && !(matriz[10][12].tengoEntidadEstatica())) {
+		   matriz[10][12].setEntidadEstatica(miLogicaGeneral.getFruit());
+		   this.coloqueFruit=true;
 	   }
 	   if(this.cantidadDots==0) {
 			miLogicaGeneral.cambiarNivel();
 	    }
    }
-    private Fruit getFruit() {
-		return null;
-    	
-    }
+   
+   protected void resetearLogicaPropia() {
+	   bomba=false;
+       coloqueFruit=false;
+       coloquePotion=false;
+   }
+    
+   
  
 }

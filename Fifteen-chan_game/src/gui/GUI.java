@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Point;
@@ -16,11 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import entidades.EntidadGrafica;
-import entidades.EntidadGraficaDinamica;
-import entidades.Personaje;
-import fabricas.FabricaEntidades;
-import fabricas.FabricaVampiro;
 import logica.LogicaColisiones;
 import logica.LogicaGeneral;
 
@@ -30,22 +24,14 @@ public class GUI {
 
 	private JPanel panelMenu;
 	private JPanel panelJuego;
-	private JLabel labels[][] = new JLabel[20][20];
-	private JLabel labels2[][] = new JLabel[20][20];
-	private JLabel labels3[][] = new JLabel[20][20];
-    private JLabel pacMan;
 	private JFrame frame;
-	private JPanel grillaNivel1;
-	private JPanel grillaNivel2;
-	private JPanel grillaNivel3;
 	private LogicaColisiones miLogicaColisiones;
 	private LogicaGeneral miLogicaGeneral;
-	private Thread sonido;
 	private JLabel vida1;
 	private JLabel vida2;
 	private JLabel vida3;
 	private JLabel lblPuntuacion;
-	
+	private JPanel grillaActual;
 
 	/**
 	 * Launch the application.
@@ -91,6 +77,8 @@ private void initialize() {
 	    frame.getContentPane().add(panelJuego);
 	    panelJuego.setLayout(null);
 	    panelJuego.setVisible(false);
+	    
+	    this.miLogicaGeneral.ReproducirSonido("D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\pac-man-fever.wav");
 	
 		panelMenu = new Panel("/Images/menu.png");
 		panelMenu.setBounds(0, 0, 1200, 720);
@@ -99,19 +87,6 @@ private void initialize() {
 		panelMenu.setLayout(null);
 		
 		
-		grillaNivel1 = new Panel("/Images/nivelvampiro1.png");
-		grillaNivel1.setBounds(365, 10, 660, 660);
-		panelJuego.add(grillaNivel1);
-		
-		grillaNivel2 = new Panel("/Images/nivelvampiro2.png");
-		grillaNivel2.setBounds(365, 10, 660, 660);
-		panelJuego.add(grillaNivel2);
-		grillaNivel2.setLayout(null);
-		
-		grillaNivel3 = new Panel("/Images/nivelvampiro3.png");
-		grillaNivel3.setBounds(365, 10, 660, 660);
-		panelJuego.add(grillaNivel3);
-		grillaNivel3.setLayout(null);
 		
 		JButton btnAyuda = new JButton("Ayuda");
 		btnAyuda.setForeground(Color.RED);
@@ -145,51 +120,34 @@ private void initialize() {
 		btnJugarSCP.setBounds(581, 238, 226, 58);
 		panelMenu.add(btnJugarSCP);
 		
-		JButton btnNivel1 = new JButton("Nivel 1");
-		btnNivel1.setForeground(Color.RED);
-		btnNivel1.setBackground(Color.BLACK);
-		btnNivel1.setBounds(74, 237, 226, 58);
-		panelJuego.add(btnNivel1);
-		
-		JButton btnNivel2 = new JButton("Nivel 2");
-		btnNivel2.setForeground(Color.RED);
-		btnNivel2.setBackground(Color.BLACK);
-		btnNivel2.setBounds(72, 314, 226, 58);
-		panelJuego.add(btnNivel2);
-		
-		JButton btnNivel3 = new JButton("Nivel 3");
-		btnNivel3.setForeground(Color.RED);
-		btnNivel3.setBackground(Color.BLACK);
-		btnNivel3.setBounds(74, 410, 226, 58);
-		panelJuego.add(btnNivel3);
 		
 		JButton btnVolverMenu = new JButton("Volver al menu");
 		btnVolverMenu.setForeground(Color.WHITE);
 		btnVolverMenu.setBackground(Color.BLACK);
 		btnVolverMenu.setBounds(50, 100, 226, 58);
 		panelJuego.add(btnVolverMenu);
-		grillaNivel1.setLayout(null);
 		
 		vida1= new JLabel("");
-		vida1.setBounds(1066, 30, 64, 64);
+		vida1.setBounds(25, 259, 64, 64);
 		panelJuego.add(vida1);
 		vida2= new JLabel("");
-		vida2.setBounds(1066, 110, 64, 64);
+		vida2.setBounds(130, 259, 64, 64);
 		panelJuego.add(vida2);
 		vida3= new JLabel("");
-		vida3.setBounds(1066, 180, 64, 64);
+		vida3.setBounds(240, 259, 64, 64);
 		panelJuego.add(vida3);
 		
+		Font Chiller= new Font("Chiller", Font.BOLD | Font.ITALIC, 50);
 		
 		JLabel lblPuntuacionLetra = new JLabel("Puntuacion");
-		lblPuntuacionLetra.setFont(new Font("Chiller", Font.BOLD | Font.ITALIC, 70));
 		lblPuntuacionLetra.setForeground(Color.RED);
+		lblPuntuacionLetra.setFont(Chiller);
 		lblPuntuacionLetra.setVerticalAlignment(SwingConstants.TOP);
-		lblPuntuacionLetra.setBounds(25, 500, 340, 170);
+		lblPuntuacionLetra.setBounds(31, 502, 340, 170);
 		panelJuego.add(lblPuntuacionLetra);
 		
 		lblPuntuacion = new JLabel("0");
-		lblPuntuacion.setFont(new Font("Chiller", Font.BOLD | Font.ITALIC, 70));
+		lblPuntuacion.setFont(Chiller);
 		lblPuntuacion.setForeground(Color.RED);
 		lblPuntuacion.setVerticalAlignment(SwingConstants.TOP);
 		lblPuntuacion.setBounds(72, 574, 259, 186);
@@ -213,6 +171,7 @@ private void initialize() {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
 				miLogicaGeneral.setFabrica("vampiros");
+				miLogicaGeneral.comenzarJuego();
 			}
 		});
 		
@@ -246,37 +205,7 @@ private void initialize() {
 			}
 		});
 		
-		btnNivel1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				grillaNivel1.setVisible(true);
-				grillaNivel2.setVisible(false);
-				grillaNivel3.setVisible(false);
-				frame.repaint();
-				miLogicaGeneral.comenzarJuego();
-			}
-		});
-		btnNivel2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				grillaNivel1.setVisible(false);
-				grillaNivel2.setVisible(true);
-				grillaNivel3.setVisible(false);
-				pacMan.setLocation(300, 345);
-				grillaNivel2.add(pacMan);
-			}
-		});
-		btnNivel3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				grillaNivel1.setVisible(false);
-				grillaNivel2.setVisible(false);
-				grillaNivel3.setVisible(true);
-				pacMan.setLocation(300, 345);
-				grillaNivel3.add(pacMan);
-			}
-		});
-		
+	
 		frame.setFocusable(true);
 		frame.addKeyListener(new KeyListener() {
 	        public void keyPressed(KeyEvent e) {
@@ -341,17 +270,21 @@ private void initialize() {
 	}
 
 
-	public void addGrillaNivel1(JLabel imagen) {
-		this.frame.getContentPane().add(imagen);
-		this.grillaNivel1.add(imagen);
+	public void addGrilla(JLabel imagen) {
+		this.grillaActual.add(imagen);
 		this.frame.repaint();
-	
 	}
-	public void cambiarNivel(int i) {
-		if(i==2) {
-			grillaNivel1=new Panel("/Images/nivelvampiro2.png");
-			this.actualizar();
+	public void cambiarNivel(String fondito) {
+		if(grillaActual!=null) {
+			grillaActual.setVisible(false);		
 		}
+		grillaActual=new Panel(fondito);
+		grillaActual.setVisible(true);
+		grillaActual.setBounds(365, 10, 660, 660);
+		panelJuego.add(grillaActual);
+		grillaActual.setVisible(true);
+		grillaActual.setLayout(null);
+		this.actualizar();
 		
 	}
 }

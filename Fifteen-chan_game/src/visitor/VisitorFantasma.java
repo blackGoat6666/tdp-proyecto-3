@@ -1,17 +1,19 @@
 package visitor;
 
 import entidades.Bloque;
+import entidades.Bomba;
 import entidades.Dot;
 import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
+import entidades.Invisibilidad;
 import entidades.PowerPellet;
 import entidades.Velocidad;
 import logica.LogicaColisiones;
 
 public class VisitorFantasma implements Visitor{
 	private Enemigo visitante;
-	protected LogicaColisiones miLogica;
+	protected LogicaColisiones miLogicaColisiones;
 	
 	
 	public void setVisitante(Enemigo ente) {
@@ -31,19 +33,25 @@ public class VisitorFantasma implements Visitor{
 	}
 
 	@Override
-	public void visitBomba() {
+	public void visitBomba(Bomba bombastic) {
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(bombastic.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		visitante.seMovio();
 		
 	}
 
 	@Override
-	public void visitInvisibilidad() {
+	public void visitInvisibilidad(Invisibilidad invi) {
 		visitante.seMovio();
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(invi.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		
 	}
 
 	@Override
 	public void visitVelocidad(Velocidad barry) {
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(barry.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 		visitante.seMovio();
 		
 	}
@@ -80,7 +88,8 @@ public class VisitorFantasma implements Visitor{
 	@Override
 	public void visitFruit(Fruit fru) {
 		visitante.seMovio();
-		
+		Bloque eliminar=miLogicaColisiones.obtenerBloque(fru.getPosicion());
+		eliminar.eliminarEntidadEstatica();
 	}
 
 
