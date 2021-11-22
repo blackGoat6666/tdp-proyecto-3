@@ -14,6 +14,7 @@ import logica.LogicaColisiones;
 public class Nivel1 extends NivelAbstracto{
 	private int[][] matrizNivel;
 	private LogicaColisiones miLogica;
+	private int cantidadDots;
 	
 	public Nivel1 (LogicaColisiones log) {
 		miLogica=log;
@@ -49,6 +50,7 @@ public class Nivel1 extends NivelAbstracto{
 					matriz[j][i] = new Bloque(new Ladrillo(null));
 					break;
 				case 1:
+					cantidadDots++;
 					imagen= fab.getDot();
 					matriz[j][i] = new Bloque(new Dot(new Point( ((j+1)*30)+5, ((i+1)*30)+5 ), imagen));
 					miLogica.graficar(imagen);
@@ -65,9 +67,11 @@ public class Nivel1 extends NivelAbstracto{
 				}
 			}
 	    }
-		
 		return matriz;
 		
+	}
+	public int getDots() {
+		return cantidadDots;
 	}
 
 }

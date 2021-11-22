@@ -29,7 +29,7 @@ public class LogicaColisiones extends Logica {
     
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
-   
+	protected int cantidadDots;
     private GUI miGUI;
     //private int puntos;
     
@@ -215,6 +215,16 @@ public class LogicaColisiones extends Logica {
    public void setMenteEnemiga(MenteEnemiga menteEnemiga) {
 	   megamind=menteEnemiga;
    }
-    
-   
+   public void setCantidadDots(int cantidad) {
+	   cantidadDots=cantidad;
+   }
+   public void restarDots() {
+	   cantidadDots--;
+   }
+   public int getCantidadDots() {
+	   return cantidadDots;
+   }
+   public boolean noQuedanDots() {
+	   return (this.getCantidadDots()==0);
+   }
 }
