@@ -34,6 +34,8 @@ public class GUI {
 	private JLabel vida3;
 	private JLabel lblPuntuacion;
 	private JPanel grillaActual;
+	private JPanel panelPerdiste;
+	private JLabel perdiste;
 
 	/**
 	 * Launch the application.
@@ -80,12 +82,8 @@ private void initialize() {
 	    panelJuego.setLayout(null);
 	    panelJuego.setVisible(false);
 	    
-<<<<<<< Updated upstream
-	    this.miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
-=======
-	    this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
->>>>>>> Stashed changes
-	
+        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
+
 		panelMenu = new Panel("/Images/menu.png");
 		panelMenu.setBounds(0, 0, 1200, 720);
 		panelMenu.setVisible(true);
@@ -171,7 +169,18 @@ private void initialize() {
 		btnMusicaMenu.setBounds(1079, 574, 64, 58);
 		panelMenu.add(btnMusicaMenu);
 		
+		panelPerdiste = new Panel("/Images/menu.png");
+        panelPerdiste.setBounds(0, 0, 1200, 720);
+        panelPerdiste.setVisible(false);
+        frame.getContentPane().add(panelPerdiste);
+        panelPerdiste.setLayout(null);
 		
+        JLabel lblPerdiste = new JLabel("PERDISTE");
+        lblPerdiste.setFont(Chiller);
+        lblPerdiste.setForeground(Color.RED);
+        lblPerdiste.setVerticalAlignment(SwingConstants.TOP);
+        lblPerdiste.setBounds(408, 362, 259, 64);
+        panelPerdiste.add(lblPerdiste);
 		
 		
 		// acciones botones
@@ -222,7 +231,7 @@ private void initialize() {
 				panelJuego.setVisible(false);
 				panelMenu.setVisible(true);
 				miLogicaGeneral.PararSonido();
-				miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
+				miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
 			}
 			
 		});
@@ -243,7 +252,7 @@ private void initialize() {
 					miLogicaGeneral.PararSonido();
 				}
 				else
-					miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
+					miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
 			}
 		});
 		
@@ -328,5 +337,11 @@ private void initialize() {
 		grillaActual.setLayout(null);
 		this.actualizar();
 		
+	}
+
+	public void terminarJuego() {
+		panelJuego.setVisible(false);
+        panelMenu.setVisible(false);
+        panelPerdiste.setVisible(true);
 	}
 }

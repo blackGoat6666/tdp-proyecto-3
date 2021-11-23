@@ -30,8 +30,7 @@ public class LogicaGeneral extends Logica {
 	protected LogicaColisiones miLogicaColisiones;
 	private Clip musiquita;
 	private Boolean musica;
-
-	
+    
 	//constructor
 	
 	public LogicaGeneral(GUI gui) {
@@ -71,6 +70,7 @@ public class LogicaGeneral extends Logica {
     		miLogicaColisiones.resetearLogicaPropia();
     		this.PararSonido();
             this.ReproducirSonido(miFabrica.getMusica(nivel));
+            
             miGUI.actualizar();	
     	}
     	
@@ -108,7 +108,9 @@ public class LogicaGeneral extends Logica {
     }
 
     public void terminarJuego() {
-    	
+        miGUI.terminarJuego();
+        this.PararSonido();
+
     }
     public int getNivel() {
     	return nivel;
@@ -118,11 +120,7 @@ public class LogicaGeneral extends Logica {
     }
     public void ReproducirSonido(String nombreSonido){
         try {
-<<<<<<< Updated upstream
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath()+nombreSonido));
-=======
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath() +nombreSonido));
->>>>>>> Stashed changes
          musiquita = AudioSystem.getClip();
          musiquita.open(audioInputStream);
          musiquita.start();

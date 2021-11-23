@@ -165,15 +165,9 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public String getMusica(int nivel) {
 		switch(nivel) {
-<<<<<<< Updated upstream
-			case 1: return "\\resources\\Musica\\Dragula8bit.wav";
-			case 2: return "\\resources\\Musica\\Toccata 8 Bit.wav";
-			case 3: return "\\resources\\Musica\\Dragula8bit.wav";
-=======
-			case 1: return "/resources/Musica/Dragula8bit.wav";
+            case 1: return "/resources/Musica/Dragula8bit.wav";
 			case 2: return "/resources/Musica/Toccata 8 Bit.wav";
 			case 3: return "/resources/Musica/Toccata 8 Bit.wav";
->>>>>>> Stashed changes
 		}
 		return null;
 	}

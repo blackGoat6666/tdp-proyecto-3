@@ -25,10 +25,10 @@ public class MenteEnemiga extends Thread{
 	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita, EntidadGraficaDinamica miRey) {
 		miLogicaGeneral= logicaGeneral;
 		miLogicaColisiones =logicaColisiones;
-		blinky=new Blinky(1,rojito, this );
-		inky= new Inky(1, celestito, this);
-		pinky= new Pinky(1,rosita,this);
-		elPana= new Clyde(1, miRey,this);
+		blinky=new Blinky(5,rojito, this );
+		inky= new Inky(3, celestito, this);
+		pinky= new Pinky(3,rosita,this);
+		elPana= new Clyde(3, miRey,this);
 		miLogicaColisiones.graficar(rojito);
 		miLogicaColisiones.graficar(celestito);
 		miLogicaColisiones.graficar(rosita);
@@ -182,5 +182,10 @@ public class MenteEnemiga extends Thread{
 		miLogicaColisiones.graficar(this.pinky.getEntidadGrafica());
 		miLogicaColisiones.graficar(this.elPana.getEntidadGrafica());
 	}
-	
+	public void cambiarVelocidad() {
+		blinky.setMovimiento(blinky.getMovimiento()+1);
+		inky.setMovimiento(inky.getMovimiento()+1);
+		pinky.setMovimiento(pinky.getMovimiento()+1);
+		elPana.setMovimiento(elPana.getMovimiento()+1);
+	}
 }
