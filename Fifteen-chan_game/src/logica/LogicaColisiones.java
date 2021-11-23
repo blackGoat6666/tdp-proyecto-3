@@ -8,6 +8,9 @@ import entidades.Bloque;
 import entidades.Bomba;
 import entidades.Enemigo;
 import entidades.EntidadDinamica;
+import entidades.EntidadEstatica;
+import entidades.EntidadGrafica;
+import entidades.EntidadGraficaEstatica;
 import entidades.Ladrillo;
 import entidades.Personaje;
 import gui.GUI;
@@ -26,9 +29,11 @@ public class LogicaColisiones extends Logica {
     private Point ubicacionBomba; 
     private boolean coloqueFruit;
     private boolean coloquePotion;
+    private EntidadGraficaEstatica bombasticeo;
+    
 
     public LogicaColisiones(GUI gui,LogicaGeneral logicaGeneral) {
-       visitorFantasma= new VisitorFantasma();
+       visitorFantasma= new VisitorFantasma(this);
        miLogicaGeneral = logicaGeneral;
        visitorPacman= new VisitorPacman(this, miLogicaGeneral);
        vidas=3;
@@ -36,6 +41,7 @@ public class LogicaColisiones extends Logica {
        bomba=false;
        coloqueFruit=false;
        coloquePotion=false;
+       ubicacionBomba=new Point(0,0);
      }
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
@@ -74,16 +80,25 @@ public class LogicaColisiones extends Logica {
     }
     public void activarBomba() {
     	if(bomba){
-    		this.ubicacionBomba.setLocation(getUbicacionPacman());
-    		this.obtenerBloque(ubicacionBomba).setEntidadEstatica(new Bomba(ubicacionBomba,miLogicaGeneral.getFabrica().getBomba()));
+    		this.ubicacionBomba.setLocation(this.miPersonaje.getPosicion());
+    		bombasticeo=miLogicaGeneral.getFabrica().getBomba();
+    		bombasticeo.setLocation(ubicacionBomba);
+    		this.graficar(bombasticeo);
+    		this.miGUI.actualizar();
+    		bomba=false;
     		miTimer= new Timer(this);
+    		miTimer.start();
     		miTimer.timearBomba();
-    	}
+         }
       }
       public void explotarBomba() {
     	  megamind.explotoBomba(ubicacionBomba);
-    	  obtenerBloque(ubicacionBomba).eliminarEntidadEstatica();
+    	  this.setModoPacman("normal");
+    	  miTimer=null;
+    	  bombasticeo.setIcon(null);
+    	  bombasticeo=null;
     	  miGUI.actualizar();
+    	  bomba=false;
       }
     
    
@@ -99,6 +114,7 @@ public class LogicaColisiones extends Logica {
     
     public void volverAModoNormal() {
     	megamind.fantasmasModoNormal();
+    	miPersonaje.setModo("normal");
     	miTimer.terminar();
     	miTimer=null;
     }
@@ -108,6 +124,7 @@ public class LogicaColisiones extends Logica {
     }
     
 
+  
     
     public Bloque obtenerBloque(Point ubicacion) {
     	int x=(ubicacion.x)/30;
@@ -123,6 +140,8 @@ public class LogicaColisiones extends Logica {
 
     public void agarroInvisibilidad() {
 		megamind.setPacmanInvisible();
+		miTimer= new Timer(this);
+		miTimer.start();
 		miTimer.timearInvisibilidad();
 		
 	}
@@ -163,7 +182,7 @@ public class LogicaColisiones extends Logica {
    
    public Boolean llegoAGate(Point Ubicacion) {
 	   Bloque comparar=this.obtenerBloque(Ubicacion);
-	   return  (comparar==matriz[10][10] ||comparar==matriz[9][10] ||comparar==matriz[11][10]);
+	   return  (comparar==matriz[10][9] ||comparar==matriz[9][9] ||comparar==matriz[11][9]);
    }
    public Boolean salioDeGate(Point Ubicacion) {
 	   Bloque comparar=this.obtenerBloque(Ubicacion);
@@ -186,23 +205,32 @@ public class LogicaColisiones extends Logica {
    }
    public void restarDots() {
 	   cantidadDots--;
-	   if(!coloquePotion && this.cantidadDots<=100 && !(matriz[10][12].tengoEntidadEstatica()) ) {
-		   matriz[10][12].setEntidadEstatica(miLogicaGeneral.getPotion());
+	   if(!coloquePotion && this.cantidadDots<=190 && !(matriz[10][11].tengoEntidadEstatica()) ) {
+		   EntidadEstatica coloco=miLogicaGeneral.getPotion();
+		   matriz[10][11].setEntidadEstatica(coloco);
+		   coloco.getEntidadGrafica().setLocation(coloco.getPosicion().x, coloco.getPosicion().y);
+		   this.graficar(coloco.getEntidadGrafica());
 		   this.coloquePotion=true;
 	   }
-	   if(!coloqueFruit && this.cantidadDots<=30 && !(matriz[10][12].tengoEntidadEstatica())) {
-		   matriz[10][12].setEntidadEstatica(miLogicaGeneral.getFruit());
-		   this.coloqueFruit=true;
+	   if(!coloqueFruit && this.cantidadDots<=30 && !(matriz[10][11].tengoEntidadEstatica())) {
+		   EntidadEstatica coloco=miLogicaGeneral.getFruit();
+		   matriz[10][11].setEntidadEstatica(coloco);
+		   this.graficar(coloco.getEntidadGrafica());
+		   this.coloqueFruit=true; 
 	   }
 	   if(this.cantidadDots==0) {
 			miLogicaGeneral.cambiarNivel();
 	    }
    }
    
-   protected void resetearLogicaPropia() {
+   public void resetearLogicaPropia() {
 	   bomba=false;
        coloqueFruit=false;
        coloquePotion=false;
+   }
+   
+   public void setModoPacman(String mode) {
+	   this.miPersonaje.setModo(mode);
    }
     
    

@@ -68,6 +68,7 @@ public class LogicaGeneral extends Logica {
     		matriz=niveles.getMatriz(miFabrica);
     		miLogicaColisiones.setMatriz(matriz);
     		miLogicaColisiones.graficarEntidadesDinamicas();
+    		miLogicaColisiones.resetearLogicaPropia();
     		this.PararSonido();
             this.ReproducirSonido(miFabrica.getMusica(nivel));
             miGUI.actualizar();	
@@ -90,7 +91,7 @@ public class LogicaGeneral extends Logica {
         matriz=niveles.getMatriz(miFabrica);
         miLogicaColisiones.setCantidadDots(221);
         miLogicaColisiones.setMatriz(matriz);
-        megamind= new MenteEnemiga(this,miLogicaColisiones,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky());
+        megamind= new MenteEnemiga(this,miLogicaColisiones,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky(), miFabrica.getClyde());
         miLogicaColisiones.setMenteEnemiga(megamind);
         megamind.start();  
         for(int i=1; i<=3; i++) {
@@ -107,7 +108,7 @@ public class LogicaGeneral extends Logica {
     }
 
     public void terminarJuego() {
-   
+    	
     }
     public int getNivel() {
     	return nivel;
@@ -117,7 +118,11 @@ public class LogicaGeneral extends Logica {
     }
     public void ReproducirSonido(String nombreSonido){
         try {
+<<<<<<< Updated upstream
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath()+nombreSonido));
+=======
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath() +nombreSonido));
+>>>>>>> Stashed changes
          musiquita = AudioSystem.getClip();
          musiquita.open(audioInputStream);
          musiquita.start();
@@ -133,20 +138,15 @@ public class LogicaGeneral extends Logica {
     }
     public EntidadEstatica getPotion() {
  	   switch(this.nivel) {
- 	   	case 1: return new Bomba(new Point((315), (375)), miFabrica.getBomba());
- 	   	case 2: return new  Invisibilidad(new Point((315), (375)), miFabrica.getInvisibilidad());
- 	   	case 3: return new Velocidad(new Point((315), (375)), miFabrica.getVelocidad());
+ 	   	case 1: return new Bomba((new Point( ((11)*30)+5, ((12)*30)+5 )), miFabrica.getBomba());
+ 	   	case 2:return new  Invisibilidad(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getInvisibilidad());
+ 	   	case 3:return new Velocidad(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getVelocidad());
  	   }
  	   return null;
     }
     public EntidadEstatica getFruit() {
-  	   switch(this.nivel) {
-  	   	case 1: return new Fruit(new Point((315), (375)), miFabrica.getFruit(nivel));
-  	   	case 2: return new  Invisibilidad(new Point((315), (375)), miFabrica.getInvisibilidad());
-  	   	case 3: return new Velocidad(new Point((315), (375)), miFabrica.getVelocidad());
-  	   }
-  	   return null;
-     }
+  	   return new Fruit(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getFruit(nivel));
+  	 }
     protected void resetearLogicaPropia() {
     }
     public Boolean getBooleanMusica() {

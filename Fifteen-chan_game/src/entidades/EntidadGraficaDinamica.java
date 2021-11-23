@@ -8,7 +8,7 @@ import gui.GUI;
 public class EntidadGraficaDinamica extends EntidadGrafica{
 	private String [] modoNormal;
 	private String [] modoPowerPellet;
-	private String [] modoVelocidad;
+	private String [] modoHuir;
 	private String [] modoInvisibilidad;
 	private String modo;
 	
@@ -19,7 +19,7 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 		this.setSize(60,60);
 		modoNormal= new String[4];
 		modoPowerPellet= new String[4];
-		modoVelocidad= new String[4];
+		modoHuir= new String[4];
 		modoInvisibilidad= new String[4];
 		for (int i = 0; i < 4; i++) {
 			modoNormal [i] = url [i];
@@ -28,7 +28,7 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 			modoPowerPellet [i] = url [i+4];
 		}
 		for (int i = 0; i < 4; i++) {
-			modoVelocidad [i] = url [i+8];
+			modoHuir[i] = url [i+8];
 		}
 		for (int i = 0; i < 4; i++) {
 			modoInvisibilidad [i] = url [i+12];
@@ -46,8 +46,8 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 		     case "powerPellet":
 		    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoPowerPellet[0])));
 		    	 break;
-		     case "velocidad":
-		    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoVelocidad[0])));
+		     case "huir":
+		    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoHuir[0])));
 		    	 break;
 		     case "invisibilidad":
 		    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoInvisibilidad[0])));
@@ -63,8 +63,8 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 	     case "powerPellet":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoPowerPellet[1])));
 	    	 break;
-	     case "velocidad":
-	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoVelocidad[1])));
+	     case "huir":
+	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoHuir[1])));
 	    	 break;
 	     case "invisibilidad":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoInvisibilidad[1])));
@@ -81,8 +81,8 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 	     case "powerPellet":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoPowerPellet[2])));
 	    	 break;
-	     case "velocidad":
-	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoVelocidad[2])));
+	     case "huir":
+	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoHuir[2])));
 	    	 break;
 	     case "invisibilidad":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoInvisibilidad[2])));
@@ -100,8 +100,8 @@ public class EntidadGraficaDinamica extends EntidadGrafica{
 	     case "powerPellet":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoPowerPellet[3])));
 	    	 break;
-	     case "velocidad":
-	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoVelocidad[3])));
+	     case "huir":
+	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoHuir[3])));
 	    	 break;
 	     case "invisibilidad":
 	    	 this.setIcon(new ImageIcon(GUI.class.getResource(modoInvisibilidad[3])));

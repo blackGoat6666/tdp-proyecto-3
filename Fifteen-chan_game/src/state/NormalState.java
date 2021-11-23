@@ -66,6 +66,7 @@ public class NormalState implements StateFantasma{
 	}
 	@Override
 	public void morir() {
+		this.miFantasmita.changeState(new MuertoState(this.miFantasmita));
 	}
 	
 	@Override

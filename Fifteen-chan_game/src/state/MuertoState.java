@@ -18,7 +18,7 @@ public class MuertoState implements StateFantasma{
 	public MuertoState(Enemigo fantasmin) {
 		miFantasmita=fantasmin;
 		miImagen=miFantasmita.getEntidadGrafica();
-		miImagen.setModo("invisibilidad");
+		miImagen.setModo("huir");
 		miMente=miFantasmita.getMente();
 		miFantasmita.setSaliDeGate(false);
 		intentos=0;
@@ -96,6 +96,7 @@ public class MuertoState implements StateFantasma{
 
 	@Override
 	public void resetear() {
+		miFantasmita.setSaliDeGate(false);
 		this.miFantasmita.changeState(new NormalState(this.miFantasmita));
 	}
 

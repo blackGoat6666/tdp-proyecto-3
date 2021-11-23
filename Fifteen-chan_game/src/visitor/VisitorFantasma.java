@@ -16,6 +16,10 @@ public class VisitorFantasma implements Visitor{
 	protected LogicaColisiones miLogicaColisiones;
 	
 	
+	public VisitorFantasma(LogicaColisiones miLog) {
+		miLogicaColisiones=miLog;
+	}
+	
 	public void setVisitante(Enemigo ente) {
 		visitante=ente;
 	}
@@ -36,6 +40,7 @@ public class VisitorFantasma implements Visitor{
 	public void visitBomba(Bomba bombastic) {
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(bombastic.getPosicion());
 		eliminar.eliminarEntidadEstatica();
+		miLogicaColisiones.setModoPacman("normal");
 		visitante.seMovio();
 		
 	}

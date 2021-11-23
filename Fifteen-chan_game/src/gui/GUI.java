@@ -80,7 +80,11 @@ private void initialize() {
 	    panelJuego.setLayout(null);
 	    panelJuego.setVisible(false);
 	    
+<<<<<<< Updated upstream
 	    this.miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
+=======
+	    this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
+>>>>>>> Stashed changes
 	
 		panelMenu = new Panel("/Images/menu.png");
 		panelMenu.setBounds(0, 0, 1200, 720);

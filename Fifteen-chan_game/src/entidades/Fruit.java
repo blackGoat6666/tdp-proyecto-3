@@ -19,6 +19,10 @@ public class Fruit extends EntidadEstatica {
 		v.visitFruit(this);
 		
 	}
+	
+	public EntidadGraficaEstatica getImagen() {
+		return this.miImagen;
+	}
 
 	
 }

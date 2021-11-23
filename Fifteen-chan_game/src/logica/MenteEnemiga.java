@@ -22,15 +22,17 @@ public class MenteEnemiga extends Thread{
 	private Point pacman;
 	private Boolean pacmanInvisible;
 	
-	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita) {
+	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita, EntidadGraficaDinamica miRey) {
 		miLogicaGeneral= logicaGeneral;
 		miLogicaColisiones =logicaColisiones;
-		blinky=new Blinky(5,rojito, this );
-		inky= new Inky(3, celestito, this);
-		pinky= new Pinky(3,rosita,this);
+		blinky=new Blinky(1,rojito, this );
+		inky= new Inky(1, celestito, this);
+		pinky= new Pinky(1,rosita,this);
+		elPana= new Clyde(1, miRey,this);
 		miLogicaColisiones.graficar(rojito);
 		miLogicaColisiones.graficar(celestito);
 		miLogicaColisiones.graficar(rosita);
+		miLogicaColisiones.graficar(miRey);
 		miLogicaColisiones.actualizarPantalla();
 		huir=false;
 		pacmanInvisible=false;
@@ -43,13 +45,15 @@ public class MenteEnemiga extends Thread{
 			blinky.calcularDir(pacman);
 			inky.calcularDir(pacman);
 			pinky.calcularDir(pacman);
+			elPana.calcularDir(pacman);
 			blinky.mover();
 			inky.mover();
 			pinky.mover();
+			elPana.mover();
 			miLogicaColisiones.actualizarPantalla();
 			this.chequearColisiones();
 			 try {
-		    	this.sleep(100);
+		    	this.sleep(200);
 		    
 			} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -79,12 +83,14 @@ public class MenteEnemiga extends Thread{
 		blinky.resetear();
 		inky.resetear();
 		pinky.resetear();
+		elPana.resetear();
 	}
 	
 	public void fantasmasModoNormal() {
 		blinky.volverModoNormal();
 		inky.volverModoNormal();
 		pinky.volverModoNormal();
+		elPana.volverModoNormal();
 		huir=false;
 		this.pacmanInvisible=false;
 		miLogicaColisiones.actualizarPantalla();
@@ -101,25 +107,31 @@ public class MenteEnemiga extends Thread{
 		blinky.setHuir();
 		inky.setHuir();
 		pinky.setHuir();
+		elPana.setHuir();
 	}
 	
 	public Boolean cambioDeBloque(Point ubicacion1, Point ubicacion2) {
 		return !miLogicaColisiones.mismoBloque(ubicacion1, ubicacion2);
 	}
 	
-	public void explotoBomba(Point ubicacion) {
-		if(Math.abs(ubicacion.x-blinky.getUbicacion().x)<=30*8 ||Math.abs(ubicacion.y-blinky.getUbicacion().y)<=30*8 ) {
+	public void explotoBomba(Point ub) {
+		if(Math.abs(ub.x-blinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-blinky.getUbicacion().y)<=31*8 ) {
 			blinky.morir();
 			miLogicaGeneral.sumarPuntos(400);
 		}
-		if(Math.abs(ubicacion.x-inky.getUbicacion().x)<=30*8 ||Math.abs(ubicacion.y-inky.getUbicacion().y)<=30*8 ) {
+		if(Math.abs(ub.x-inky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-inky.getUbicacion().y)<=31*8 ) {
 			inky.morir();
 			miLogicaGeneral.sumarPuntos(400);
 		}
-		if(Math.abs(ubicacion.x-pinky.getUbicacion().x)<=30*8 ||Math.abs(ubicacion.y-pinky.getUbicacion().y)<=30*8 ) {
+		if(Math.abs(ub.x-pinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-pinky.getUbicacion().y)<=31*8 ) {
 			pinky.morir();
 			miLogicaGeneral.sumarPuntos(400);
 		}
+		if(Math.abs(ub.x-elPana.getUbicacion().x)<=31*8 ||Math.abs(ub.y-elPana.getUbicacion().y)<=31*8 ) {
+			elPana.morir();
+			miLogicaGeneral.sumarPuntos(400);
+		}
+		miLogicaColisiones.actualizarPantalla();
 	}
 	
 	private void chequearColisiones() {
@@ -144,11 +156,15 @@ public class MenteEnemiga extends Thread{
 			pinky.morir();
 			miLogicaGeneral.sumarPuntos(200);
 		}
+		if(this.colisionoConPacman(elPana)) {
+			elPana.morir();
+			miLogicaGeneral.sumarPuntos(200);
+		}
 		
 	}
 	private void pacmanMuerto() {
 		if( !(this.pacmanInvisible) && ( (this.colisionoConPacman(blinky)  && !(blinky.estoyMuerto()) ) ||
-		 (this.colisionoConPacman(inky)  && !(inky.estoyMuerto())) ||(this.colisionoConPacman(pinky)  && !(pinky.estoyMuerto()))  ) ) {
+		 (this.colisionoConPacman(inky)  && !(inky.estoyMuerto())) ||(this.colisionoConPacman(pinky)  && !(pinky.estoyMuerto())) || (this.colisionoConPacman(elPana) && !(elPana.estoyMuerto())) ) ) {
 			miLogicaColisiones.perderVida();
 		}
 	}
@@ -164,6 +180,7 @@ public class MenteEnemiga extends Thread{
 		miLogicaColisiones.graficar(blinky.getEntidadGrafica());
 		miLogicaColisiones.graficar(this.inky.getEntidadGrafica());
 		miLogicaColisiones.graficar(this.pinky.getEntidadGrafica());
+		miLogicaColisiones.graficar(this.elPana.getEntidadGrafica());
 	}
 	
 }

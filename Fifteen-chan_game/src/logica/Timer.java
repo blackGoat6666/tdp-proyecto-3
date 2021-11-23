@@ -52,7 +52,7 @@ public class Timer extends Thread {
     			case "Invisibilidad": return 10000;
     		}
     	}
-    	return 1000;
+    	return 3000;
     }
     
     public void timearBomba() {

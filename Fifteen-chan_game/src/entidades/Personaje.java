@@ -134,7 +134,10 @@ public class Personaje extends EntidadDinamica {
 		return this.dir;
 	}
 
+	public void setModo(String mode) {
+		this.miImagen.setModo(mode);
+	}
 
-	
+
 }
 

@@ -20,11 +20,11 @@ public class FabricaVampiro implements FabricaEntidades {
 		retorno[4]="/resources/Vampiro/papa power pellet adelante.gif";
 		retorno[5]="/resources/Vampiro/papa power pellet atras.gif";
 		retorno[6]="/resources/Vampiro/papa power pellet adelante.gif";
-		retorno[7]="/resources/Vampiro/papa power pellet atras.gif";
-		retorno[8]="/resources/Vampiro/papa bomba adelante.gif";
-		retorno[9]="/resources/Vampiro/papa bomba atras.gif";
-		retorno[10]="/resources/Vampiro/papa bomba adelante.gif";
-		retorno[11]="/resources/Vampiro/papa bomba atras.gif";
+		retorno[7]="/resources/Vampiro/papa power pellet adelante.gif";
+		retorno[8]="/resources/Vampiro/papaMuerto.gif";
+		retorno[9]="/resources/Vampiro/papaMuertoAtras.gif";
+		retorno[10]="/resources/Vampiro/papaMuerto.gif";
+		retorno[11]="/resources/Vampiro/papaMuerto.gif";
 		retorno[12]="/resources/Vampiro/papa adelante.gif";
 		retorno[13]="/resources/Vampiro/papa atras.gif";
 		retorno[14]="/resources/Vampiro/papa adelante.gif";
@@ -35,9 +35,22 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaDinamica getInky() {
 		String[] retorno= new String[16];
-		for(int i=0; i<16; i++) {
-			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
-		}
+		retorno[0]="/resources/Vampiro/angy.png";
+		retorno[1]="/resources/Vampiro/angy.png";
+		retorno[2]="/resources/Vampiro/angy.png";
+		retorno[3]="/resources/Vampiro/angy.png";
+		retorno[4]="/resources/Vampiro/angy.png";
+		retorno[5]="/resources/Vampiro/angy.png";
+		retorno[6]="/resources/Vampiro/angy.png";
+		retorno[7]="/resources/Vampiro/angy.png";
+		retorno[8]="/resources/Vampiro/angy.png";
+		retorno[9]="/resources/Vampiro/angy.png";
+		retorno[10]="/resources/Vampiro/angy.png";
+		retorno[11]="/resources/Vampiro/angy.png";
+		retorno[12]="/resources/Vampiro/angy.png";
+		retorno[13]="/resources/Vampiro/angy.png";
+		retorno[14]="/resources/Vampiro/angy.png";
+		retorno[15]="/resources/Vampiro/angy.png";
 		return new EntidadGraficaDinamica(retorno);
 	}
 
@@ -53,9 +66,22 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaDinamica getClyde() {
 		String[] retorno= new String[16];
-		for(int i=0; i<16; i++) {
-			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
-		}
+		retorno[0]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[1]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[2]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[3]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[4]="/resources/Vampiro/JosephCheaterJoestarPowerPellet.gif";
+		retorno[5]="/resources/Vampiro/JosephCheaterJoestarPowerPellet.gif";
+		retorno[6]="/resources/Vampiro/JosephCheaterJoestarPowerPellet.gif";
+		retorno[7]="/resources/Vampiro/JosephCheaterJoestarPowerPellet.gif";
+		retorno[8]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[9]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[10]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[11]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[12]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[13]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[14]="/resources/Vampiro/JosephCheaterJoestar.gif";
+		retorno[15]="/resources/Vampiro/JosephCheaterJoestar.gif";
 		return new EntidadGraficaDinamica(retorno);
 	}
 
@@ -64,20 +90,20 @@ public class FabricaVampiro implements FabricaEntidades {
 		String[] retorno= new String[16];
 		retorno[0]="/resources/Vampiro/vampiroadelantemoviendose.gif";
 		retorno[1]="/resources/Vampiro/vampiro mirando atras.gif";
-		retorno[2]="/resources/Vampiro/vampiroadelantemoviendose.gif";
-		retorno[3]="/resources/Vampiro/vampiroadelantemoviendose.gif";
+		retorno[2]="/resources/Vampiro/vampiroIzquierda.png";
+		retorno[3]="/resources/Vampiro/vampiroderecha.png";
 		retorno[4]="/resources/Vampiro/power pellet.gif";
 		retorno[5]="/resources/Vampiro/power pellet atras.gif";
 		retorno[6]="/resources/Vampiro/power pellet.gif";
-		retorno[7]="/resources/Vampiro/power pellet atras.gif";
+		retorno[7]="/resources/Vampiro/power pellet.gif";
 		retorno[8]="/resources/Vampiro/vampiro bomba adelante.gif";
 		retorno[9]="/resources/Vampiro/vampiro bomba atras.gif";
 		retorno[10]="/resources/Vampiro/vampiro bomba adelante.gif";
-		retorno[11]="/resources/Vampiro/vampiro bomba atras.gif";
-		retorno[12]="/resources/Vampiro/papa adelante.gif";
-		retorno[13]="/resources/Vampiro/papa atras.gif";
-		retorno[14]="/resources/Vampiro/papa adelante.gif";
-		retorno[15]="/resources/Vampiro/papa atras.gif";
+		retorno[11]="/resources/Vampiro/vampiro mirando derecha bomba.png";
+		retorno[12]="/resources/Vampiro/power pellet atras.gif";
+		retorno[13]="/resources/Vampiro/power pellet atras.gif";
+		retorno[14]="/resources/Vampiro/power pellet atras.gif";
+		retorno[15]="/resources/Vampiro/power pellet atras.gif";
 		return new EntidadGraficaDinamica(retorno);
 	}
 
@@ -96,9 +122,9 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaEstatica getFruit(int nivel) {
 		switch(nivel) {
-			case 1: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
-			case 2: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
-			case 3: return  new EntidadGraficaEstatica ("/resources/Vampiro/ppVampiro.png");
+			case 1: return  new EntidadGraficaEstatica ("/resources/Vampiro/crepusculoEnLlamas.png");
+			case 2: return  new EntidadGraficaEstatica ("/resources/Vampiro/dracula.png");
+			case 3: return  new EntidadGraficaEstatica ("/resources/Vampiro/collarHermoso.png");
 		}
 		return null;
 	}
@@ -107,7 +133,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaEstatica getBomba() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/resources/Vampiro/bomba.gif");
 	}
 
 	@Override
@@ -119,7 +145,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public EntidadGraficaEstatica getVelocidad() {
 		// TODO Auto-generated method stub
-		return new EntidadGraficaEstatica ("/Images/vampiroadelantemoviendose.gif");
+		return new EntidadGraficaEstatica ("/resources/Vampiro/botellitaDeSangreOP.gif");
 	}
 
 
@@ -139,9 +165,15 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public String getMusica(int nivel) {
 		switch(nivel) {
+<<<<<<< Updated upstream
 			case 1: return "\\resources\\Musica\\Dragula8bit.wav";
 			case 2: return "\\resources\\Musica\\Toccata 8 Bit.wav";
 			case 3: return "\\resources\\Musica\\Dragula8bit.wav";
+=======
+			case 1: return "/resources/Musica/Dragula8bit.wav";
+			case 2: return "/resources/Musica/Toccata 8 Bit.wav";
+			case 3: return "/resources/Musica/Toccata 8 Bit.wav";
+>>>>>>> Stashed changes
 		}
 		return null;
 	}

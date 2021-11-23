@@ -26,7 +26,7 @@ public class VisitorPacman implements Visitor {
 	}
 
 	public void visitBloque(Bloque casillero) {
-		
+		casillero.accept(this);
 		
 	}
 
@@ -55,14 +55,17 @@ public class VisitorPacman implements Visitor {
 		eliminar.eliminarEntidadEstatica();
 		miLogicaGeneral.sumarPuntos(power.getPuntaje());
 		miLogicaColisiones.pacmanPuedeMoverse();
+		miLogicaColisiones.setModoPacman("powerPellet");
 	}
 
 	@Override
 	public void visitBomba(Bomba bombastic) {
 		miLogicaColisiones.agarroBomba();
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(bombastic.getPosicion());
+		System.out.println(bombastic.getPosicion().x+ " "+bombastic.getPosicion().y);
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
+		miLogicaColisiones.setModoPacman("huir");
 		
 	}
 
@@ -72,6 +75,7 @@ public class VisitorPacman implements Visitor {
 		Bloque eliminar=miLogicaColisiones.obtenerBloque(invi.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		miLogicaColisiones.pacmanPuedeMoverse();
+		miLogicaColisiones.setModoPacman("invisibilidad");
 		
 	}
 
