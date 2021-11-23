@@ -19,6 +19,8 @@ import logica.LogicaColisiones;
 import logica.LogicaGeneral;
 
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI {
 
@@ -153,6 +155,15 @@ private void initialize() {
 		lblPuntuacion.setBounds(72, 574, 259, 186);
 		panelJuego.add(lblPuntuacion);
 		
+		JButton btnMusicaJuego = new JButton("Musica");
+		btnMusicaJuego.setBounds(1080, 610, 89, 23);
+		panelJuego.add(btnMusicaJuego);
+		
+		JButton btnMusicaMenu = new JButton("Musica");
+		btnMusicaMenu.setBounds(1080, 610, 89, 23);
+		panelMenu.add(btnMusicaMenu);
+		
+		
 		
 		
 		// acciones botones
@@ -202,6 +213,29 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(false);
 				panelMenu.setVisible(true);
+				miLogicaGeneral.PararSonido();
+				miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
+			}
+			
+		});
+		
+		btnMusicaJuego.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(miLogicaGeneral.getBooleanMusica()==true) {
+					miLogicaGeneral.PararSonido();
+				}
+				else
+					miLogicaGeneral.ReproducirSonido(miLogicaGeneral.getFabrica().getMusica(miLogicaGeneral.getNivel()));
+			}
+		});
+		
+		btnMusicaMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(miLogicaGeneral.getBooleanMusica()==true) {
+					miLogicaGeneral.PararSonido();
+				}
+				else
+					miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
 			}
 		});
 		
