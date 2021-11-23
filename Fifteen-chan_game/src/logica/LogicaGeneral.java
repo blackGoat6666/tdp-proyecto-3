@@ -3,6 +3,7 @@ package logica;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -28,6 +29,7 @@ public class LogicaGeneral extends Logica {
 	protected FabricaEntidades miFabrica;
 	protected LogicaColisiones miLogicaColisiones;
 	private Clip musiquita;
+	private Boolean musica;
 
 	
 	//constructor
@@ -115,17 +117,19 @@ public class LogicaGeneral extends Logica {
     }
     public void ReproducirSonido(String nombreSonido){
         try {
-         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath()+nombreSonido));
          musiquita = AudioSystem.getClip();
          musiquita.open(audioInputStream);
          musiquita.start();
         } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
           System.out.println("error "+ ex.getMessage());
         }
+        musica = true;
     }
     public void PararSonido() {
     	musiquita.stop();
     	musiquita=null;
+    	musica = false;
     }
     public EntidadEstatica getPotion() {
  	   switch(this.nivel) {
@@ -144,5 +148,8 @@ public class LogicaGeneral extends Logica {
   	   return null;
      }
     protected void resetearLogicaPropia() {
+    }
+    public Boolean getBooleanMusica() {
+    	return musica;
     }
 }

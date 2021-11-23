@@ -139,9 +139,9 @@ public class FabricaVampiro implements FabricaEntidades {
 	@Override
 	public String getMusica(int nivel) {
 		switch(nivel) {
-			case 1: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Dragula8bit.wav";
-			case 2: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Toccata 8 Bit.wav";
-			case 3: return "D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\Dragula8bit.wav";
+			case 1: return "\\resources\\Musica\\Dragula8bit.wav";
+			case 2: return "\\resources\\Musica\\Toccata 8 Bit.wav";
+			case 3: return "\\resources\\Musica\\Dragula8bit.wav";
 		}
 		return null;
 	}

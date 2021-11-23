@@ -78,7 +78,7 @@ private void initialize() {
 	    panelJuego.setLayout(null);
 	    panelJuego.setVisible(false);
 	    
-	    this.miLogicaGeneral.ReproducirSonido("D:\\Uni 2do año\\TDP\\carpeta\\tdp-proyecto-3\\Fifteen-chan_game\\src\\resources\\Musica\\pac-man-fever.wav");
+	    this.miLogicaGeneral.ReproducirSonido("\\resources\\Musica\\pac-man-fever.wav");
 	
 		panelMenu = new Panel("/Images/menu.png");
 		panelMenu.setBounds(0, 0, 1200, 720);
