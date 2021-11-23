@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.Random;
 
 import logica.MenteEnemiga;
+import state.NormalState;
+import state.StateFantasma;
 import visitor.Visitor;
 
 public abstract class Enemigo extends EntidadDinamica {
@@ -11,109 +13,80 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected Point preferencias;
 	protected Point posicionObjetivo;
 	protected Point ultimaDireccion;
-	protected int intentos;
 	protected MenteEnemiga miMente;
-	protected int movimiento;
 	protected int movimientoOriginal;
-	protected Boolean meMovi;
 	protected Point ubicacion;
-	protected Boolean muerto;
-	protected Boolean huir;
 	protected Boolean saliDeGate;
-	protected int meAtore;
+	protected StateFantasma miEstado;
 	protected Point ultimoBloque;
-	protected Random random;
 	
 	public Enemigo(int mov, EntidadGraficaDinamica imagen, MenteEnemiga megamind) {
 		super(imagen);
-		movimiento=mov;
-		movimientoOriginal=mov;
-		intentos=0;
-		ultimaDireccion= new Point(0,0);
-		preferencias= new Point(0,0);
-		ultimoBloque= new Point(0,0);
-		meMovi=false;
-		meAtore=4;
-		miMente=megamind;
 		ubicacion= new Point(0,0);
+		movimientoOriginal=mov;
+		ultimaDireccion= new Point(0,0);
+		ultimoBloque= new Point(0,0);
+		miMente=megamind;
 		posicionObjetivo= new Point(0,0);
-		huir=false;
-		muerto=false;
 		saliDeGate=false;
-		random= new Random();
+		preferencias= new Point(0,0);
+    }
+	
+	public int getMovimiento() {
+		return this.movimientoOriginal;
 	}
 
-
+	public void changeState(StateFantasma estado) {
+		this.miEstado=estado;
+	}
+	
+	public void setUbicacion(Point ub) {
+		this.ubicacion=ub;
+	}
 	
 	public abstract void resetear();
 
-
+	public Point getUltimoBloque() {
+		return this.ultimoBloque;
+	}
+	public void setUltimoBloque(Point ult) {
+		this.ultimoBloque=ult;
+	}
+	
+	public void setUltimaDireccion(Point dir) {
+		this.ultimaDireccion=dir;
+	}
 
 	@Override
 	public void mover() {
-		  Point vectorMovimiento;
-		  Point movimientoReal;
-		  movimientoReal= new Point(0,0);
-		  while(!meMovi && intentos<=2) {
-			vectorMovimiento= this.siguienteDireccion();
-			movimientoReal= new Point( ((vectorMovimiento.x)*30)+ ubicacion.x ,(vectorMovimiento.y*30)+ ubicacion.y);
-			if((movimientoReal.x>=31) && (movimientoReal.y>=31) && (movimientoReal.x<=20*30)&& (movimientoReal.y<=20*30)) {
-				if(intentos!=0 || miMente.cambioDeBloque(ultimoBloque, movimientoReal)) {
-				miMente.chequearBloque(this, movimientoReal);
-				}
-            }
-			intentos++;
-		  }
-		  intentos--;
-		  vectorMovimiento=this.siguienteDireccion();
-		  ultimaDireccion.setLocation(vectorMovimiento);
-		  this.actualizarMiEntidadGrafica();
-		  movimientoReal.setLocation(vectorMovimiento.x*movimiento, vectorMovimiento.y*movimiento);
-		  ubicacion.setLocation(ubicacion.x+movimientoReal.x, ubicacion.y+movimientoReal.y);
-		  ultimoBloque.setLocation(ubicacion);
-		  miImagen.setLocation(miImagen.getLocation().x+movimientoReal.x, miImagen.getLocation().y+movimientoReal.y);
-		  meMovi=false;
-		  intentos=0;
-		  if(muerto && miMente.llegueAGate(ubicacion)){
-			  muerto=false;
-			  saliDeGate=false;
-			  movimiento=movimientoOriginal;
-		  }
-		  if(!saliDeGate && miMente.saliDeGate(ubicacion)) {
-			  saliDeGate=true;
-		  }
-		  
+		this.miEstado.mover();
+	}
+	
+	public void setSaliDeGate(Boolean sali) {
+		this.saliDeGate=sali;
+	}
+	public Boolean getSaliDeGate() {
+		return this.saliDeGate;
 	}
 	public void volverModoNormal() {
-		huir=false;
-		if(!muerto) {
-			this.miImagen.setModo("normal");
-			this.movimiento=this.movimientoOriginal;
-		}
+		this.miEstado.modoNormal();
 	}
 	
 	public Boolean puedoAtravesarGate() {
-		return(!saliDeGate || muerto);
+		return miEstado.puedeAtravesarGate();
 	}
 	
 	public void seMovio() {
-		meMovi=true;
+		miEstado.setMePuedoMover(true);
 	}
 
 	@Override
 	public void morir() {
-		miImagen.setModo("invisibilidad");
-		muerto=true;
-		saliDeGate=false;
-		huir=false;
-		meAtore=0;
-		intentos=0;
-		movimiento=movimientoOriginal+3;
-		
+		this.miEstado.morir();
 	}
-	protected void actualizarMiEntidadGrafica() {
-		if(this.siguienteDireccion().x==0) {
-			if(this.siguienteDireccion().y==1) {
+	public void actualizarMiEntidadGrafica() {
+		if(this.siguienteDireccion(this.miEstado.getIntentos()).x==0) {
+			if(this.siguienteDireccion(this.miEstado.getIntentos()).y==1) {
 				miImagen.setAdelante();
 			}
 			else {
@@ -121,7 +94,7 @@ public abstract class Enemigo extends EntidadDinamica {
 			}
 		}
 		else {
-			if(this.siguienteDireccion().x==1) {
+			if(this.siguienteDireccion(this.miEstado.getIntentos()).x==1) {
 				miImagen.setDerecha();
 			}
 			else {
@@ -131,9 +104,16 @@ public abstract class Enemigo extends EntidadDinamica {
 		
 	}
 	
+	public void setPreferencias(Point pref) {
+		this.preferencias=pref;
+	}
+	public Point getPreferencias() {
+		return this.preferencias;
+	}
 	
-	protected Point siguienteDireccion() {
-			switch(intentos) {
+	
+	public Point siguienteDireccion(int inte) {
+			switch(inte) {
 			case 0: if(ultimaDireccion.x==0) {
 						return new Point(preferencias.x, 0);
 					}
@@ -148,37 +128,20 @@ public abstract class Enemigo extends EntidadDinamica {
 						return new Point(-(preferencias.x), 0);
 					}
 		}
-		return ultimaDireccion;
+		return new Point(0, preferencias.y);
 		
 	}
 	
 	public Point getUbicacion() {
-		return ubicacion;
+		return this.ubicacion;
 	}
-	public void accept(Visitor v) {
-	}
-
+	
 	public void calcularDir(Point Pacman) {
-		if(!huir && !muerto && saliDeGate) {
-			this.calcularDirNormal(Pacman);
-		}
-		else {
-			if(huir) {
-				this.calcularDirNormal(Pacman);
-				preferencias.setLocation(-(preferencias.x), -(preferencias.y));
-			}
-			else if(muerto) {
-			    this.calcularDirDirecta(new Point(320,320));	
-			}
-			else {
-				this.calcularDirDirecta(new Point(300,240));
-			}
-		}
-		
-		
+		this.miEstado.calcularDir(Pacman);	
 	}
-	protected void  calcularDirDirecta(Point ubicacion) {
-		posicionObjetivo.setLocation(ubicacion);
+	
+	public void  calcularDirDirecta(Point ub) {
+		posicionObjetivo.setLocation(ub);
 		if(ubicacion.x<=posicionObjetivo.x){
 		  preferencias.setLocation(1, 0);
 		}
@@ -194,39 +157,37 @@ public abstract class Enemigo extends EntidadDinamica {
 	}
 	
 	public void setHuir() {
-		if(!this.muerto) {
-			huir=true;
-			this.calcularDir(miMente.getPosicionPacman());
-			movimiento=movimientoOriginal-1;
-			this.miImagen.setModo("powerPellet");
-		}
+		this.miEstado.huir();
+		
 	}
 	
 	public String toString() {
 		return "Enemigo";
 	}
 	public void setNoSeMovio() {
-		meMovi=false;
+		miEstado.setMePuedoMover(false);
 	}
 	
 	public boolean estoyMuerto() {
-		return this.muerto;
+		return this.miEstado.getMuerto();
 	}
 	protected void resetearGeneral() {
-		miImagen.setModo("normal");
-		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
-		movimiento=this.movimientoOriginal;
-		intentos=0;
-		meMovi=false;
-		huir=false;
-		muerto=false;
+		this.miEstado.resetear();
 		saliDeGate=false;
 	}
 
-	protected abstract void calcularDirNormal(Point Pacman);
+	public abstract void calcularDirNormal(Point Pacman);
 	
-	public EntidadGrafica getEntidadGrafica() {
+	public EntidadGraficaDinamica getEntidadGrafica() {
 		return miImagen;
 		
+	}
+	
+	public MenteEnemiga getMente() {
+		return this.miMente;
+	}
+	
+	public void setMovimiento(int mov) {
+		this.movimientoOriginal=mov;
 	}
 }

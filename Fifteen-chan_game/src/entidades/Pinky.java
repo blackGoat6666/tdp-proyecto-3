@@ -3,6 +3,7 @@ package entidades;
 import java.awt.Point;
 
 import logica.MenteEnemiga;
+import state.NormalState;
 
 public class Pinky extends Enemigo{
 
@@ -10,6 +11,7 @@ public class Pinky extends Enemigo{
 		super(mov,imagen, megamind);
 		ubicacion.setLocation(330,310);
 		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
+		this.miEstado = new NormalState(this);
 	}
 	
 
@@ -20,7 +22,7 @@ public class Pinky extends Enemigo{
 	}
 
 	@Override
-	protected void calcularDirNormal(Point Pacman) {
+	public void calcularDirNormal(Point Pacman) {
 		Point direccion=miMente.getDireccionPacman();
 		if(direccion.y==-1) {
 			posicionObjetivo.setLocation(Pacman.x-60, Pacman.x-120);

@@ -16,10 +16,10 @@ public abstract void mover();
 
 public abstract void morir();
 
-public void acceptVisitor(Visitor v){
-	
-}
 public abstract String toString(); 
+
+public void accept(Visitor v) {
+}
 
 	
 }
