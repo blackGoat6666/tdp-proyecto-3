@@ -155,12 +155,16 @@ private void initialize() {
 		lblPuntuacion.setBounds(72, 574, 259, 186);
 		panelJuego.add(lblPuntuacion);
 		
-		JButton btnMusicaJuego = new JButton("Musica");
-		btnMusicaJuego.setBounds(1080, 610, 89, 23);
+		JButton btnMusicaJuego = new JButton("");
+		btnMusicaJuego.setForeground(Color.RED);
+		btnMusicaJuego.setBackground(Color.BLACK);
+		btnMusicaJuego.setBounds(1079, 574, 64, 58);
 		panelJuego.add(btnMusicaJuego);
 		
-		JButton btnMusicaMenu = new JButton("Musica");
-		btnMusicaMenu.setBounds(1080, 610, 89, 23);
+		JButton btnMusicaMenu = new JButton("");
+		btnMusicaMenu.setForeground(Color.RED);
+		btnMusicaMenu.setBackground(Color.BLACK);
+		btnMusicaMenu.setBounds(1079, 574, 64, 58);
 		panelMenu.add(btnMusicaMenu);
 		
 		
