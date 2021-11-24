@@ -53,9 +53,9 @@ public class LogicaGeneral extends Logica {
 	    
     private void getFabrica(String fab) {
     	switch(fab) {
-    		case "vampiros": miFabrica=new FabricaVampiro();
-    		case "scp": miFabrica= new FabricaSCP();
-    		case "metaleros": miFabrica= new FabricaMetaleros();
+    		case "vampiros": miFabrica=new FabricaVampiro(); break;
+    		case "scp": miFabrica= new FabricaSCP(); break;
+    		case "metaleros": miFabrica= new FabricaMetaleros(); break;
 	    }
     }
     
