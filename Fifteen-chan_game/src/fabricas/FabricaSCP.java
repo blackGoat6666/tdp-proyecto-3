@@ -132,7 +132,7 @@ public class FabricaSCP implements FabricaEntidades {
 
 	@Override
 	public String getVida() {
-		return "/resources/SCP/scp-999-b.png";
+		return "/resources/SCP/scp-999b.png";
 	}
 
 	@Override
