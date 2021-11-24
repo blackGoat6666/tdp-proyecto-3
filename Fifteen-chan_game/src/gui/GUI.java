@@ -190,7 +190,8 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
-				
+				miLogicaGeneral.setFabrica("metaleros");
+				miLogicaGeneral.comenzarJuego();
 			}
 		});
 		btnJugarVampiros.addMouseListener(new MouseAdapter() {
@@ -209,6 +210,8 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				miLogicaGeneral.setFabrica("scp");
+				miLogicaGeneral.comenzarJuego();
 			}
 		});
 		

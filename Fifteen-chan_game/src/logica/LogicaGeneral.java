@@ -19,6 +19,8 @@ import entidades.Invisibilidad;
 import entidades.Personaje;
 import entidades.Velocidad;
 import fabricas.FabricaEntidades;
+import fabricas.FabricaMetaleros;
+import fabricas.FabricaSCP;
 import fabricas.FabricaVampiro;
 import gui.GUI;
 
@@ -52,6 +54,8 @@ public class LogicaGeneral extends Logica {
     private void getFabrica(String fab) {
     	switch(fab) {
     		case "vampiros": miFabrica=new FabricaVampiro();
+    		case "scp": miFabrica= new FabricaSCP();
+    		case "metaleros": miFabrica= new FabricaMetaleros();
 	    }
     }
     

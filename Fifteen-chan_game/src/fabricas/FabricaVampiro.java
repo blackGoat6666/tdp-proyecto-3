@@ -58,7 +58,7 @@ public class FabricaVampiro implements FabricaEntidades {
 	public EntidadGraficaDinamica getPinky() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
-			retorno[i]="/resources/Vampiro/vampiroadelantemoviendose.gif";
+			retorno[i]="/resources/Vampiro/vampiro power pellet maybe.gif";
 		}
 		return new EntidadGraficaDinamica(retorno);
 	}
