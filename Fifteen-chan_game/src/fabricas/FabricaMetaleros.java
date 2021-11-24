@@ -179,9 +179,9 @@ public class FabricaMetaleros implements FabricaEntidades{
 	@Override
 	public String getFondo(int nivel) {
 		switch(nivel) {
-			case 1: return "/resources/Vampiro/nivelvampiro1.png";
-			case 2: return "/resources/Vampiro/nivelvampiro2.png";
-			case 3: return "/resources/Vampiro/nivelvampiro3.png";
+			case 1: return "/resources/Metalero/nivel1.jpg";
+			case 2: return "/resources/Metalero/nivel2jpg.jpg";
+			case 3: return "/resources/Metaleros/nivel3.jpg";
 		}
 		return null;
 	}
