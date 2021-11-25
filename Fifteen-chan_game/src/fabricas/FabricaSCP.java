@@ -145,7 +145,7 @@ public class FabricaSCP implements FabricaEntidades {
 		switch(nivel) {
         case 1: return "/resources/Musica/Two Time 8bit.wav";
 		case 2: return "/resources/Musica/Dead Weight 8bit.wav";
-		case 3: return "/resources/Musica/Two Time 8bit.wav";
+		case 3: return "/resources/Musica/Cheeseburger Family.wav";
 	}
 	return null;
 }

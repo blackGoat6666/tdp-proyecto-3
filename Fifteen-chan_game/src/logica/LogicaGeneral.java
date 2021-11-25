@@ -63,7 +63,7 @@ public class LogicaGeneral extends Logica {
     	miLogicaColisiones.reset();
     	nivel++;
     	if(nivel==4) {
-    		
+    		miGUI.ganaste();
     	}
     	else {
     		miGUI.cambiarNivel(miFabrica.getFondo(nivel));
@@ -72,9 +72,10 @@ public class LogicaGeneral extends Logica {
     		miLogicaColisiones.setMatriz(matriz);
     		miLogicaColisiones.graficarEntidadesDinamicas();
     		miLogicaColisiones.resetearLogicaPropia();
+    		this.megamind.cambiarVelocidad();
     		this.PararSonido();
             this.ReproducirSonido(miFabrica.getMusica(nivel));
-            
+            this.miLogicaColisiones.setCantidadDots(niveles.getDots());
             miGUI.actualizar();	
     	}
     	
@@ -134,9 +135,12 @@ public class LogicaGeneral extends Logica {
         musica = true;
     }
     public void PararSonido() {
-    	musiquita.stop();
-    	musiquita=null;
-    	musica = false;
+    	if(musica) {
+    		musiquita.stop();
+        	musiquita=null;
+        	musica = false;
+    	}
+    	
     }
     public EntidadEstatica getPotion() {
  	   switch(this.nivel) {

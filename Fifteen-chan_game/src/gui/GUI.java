@@ -36,6 +36,7 @@ public class GUI {
 	private JPanel grillaActual;
 	private JPanel panelPerdiste;
 	private JLabel perdiste;
+	private JPanel panelGanaste;
 
 	/**
 	 * Launch the application.
@@ -182,6 +183,13 @@ private void initialize() {
         lblPerdiste.setBounds(408, 362, 259, 64);
         panelPerdiste.add(lblPerdiste);
 		
+        panelGanaste = new Panel("/Images/menu.png");
+        panelGanaste.setBounds(0, 0, 1200, 720);
+        panelGanaste.setVisible(false);
+        frame.getContentPane().add(panelGanaste);
+        panelGanaste.setLayout(null);
+        
+        
 		
 		// acciones botones
 		
@@ -346,5 +354,34 @@ private void initialize() {
 		panelJuego.setVisible(false);
         panelMenu.setVisible(false);
         panelPerdiste.setVisible(true);
+        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Milk.wav");
+	}
+	
+	public void ganaste() {
+		panelJuego.setVisible(false);
+        panelMenu.setVisible(false);
+        panelGanaste.setVisible(true);
+        this.miLogicaGeneral.PararSonido();
+        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Coffee.wav");
+        JLabel vampirito= new JLabel();
+        vampirito.setIcon(new ImageIcon(GUI.class.getResource("/resources/Vampiro/vampiro bomba adelante.gif")));
+        JLabel metalerito= new JLabel();
+        metalerito.setIcon(new ImageIcon(GUI.class.getResource("/resources/Metalero/metaleroBomba.gif")));
+        JLabel scpcito= new JLabel();
+        scpcito.setIcon(new ImageIcon(GUI.class.getResource("/resources/SCP/999bomba.gif")));
+        vampirito.setBounds(60, 60, 300, 300);
+        vampirito.setBounds(60, 60, 350, 300);
+        vampirito.setBounds(60, 60, 400, 300);
+        JLabel lblganaste = new JLabel("Ganaste");
+        lblganaste.setForeground(Color.RED);
+        lblganaste.setVerticalAlignment(SwingConstants.TOP);
+        lblganaste.setBounds(408, 362, 259, 64);
+        lblganaste.setVerticalAlignment(SwingConstants.TOP);
+        panelGanaste.add(lblganaste);
+        panelGanaste.add(scpcito);
+        panelGanaste.add(vampirito);
+        panelGanaste.add(metalerito);
+        frame.repaint();
+        
 	}
 }

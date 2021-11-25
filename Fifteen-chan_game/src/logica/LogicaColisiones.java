@@ -203,6 +203,11 @@ public class LogicaColisiones extends Logica {
    public void setCantidadDots(int cantidad) {
 	   cantidadDots=cantidad;
    }
+   
+   public void setDots(int dots) {
+	   this.cantidadDots=dots;
+   }
+   
    public void restarDots() {
 	   cantidadDots--;
 	   if(!coloquePotion && this.cantidadDots<=190 && !(matriz[10][11].tengoEntidadEstatica()) ) {
