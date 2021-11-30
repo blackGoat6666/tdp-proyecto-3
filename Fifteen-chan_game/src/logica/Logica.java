@@ -2,7 +2,7 @@ package logica;
 
 import Nivel.Niveles;
 import entidades.Bloque;
-import entidades.Personaje;
+import entidadesDinamicas.Personaje;
 import gui.GUI;
 
 public abstract class Logica {

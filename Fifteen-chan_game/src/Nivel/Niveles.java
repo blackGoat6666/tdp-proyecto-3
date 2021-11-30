@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import entidades.Bloque;
 import entidades.Dot;
+import entidades.EntidadEstatica;
 import entidades.EntidadGraficaEstatica;
 import entidades.Gate;
 import entidades.Ladrillo;
@@ -43,7 +44,6 @@ public class Niveles{
 	public Bloque[][] getMatriz(FabricaEntidades fab) {
 		cantidadDots=0;
 		Bloque [][] matriz = new Bloque [20][20];
-		EntidadGraficaEstatica imagen;
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				switch (matrizNivel[i][j]) {
@@ -52,14 +52,14 @@ public class Niveles{
 					break;
 				case 1:
 					cantidadDots++;
-					imagen= fab.getDot();
-					matriz[j][i] = new Bloque(new Dot(new Point( ((j+1)*30)+5, ((i+1)*30)+5 ), imagen));
-					miLogica.graficar(imagen);
+					EntidadEstatica dot=fab.getDot(new Point( ((j+1)*30)+5, ((i+1)*30) +5 ));
+					matriz[j][i] = new Bloque(dot);
+					miLogica.graficar(dot.getEntidadGrafica());
 					break;
 				case 2:
-					imagen= fab.getPowerPellet();
-					matriz[j][i] = new Bloque(new PowerPellet(new Point( ((j+1)*30)+5, ((i+1)*30) +5 ),imagen));
-					miLogica.graficar(imagen);
+					EntidadEstatica PowerPellet= fab.getPowerPellet(new Point( ((j+1)*30)+5, ((i+1)*30) +5 ));
+					matriz[j][i] = new Bloque(PowerPellet);
+					miLogica.graficar(PowerPellet.getEntidadGrafica());
 					
 					break;
 				case 3:

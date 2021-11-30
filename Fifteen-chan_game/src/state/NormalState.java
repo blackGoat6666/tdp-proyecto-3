@@ -2,8 +2,8 @@ package state;
 
 import java.awt.Point;
 
-import entidades.Enemigo;
-import entidades.EntidadGraficaDinamica;
+import entidadesDinamicas.Enemigo;
+import entidadesDinamicas.EntidadGraficaDinamica;
 import logica.MenteEnemiga;
 
 public class NormalState implements StateFantasma{

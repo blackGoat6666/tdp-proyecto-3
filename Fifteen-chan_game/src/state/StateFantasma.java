@@ -2,7 +2,7 @@ package state;
 
 import java.awt.Point;
 
-import entidades.Enemigo;
+import entidadesDinamicas.Enemigo;
 
 public interface StateFantasma { 
 	

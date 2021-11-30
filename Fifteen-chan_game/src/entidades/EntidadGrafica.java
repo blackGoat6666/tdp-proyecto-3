@@ -9,7 +9,8 @@ public class EntidadGrafica extends JLabel {
 	public EntidadGrafica (String url) {
 		super(".");
 		this.setText(null);
-		this.setIcon(new ImageIcon(GUI.class.getResource(url)));
+		ImageIcon imagen=new ImageIcon(getClass().getResource(url), "imagen de la entidad");
+		this.setIcon(imagen);
 	}
 
 }

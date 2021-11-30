@@ -3,12 +3,12 @@ package visitor;
 import entidades.Bloque;
 import entidades.Bomba;
 import entidades.Dot;
-import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
 import entidades.Invisibilidad;
 import entidades.PowerPellet;
 import entidades.Velocidad;
+import entidadesDinamicas.Enemigo;
 import logica.LogicaColisiones;
 
 public class VisitorFantasma implements Visitor{
@@ -33,7 +33,6 @@ public class VisitorFantasma implements Visitor{
 	@Override
 	public void visitPowerPellet(PowerPellet power) {
 		visitante.seMovio();
-		
 	}
 
 	@Override

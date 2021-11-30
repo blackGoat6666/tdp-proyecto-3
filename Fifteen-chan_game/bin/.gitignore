@@ -1,3 +1,10 @@
+/Images/
 /Nivel/
 /entidades/
+/entidadesDinamicas/
+/fabricas/
+/gui/
 /logica/
+/resources/
+/state/
+/visitor/

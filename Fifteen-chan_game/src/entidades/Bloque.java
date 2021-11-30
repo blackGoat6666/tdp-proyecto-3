@@ -4,8 +4,8 @@ import java.awt.Point;
 import javax.swing.JFrame;
 
 import entidades.Entidad;
-import entidades.EntidadDinamica;
 import entidades.EntidadEstatica;
+import entidadesDinamicas.EntidadDinamica;
 import visitor.Visitor;
 
 public class Bloque{

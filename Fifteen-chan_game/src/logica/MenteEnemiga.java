@@ -2,37 +2,41 @@ package logica;
 
 import java.awt.Point;
 
-import entidades.Blinky;
-import entidades.Clyde;
-import entidades.Enemigo;
 import entidades.Entidad;
-import entidades.EntidadGraficaDinamica;
-import entidades.Inky;
-import entidades.Pinky;
+import entidadesDinamicas.Blinky;
+import entidadesDinamicas.Clyde;
+import entidadesDinamicas.Enemigo;
+import entidadesDinamicas.EntidadGraficaDinamica;
+import entidadesDinamicas.Inky;
+import entidadesDinamicas.Pinky;
 
 public class MenteEnemiga extends Thread{
 
 	private LogicaGeneral miLogicaGeneral;
 	private LogicaColisiones miLogicaColisiones;
-	private Blinky blinky;
-	private Inky inky;
-	private Pinky pinky;
-	private Clyde elPana;
+	private Enemigo blinky;
+	private Enemigo inky;
+	private Enemigo pinky;
+	private Enemigo elPana;
 	private Boolean huir;
 	private Point pacman;
 	private Boolean pacmanInvisible;
 	
-	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, EntidadGraficaDinamica rojito, EntidadGraficaDinamica celestito, EntidadGraficaDinamica rosita, EntidadGraficaDinamica miRey) {
+	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, Enemigo rojito, Enemigo celestito, Enemigo rosita, Enemigo miRey) {
 		miLogicaGeneral= logicaGeneral;
 		miLogicaColisiones =logicaColisiones;
-		blinky=new Blinky(5,rojito, this );
-		inky= new Inky(3, celestito, this);
-		pinky= new Pinky(3,rosita,this);
-		elPana= new Clyde(3, miRey,this);
-		miLogicaColisiones.graficar(rojito);
-		miLogicaColisiones.graficar(celestito);
-		miLogicaColisiones.graficar(rosita);
-		miLogicaColisiones.graficar(miRey);
+		blinky=rojito;
+		inky=celestito;
+		pinky= rosita;
+		elPana= miRey;
+		miLogicaColisiones.graficar(rojito.getEntidadGrafica());
+		miLogicaColisiones.graficar(celestito.getEntidadGrafica());
+		miLogicaColisiones.graficar(rosita.getEntidadGrafica());
+		miLogicaColisiones.graficar(miRey.getEntidadGrafica());
+		blinky.setMenteEnemiga(this);
+		inky.setMenteEnemiga(this);
+		pinky.setMenteEnemiga(this);
+		elPana.setMenteEnemiga(this);
 		miLogicaColisiones.actualizarPantalla();
 		huir=false;
 		pacmanInvisible=false;

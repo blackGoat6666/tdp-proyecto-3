@@ -83,7 +83,7 @@ private void initialize() {
 	    panelJuego.setLayout(null);
 	    panelJuego.setVisible(false);
 	    
-        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
+        this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
 
 		panelMenu = new Panel("/Images/menu.png");
 		panelMenu.setBounds(0, 0, 1200, 720);
@@ -242,7 +242,9 @@ private void initialize() {
 				panelJuego.setVisible(false);
 				panelMenu.setVisible(true);
 				miLogicaGeneral.PararSonido();
-				miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
+				miLogicaGeneral.clean();
+				miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
+				
 			}
 			
 		});
@@ -263,7 +265,7 @@ private void initialize() {
 					miLogicaGeneral.PararSonido();
 				}
 				else
-					miLogicaGeneral.ReproducirSonido("/resources/Musica/Oh Klahoma 8bit.wav");
+					miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
 			}
 		});
 		
@@ -354,7 +356,7 @@ private void initialize() {
 		panelJuego.setVisible(false);
         panelMenu.setVisible(false);
         panelPerdiste.setVisible(true);
-        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Milk.wav");
+        this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Milk.wav");
 	}
 	
 	public void ganaste() {
@@ -362,7 +364,7 @@ private void initialize() {
         panelMenu.setVisible(false);
         panelGanaste.setVisible(true);
         this.miLogicaGeneral.PararSonido();
-        this.miLogicaGeneral.ReproducirSonido("/resources/Musica/Coffee.wav");
+        this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Coffee.wav");
         JLabel vampirito= new JLabel();
         vampirito.setIcon(new ImageIcon(GUI.class.getResource("/resources/Vampiro/vampiro bomba adelante.gif")));
         JLabel metalerito= new JLabel();
@@ -384,4 +386,5 @@ private void initialize() {
         frame.repaint();
         
 	}
+	
 }

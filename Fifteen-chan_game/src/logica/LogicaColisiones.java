@@ -5,14 +5,12 @@ import java.awt.Point;
 import javax.swing.JLabel;
 
 import entidades.Bloque;
-import entidades.Bomba;
-import entidades.Enemigo;
-import entidades.EntidadDinamica;
 import entidades.EntidadEstatica;
-import entidades.EntidadGrafica;
 import entidades.EntidadGraficaEstatica;
 import entidades.Ladrillo;
-import entidades.Personaje;
+import entidadesDinamicas.Enemigo;
+import entidadesDinamicas.EntidadDinamica;
+import entidadesDinamicas.Personaje;
 import gui.GUI;
 import visitor.Visitor;
 import visitor.VisitorFantasma;
@@ -81,7 +79,7 @@ public class LogicaColisiones extends Logica {
     public void activarBomba() {
     	if(bomba){
     		this.ubicacionBomba.setLocation(this.miPersonaje.getPosicion());
-    		bombasticeo=miLogicaGeneral.getFabrica().getBomba();
+    		bombasticeo=miLogicaGeneral.getFabrica().getBomba(ubicacionBomba).getEntidadGrafica();
     		bombasticeo.setLocation(ubicacionBomba);
     		this.graficar(bombasticeo);
     		this.miGUI.actualizar();
@@ -238,6 +236,11 @@ public class LogicaColisiones extends Logica {
 	   this.miPersonaje.setModo(mode);
    }
     
+   public void clean() {
+	   this.vidas=3;
+	   this.coloqueFruit=false;
+	   this.coloquePotion=false;
+   }
    
  
 }

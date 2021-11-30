@@ -3,7 +3,6 @@ package visitor;
 import entidades.Bloque;
 import entidades.Bomba;
 import entidades.Dot;
-import entidades.Enemigo;
 import entidades.Entidad;
 import entidades.Fruit;
 import entidades.Gate;
@@ -11,6 +10,7 @@ import entidades.Invisibilidad;
 import entidades.Ladrillo;
 import entidades.PowerPellet;
 import entidades.Velocidad;
+import entidadesDinamicas.Enemigo;
 
 public interface Visitor {
 

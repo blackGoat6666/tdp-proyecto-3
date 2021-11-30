@@ -1,7 +1,23 @@
 package fabricas;
 
-import entidades.EntidadGraficaDinamica;
+import java.awt.Point;
+
+import entidades.Bomba;
+import entidades.Dot;
+import entidades.EntidadEstatica;
 import entidades.EntidadGraficaEstatica;
+import entidades.Fruit;
+import entidades.Invisibilidad;
+import entidades.PowerPellet;
+import entidades.Velocidad;
+import entidadesDinamicas.Blinky;
+import entidadesDinamicas.Clyde;
+import entidadesDinamicas.Enemigo;
+import entidadesDinamicas.EntidadGraficaDinamica;
+import entidadesDinamicas.Inky;
+import entidadesDinamicas.Personaje;
+import entidadesDinamicas.Pinky;
+import logica.LogicaColisiones;
 
 public class FabricaSCP implements FabricaEntidades {
 
@@ -10,7 +26,7 @@ public class FabricaSCP implements FabricaEntidades {
 	}
 
 	@Override
-	public EntidadGraficaDinamica getBlinky() {
+	public Enemigo getBlinky() {
 		String[] retorno= new String[16];
 		retorno[0]="/resources/SCP/Chanqueo.gif";
 		retorno[1]="/resources/SCP/Chanqueo.gif";
@@ -28,11 +44,11 @@ public class FabricaSCP implements FabricaEntidades {
 		retorno[13]="/resources/SCP/Chanqueo.gif";
 		retorno[14]="/resources/SCP/Chanqueo.gif";
 		retorno[15]="/resources/SCP/Chanqueo.gif";
-		return new EntidadGraficaDinamica(retorno);
+		return new Blinky(5,new EntidadGraficaDinamica(retorno));
 	}
 
 	@Override
-	public EntidadGraficaDinamica getInky() {
+	public Enemigo getInky() {
 		String[] retorno= new String[16];
 		retorno[0]="/resources/SCP/kushi.png";
 		retorno[1]="/resources/SCP/kushi.png";
@@ -50,29 +66,28 @@ public class FabricaSCP implements FabricaEntidades {
 		retorno[13]="/resources/SCP/kushi.png";
 		retorno[14]="/resources/SCP/kushi.png";
 		retorno[15]="/resources/SCP/kushi.png";
-		return new EntidadGraficaDinamica(retorno);
+		return new Inky(3,new EntidadGraficaDinamica(retorno));
 	}
 
 	@Override
-	public EntidadGraficaDinamica getPinky() {
+	public Enemigo getPinky() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
 			retorno[i]="/resources/SCP/ojardo.png";
 		}
-		return new EntidadGraficaDinamica(retorno);
+		return new Pinky(3,new EntidadGraficaDinamica(retorno));
 	}
 
 	@Override
-	public EntidadGraficaDinamica getClyde() {
+	public Enemigo getClyde() {
 		String[] retorno= new String[16];
 		for(int i=0; i<16; i++) {
 			retorno[i]="/resources/SCP/yello.png";
 		}
-		return new EntidadGraficaDinamica(retorno);
+		return new Clyde(3,new EntidadGraficaDinamica(retorno));
 	}
 
-	@Override
-	public EntidadGraficaDinamica getPersonaje() {
+	public Personaje getPersonaje(LogicaColisiones log) {
 		String[] retorno= new String[16];
 		retorno[0]="/resources/SCP/999.gif";
 		retorno[1]="/resources/SCP/999.gif";
@@ -90,44 +105,43 @@ public class FabricaSCP implements FabricaEntidades {
 		retorno[13]="/resources/SCP/999Invisibilidad.gif";
 		retorno[14]="/resources/SCP/999Invisibilidad.gif";
 		retorno[15]="/resources/SCP/999Invisibilidad.gif";
-		return new EntidadGraficaDinamica(retorno);
+		return new Personaje(log, new EntidadGraficaDinamica(retorno));
+	}
+
+	public EntidadEstatica getDot(Point ubicacion) {
+		return new Dot(ubicacion, new EntidadGraficaEstatica("/resources/SCP/caramelo.png"));
+	}
+
+
+	@Override
+	public EntidadEstatica getPowerPellet(Point ubicacion) {
+		return new PowerPellet(ubicacion,new EntidadGraficaEstatica("/resources/SCP/paletita.png"));
 	}
 
 	@Override
-	public EntidadGraficaEstatica getDot() {
-		return new EntidadGraficaEstatica("/resources/SCP/caramelo.png");
-	}
-
-
-	@Override
-	public EntidadGraficaEstatica getPowerPellet() {
-		return new EntidadGraficaEstatica("/resources/SCP/paletita.png");
-	}
-
-	@Override
-	public EntidadGraficaEstatica getFruit(int nivel) {
+	public EntidadEstatica getFruit(Point ubicacion,int nivel) {
 		switch(nivel) {
-		case 1: return  new EntidadGraficaEstatica ("/resources/SCP/palito.png");
-		case 2: return  new EntidadGraficaEstatica ("/resources/SCP/chocolate.png");
-		case 3: return  new EntidadGraficaEstatica ("/resources/SCP/rocklets.png");
+		case 1: return new Fruit(ubicacion, new EntidadGraficaEstatica ("/resources/SCP/palito.png"));
+		case 2: return new Fruit(ubicacion, new EntidadGraficaEstatica ("/resources/SCP/chocolate.png"));
+		case 3: return new Fruit(ubicacion,  new EntidadGraficaEstatica ("/resources/SCP/rocklets.png"));
 	}
 	return null;
 }
 
 	@Override
-	public EntidadGraficaEstatica getBomba() {
-		return new EntidadGraficaEstatica("/resources/SCP/nose.png");
+	public EntidadEstatica getBomba(Point ubicacion) {
+		return new Bomba(ubicacion,new  EntidadGraficaEstatica("/resources/SCP/nose.png"));
 	}
 
 	@Override
-	public EntidadGraficaEstatica getInvisibilidad() {
-		return new EntidadGraficaEstatica("/resources/SCP/invisibilidad.png");
+	public EntidadEstatica getInvisibilidad(Point ubicacion) {
+		return new Invisibilidad(ubicacion, new EntidadGraficaEstatica("/resources/SCP/invisibilidad.png"));
 	}
 
 	@Override
-	public EntidadGraficaEstatica getVelocidad() {
+	public EntidadEstatica getVelocidad(Point ubicacion) {
 		// TODO Auto-generated method stub  
-		return new EntidadGraficaEstatica("/resources/SCP/velocidad.png");
+		return new Velocidad(ubicacion, new EntidadGraficaEstatica("/resources/SCP/velocidad.png"));
 	}
 
 	@Override
@@ -143,9 +157,9 @@ public class FabricaSCP implements FabricaEntidades {
 	@Override
 	public String getMusica(int nivel) {
 		switch(nivel) {
-        case 1: return "/resources/Musica/Two Time 8bit.wav";
-		case 2: return "/resources/Musica/Dead Weight 8bit.wav";
-		case 3: return "/resources/Musica/Cheeseburger Family.wav";
+        case 1: return "/src/resources/Musica/Two Time 8bit.wav";
+		case 2: return "/src/resources/Musica/Dead Weight 8bit.wav";
+		case 3: return "/src/resources/Musica/Cheeseburger Family.wav";
 	}
 	return null;
 }
@@ -159,5 +173,6 @@ public class FabricaSCP implements FabricaEntidades {
 	}
 	return null;
 }
-	
+
+
 }

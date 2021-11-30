@@ -12,12 +12,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import Nivel.Niveles;
-import entidades.Bomba;
 import entidades.EntidadEstatica;
-import entidades.Fruit;
-import entidades.Invisibilidad;
-import entidades.Personaje;
-import entidades.Velocidad;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaMetaleros;
 import fabricas.FabricaSCP;
@@ -89,7 +84,7 @@ public class LogicaGeneral extends Logica {
     	miLogicaColisiones.jugando=true;
     	this.nivel=1;
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
-    	miPersonaje= new Personaje(miLogicaColisiones, miFabrica.getPersonaje());
+    	miPersonaje= this.miFabrica.getPersonaje(miLogicaColisiones);
         miLogicaColisiones.setPersonaje(miPersonaje);
         miGUI.addGrilla(miPersonaje.getEntidadGrafica());
         niveles = new Niveles(miLogicaColisiones);
@@ -144,18 +139,26 @@ public class LogicaGeneral extends Logica {
     }
     public EntidadEstatica getPotion() {
  	   switch(this.nivel) {
- 	   	case 1: return new Bomba((new Point( ((11)*30)+5, ((12)*30)+5 )), miFabrica.getBomba());
- 	   	case 2:return new  Invisibilidad(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getInvisibilidad());
- 	   	case 3:return new Velocidad(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getVelocidad());
+ 	   	case 1: return  miFabrica.getBomba( new Point( ((11)*30)+5, ((12)*30)+5 ) );
+ 	   	case 2:return miFabrica.getInvisibilidad(new Point( ((11)*30)+5, ((12)*30)+5 ));
+ 	   	case 3:return miFabrica.getVelocidad(new Point( ((11)*30)+5, ((12)*30)+5 ));
  	   }
  	   return null;
     }
     public EntidadEstatica getFruit() {
-  	   return new Fruit(new Point( ((11)*30)+5, ((12)*30)+5 ), miFabrica.getFruit(nivel));
+  	   return  miFabrica.getFruit(new Point( ((11)*30)+5, ((12)*30)+5 ), nivel);
   	 }
     protected void resetearLogicaPropia() {
     }
     public Boolean getBooleanMusica() {
     	return musica;
+    }
+    public void clean() {
+    	this.nivel=1;
+    	this.puntos=0;
+    	this.miGUI.actualizarPuntos(puntos);
+    	this.vidas=3;
+    	this.miLogicaColisiones.clean();
+   
     }
 }
