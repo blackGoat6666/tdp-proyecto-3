@@ -17,6 +17,8 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected Boolean saliDeGate;
 	protected StateFantasma miEstado;
 	protected Point ultimoBloque;
+	protected Boolean meMovi;
+	
 	
 	public Enemigo(int mov, EntidadGraficaDinamica imagen) {
 		super(imagen);
@@ -27,6 +29,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		posicionObjetivo= new Point(0,0);
 		saliDeGate=false;
 		preferencias= new Point(0,0);
+		this.meMovi=false;
     }
 	
 	public void setMenteEnemiga(MenteEnemiga megamind) {
@@ -79,7 +82,7 @@ public abstract class Enemigo extends EntidadDinamica {
 	}
 	
 	public void seMovio() {
-		miEstado.setMePuedoMover(true);
+		this.meMovi=true;
 	}
 
 	@Override
@@ -167,7 +170,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		return "Enemigo";
 	}
 	public void setNoSeMovio() {
-		miEstado.setMePuedoMover(false);
+		this.meMovi=false;
 	}
 	
 	public boolean estoyMuerto() {
@@ -191,6 +194,10 @@ public abstract class Enemigo extends EntidadDinamica {
 	
 	public void setMovimiento(int mov) {
 		this.movimientoOriginal=mov;
+	}
+	
+	public Boolean getSeMovio() {
+		return this.meMovi;
 	}
 
 }

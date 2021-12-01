@@ -35,7 +35,6 @@ public class GUI {
 	private JLabel lblPuntuacion;
 	private JPanel grillaActual;
 	private JPanel panelPerdiste;
-	private JLabel perdiste;
 	private JPanel panelGanaste;
 	private JButton btnMusicaJuego;
 	private JButton btnMusicaMenu;
@@ -248,6 +247,7 @@ private void initialize() {
 				panelMenu.setVisible(true);
 				miLogicaGeneral.PararSonido();
 				miLogicaGeneral.clean();
+				miLogicaColisiones.clean();
 				miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
 				
 			}

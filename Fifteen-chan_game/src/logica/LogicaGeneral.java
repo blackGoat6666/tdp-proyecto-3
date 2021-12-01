@@ -83,6 +83,7 @@ public class LogicaGeneral extends Logica {
     	jugando=true;
     	miLogicaColisiones.jugando=true;
     	this.nivel=1;
+    	this.miLogicaColisiones.clean();
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
     	miPersonaje= this.miFabrica.getPersonaje(miLogicaColisiones);
         miLogicaColisiones.setPersonaje(miPersonaje);

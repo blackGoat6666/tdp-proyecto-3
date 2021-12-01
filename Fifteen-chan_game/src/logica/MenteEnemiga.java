@@ -2,22 +2,20 @@ package logica;
 
 import java.awt.Point;
 
-import entidades.Entidad;
-import entidadesDinamicas.Blinky;
-import entidadesDinamicas.Clyde;
+import TDALista.BoundaryViolationException;
+import TDALista.EmptyListException;
+import TDALista.InvalidPositionException;
+import TDALista.ListaDoblementeEnlazada;
+import TDALista.Position;
+import TDALista.PositionList;
 import entidadesDinamicas.Enemigo;
-import entidadesDinamicas.EntidadGraficaDinamica;
-import entidadesDinamicas.Inky;
-import entidadesDinamicas.Pinky;
 
 public class MenteEnemiga extends Thread{
 
 	private LogicaGeneral miLogicaGeneral;
 	private LogicaColisiones miLogicaColisiones;
+	private PositionList<Enemigo> listaEnemigos;
 	private Enemigo blinky;
-	private Enemigo inky;
-	private Enemigo pinky;
-	private Enemigo elPana;
 	private Boolean huir;
 	private Point pacman;
 	private Boolean pacmanInvisible;
@@ -25,18 +23,16 @@ public class MenteEnemiga extends Thread{
 	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, Enemigo rojito, Enemigo celestito, Enemigo rosita, Enemigo miRey) {
 		miLogicaGeneral= logicaGeneral;
 		miLogicaColisiones =logicaColisiones;
+		listaEnemigos= new ListaDoblementeEnlazada<Enemigo>();
 		blinky=rojito;
-		inky=celestito;
-		pinky= rosita;
-		elPana= miRey;
-		miLogicaColisiones.graficar(rojito.getEntidadGrafica());
-		miLogicaColisiones.graficar(celestito.getEntidadGrafica());
-		miLogicaColisiones.graficar(rosita.getEntidadGrafica());
-		miLogicaColisiones.graficar(miRey.getEntidadGrafica());
-		blinky.setMenteEnemiga(this);
-		inky.setMenteEnemiga(this);
-		pinky.setMenteEnemiga(this);
-		elPana.setMenteEnemiga(this);
+		listaEnemigos.addLast(rojito);
+		listaEnemigos.addLast(celestito);
+		listaEnemigos.addLast(rosita);
+		listaEnemigos.addLast(miRey);
+		for(Enemigo e: this.listaEnemigos) {
+			miLogicaColisiones.graficar(e.getEntidadGrafica());
+			e.setMenteEnemiga(this);
+		}
 		miLogicaColisiones.actualizarPantalla();
 		huir=false;
 		pacmanInvisible=false;
@@ -46,22 +42,21 @@ public class MenteEnemiga extends Thread{
 	public void run() {
 		while(miLogicaColisiones.jugando()) {
 			this.pacman=miLogicaColisiones.getUbicacionPacman();
-			blinky.calcularDir(pacman);
-			inky.calcularDir(pacman);
-			pinky.calcularDir(pacman);
-			elPana.calcularDir(pacman);
-			blinky.mover();
-			inky.mover();
-			pinky.mover();
-			elPana.mover();
+			for(Enemigo e: this.listaEnemigos) {
+				e.calcularDir(pacman);
+				e.mover();
+			}
 			miLogicaColisiones.actualizarPantalla();
-			this.chequearColisiones();
 			 try {
+				this.chequearColisiones();
 		    	this.sleep(200);
 		    
 			} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (EmptyListException|InvalidPositionException|BoundaryViolationException  e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}
@@ -84,17 +79,15 @@ public class MenteEnemiga extends Thread{
 	}
 
 	public void resetearFantasmas() {
-		blinky.resetear();
-		inky.resetear();
-		pinky.resetear();
-		elPana.resetear();
+		for(Enemigo e: this.listaEnemigos) {
+			e.resetear();
+		}
 	}
 	
 	public void fantasmasModoNormal() {
-		blinky.volverModoNormal();
-		inky.volverModoNormal();
-		pinky.volverModoNormal();
-		elPana.volverModoNormal();
+		for(Enemigo e: this.listaEnemigos) {
+			e.volverModoNormal();
+		}
 		huir=false;
 		this.pacmanInvisible=false;
 		miLogicaColisiones.actualizarPantalla();
@@ -108,10 +101,9 @@ public class MenteEnemiga extends Thread{
 	
 	public void setHuir() {
 		huir=true;
-		blinky.setHuir();
-		inky.setHuir();
-		pinky.setHuir();
-		elPana.setHuir();
+		for(Enemigo e: this.listaEnemigos) {
+			e.setHuir();
+		}
 	}
 	
 	public Boolean cambioDeBloque(Point ubicacion1, Point ubicacion2) {
@@ -119,26 +111,16 @@ public class MenteEnemiga extends Thread{
 	}
 	
 	public void explotoBomba(Point ub) {
-		if(Math.abs(ub.x-blinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-blinky.getUbicacion().y)<=31*8 ) {
-			blinky.morir();
-			miLogicaGeneral.sumarPuntos(400);
-		}
-		if(Math.abs(ub.x-inky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-inky.getUbicacion().y)<=31*8 ) {
-			inky.morir();
-			miLogicaGeneral.sumarPuntos(400);
-		}
-		if(Math.abs(ub.x-pinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-pinky.getUbicacion().y)<=31*8 ) {
-			pinky.morir();
-			miLogicaGeneral.sumarPuntos(400);
-		}
-		if(Math.abs(ub.x-elPana.getUbicacion().x)<=31*8 ||Math.abs(ub.y-elPana.getUbicacion().y)<=31*8 ) {
-			elPana.morir();
-			miLogicaGeneral.sumarPuntos(400);
+		for(Enemigo e: this.listaEnemigos) {
+			if(Math.abs(ub.x-e.getUbicacion().x)<=31*8 ||Math.abs(ub.y-e.getUbicacion().y)<=31*8 ) {
+				e.morir();
+				miLogicaGeneral.sumarPuntos(400);
+			}
 		}
 		miLogicaColisiones.actualizarPantalla();
 	}
 	
-	private void chequearColisiones() {
+	private void chequearColisiones() throws EmptyListException, InvalidPositionException, BoundaryViolationException {
 		if(huir) {
 			this.fantasmasMuertos();
 		}
@@ -148,27 +130,31 @@ public class MenteEnemiga extends Thread{
 
 	}
 	private void fantasmasMuertos() {
-		if(this.colisionoConPacman(blinky) ) {
-			blinky.morir();
-			miLogicaGeneral.sumarPuntos(200);
+		for(Enemigo e: this.listaEnemigos) {
+			if(this.colisionoConPacman(e)) {
+				e.morir();
+				miLogicaGeneral.sumarPuntos(200);
+			}
 		}
-		if(this.colisionoConPacman(inky)) {
-			inky.morir();
-			miLogicaGeneral.sumarPuntos(200);
-		}
-		if(this.colisionoConPacman(pinky)) {
-			pinky.morir();
-			miLogicaGeneral.sumarPuntos(200);
-		}
-		if(this.colisionoConPacman(elPana)) {
-			elPana.morir();
-			miLogicaGeneral.sumarPuntos(200);
-		}
-		
 	}
-	private void pacmanMuerto() {
-		if( !(this.pacmanInvisible) && ( (this.colisionoConPacman(blinky)  && !(blinky.estoyMuerto()) ) ||
-		 (this.colisionoConPacman(inky)  && !(inky.estoyMuerto())) ||(this.colisionoConPacman(pinky)  && !(pinky.estoyMuerto())) || (this.colisionoConPacman(elPana) && !(elPana.estoyMuerto())) ) ) {
+	private void pacmanMuerto() throws EmptyListException, InvalidPositionException, BoundaryViolationException {
+		boolean murio=false;
+		if(!(this.pacmanInvisible)) {
+			Position<Enemigo> cursor=this.listaEnemigos.first();
+			while(!murio && cursor!=this.listaEnemigos.last()) {
+				Enemigo e=cursor.element();
+				if(this.colisionoConPacman(e)  && !(e.estoyMuerto()) ){
+						murio=true;
+				}
+				cursor=this.listaEnemigos.next(cursor);
+			}
+			Enemigo e=cursor.element();
+			if(this.colisionoConPacman(e)  && !(e.estoyMuerto()) ){
+					murio=true;
+			}
+			
+		}
+		if(murio) {
 			miLogicaColisiones.perderVida();
 		}
 	}
@@ -181,15 +167,13 @@ public class MenteEnemiga extends Thread{
 		this.pacmanInvisible=true;
 	}
 	public void graficarFantasmitas() {
-		miLogicaColisiones.graficar(blinky.getEntidadGrafica());
-		miLogicaColisiones.graficar(this.inky.getEntidadGrafica());
-		miLogicaColisiones.graficar(this.pinky.getEntidadGrafica());
-		miLogicaColisiones.graficar(this.elPana.getEntidadGrafica());
+		for(Enemigo e: this.listaEnemigos) {
+			this.miLogicaColisiones.graficar(e.getEntidadGrafica());
+		}
 	}
 	public void cambiarVelocidad() {
-		blinky.setMovimiento(blinky.getMovimiento()+1);
-		inky.setMovimiento(inky.getMovimiento()+1);
-		pinky.setMovimiento(pinky.getMovimiento()+1);
-		elPana.setMovimiento(elPana.getMovimiento()+1);
+		for(Enemigo e: this.listaEnemigos) {
+			e.setMovimiento(e.getMovimiento()+1);
+		}
 	}
 }
