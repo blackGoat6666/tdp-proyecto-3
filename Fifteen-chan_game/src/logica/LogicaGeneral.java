@@ -124,6 +124,7 @@ public class LogicaGeneral extends Logica {
          musiquita = AudioSystem.getClip();
          musiquita.open(audioInputStream);
          musiquita.start();
+         this.miGUI.setIconMusiquita("/resources/Musica/musicola.png");
         } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
           System.out.println("error "+ ex.getMessage());
         }
@@ -132,6 +133,7 @@ public class LogicaGeneral extends Logica {
     public void PararSonido() {
     	if(musica) {
     		musiquita.stop();
+    		this.miGUI.setIconMusiquita("/resources/Musica/musicolaPausada.png");
         	musiquita=null;
         	musica = false;
     	}

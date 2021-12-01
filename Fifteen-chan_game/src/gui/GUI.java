@@ -37,7 +37,9 @@ public class GUI {
 	private JPanel panelPerdiste;
 	private JLabel perdiste;
 	private JPanel panelGanaste;
-
+	private JButton btnMusicaJuego;
+	private JButton btnMusicaMenu;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -65,6 +67,14 @@ public class GUI {
 		frame.setBounds(0, 0, 1200, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		btnMusicaMenu = new JButton("");
+		btnMusicaMenu.setForeground(Color.RED);
+		btnMusicaMenu.setBackground(Color.BLACK);
+		btnMusicaMenu.setBounds(1079, 574, 64, 58);
+		btnMusicaJuego = new JButton("");
+		btnMusicaJuego.setForeground(Color.RED);
+		btnMusicaJuego.setBackground(Color.BLACK);
+		btnMusicaJuego.setBounds(1079, 574, 64, 58);
 		miLogicaGeneral=new LogicaGeneral(this);
 		miLogicaColisiones= new LogicaColisiones(this,miLogicaGeneral);
 		miLogicaGeneral.setLogicaColisiones(miLogicaColisiones);
@@ -90,7 +100,6 @@ private void initialize() {
 		panelMenu.setVisible(true);
 		frame.getContentPane().add(panelMenu);
 		panelMenu.setLayout(null);
-		
 		
 		
 		JButton btnAyuda = new JButton("Ayuda");
@@ -158,17 +167,13 @@ private void initialize() {
 		lblPuntuacion.setBounds(72, 574, 259, 186);
 		panelJuego.add(lblPuntuacion);
 		
-		JButton btnMusicaJuego = new JButton("");
-		btnMusicaJuego.setForeground(Color.RED);
-		btnMusicaJuego.setBackground(Color.BLACK);
-		btnMusicaJuego.setBounds(1079, 574, 64, 58);
-		panelJuego.add(btnMusicaJuego);
 		
-		JButton btnMusicaMenu = new JButton("");
-		btnMusicaMenu.setForeground(Color.RED);
-		btnMusicaMenu.setBackground(Color.BLACK);
-		btnMusicaMenu.setBounds(1079, 574, 64, 58);
+		panelJuego.add(btnMusicaJuego);
+
+		
 		panelMenu.add(btnMusicaMenu);
+		btnMusicaMenu.setIcon(new ImageIcon(GUI.class.getResource("/resources/Musica/musicola.png")));
+		
 		
 		panelPerdiste = new Panel("/Images/menu.png");
         panelPerdiste.setBounds(0, 0, 1200, 720);
@@ -356,6 +361,7 @@ private void initialize() {
 		panelJuego.setVisible(false);
         panelMenu.setVisible(false);
         panelPerdiste.setVisible(true);
+        this.miLogicaGeneral.PararSonido();
         this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Milk.wav");
 	}
 	
@@ -385,6 +391,11 @@ private void initialize() {
         panelGanaste.add(metalerito);
         frame.repaint();
         
+	}
+	
+	public void setIconMusiquita(String imagen) {
+		this.btnMusicaMenu.setIcon(new ImageIcon(GUI.class.getResource(imagen)));
+		this.btnMusicaJuego.setIcon(new ImageIcon(GUI.class.getResource(imagen)));
 	}
 	
 }
