@@ -62,15 +62,7 @@ public class NormalState implements StateFantasma{
 		}
 		
 	}
-	@Override
-	public void morir() {
-		this.miFantasmita.changeState(new MuertoState(this.miFantasmita));
-	}
 	
-	@Override
-	public void huir() {
-		this.miFantasmita.changeState(new HuirState(this.miFantasmita));
-	}
 	public Boolean puedeAtravesarGate() {
 		return !(miFantasmita.getSaliDeGate());
 	}
@@ -78,21 +70,11 @@ public class NormalState implements StateFantasma{
 	public Boolean getMuerto() {
 		return false;
 	}
-	@Override
-	public void modoNormal() {
-	}
-
-	@Override
-	public void resetear() {
-		miImagen=miFantasmita.getEntidadGrafica();
-		miFantasmita.getEntidadGrafica().setModo("normal");
-		miFantasmita.getEntidadGrafica().setLocation(miFantasmita.getUbicacion().x-30, miFantasmita.getUbicacion().y-50);
-		intentos=0;
-	}
 
 	@Override
 	public int getIntentos() {
 		return intentos;
 	}
+
 
 }

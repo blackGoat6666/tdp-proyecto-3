@@ -61,16 +61,6 @@ public class MuertoState implements StateFantasma{
 	}
 
 
-	public void morir() {
-	}
-
-
-	@Override
-	public void huir() {
-	}
-
-
-
 	@Override
 	public Boolean puedeAtravesarGate() {
 		return true;
@@ -81,22 +71,9 @@ public class MuertoState implements StateFantasma{
 	public Boolean getMuerto() {
 		return true;
 	}
-
-
-	public void modoNormal() {
-	}
-
-
-	@Override
-	public void resetear() {
-		miFantasmita.setSaliDeGate(false);
-		this.miFantasmita.changeState(new NormalState(this.miFantasmita));
-	}
-
-
-	@Override
 	public int getIntentos() {
 		return intentos;
 	}
+
 
 }

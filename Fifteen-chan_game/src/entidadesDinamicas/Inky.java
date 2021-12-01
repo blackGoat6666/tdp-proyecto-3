@@ -15,7 +15,7 @@ public class Inky extends Enemigo {
 
 	public void resetear() {
 		ubicacion.setLocation(330,300);
-		this.resetearGeneral();
+		saliDeGate=false;
 	}
 
 	@Override

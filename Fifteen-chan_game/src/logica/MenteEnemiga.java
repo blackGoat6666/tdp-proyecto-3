@@ -9,6 +9,9 @@ import TDALista.ListaDoblementeEnlazada;
 import TDALista.Position;
 import TDALista.PositionList;
 import entidadesDinamicas.Enemigo;
+import state.HuirState;
+import state.MuertoState;
+import state.NormalState;
 
 public class MenteEnemiga extends Thread{
 
@@ -81,12 +84,13 @@ public class MenteEnemiga extends Thread{
 	public void resetearFantasmas() {
 		for(Enemigo e: this.listaEnemigos) {
 			e.resetear();
+			e.changeState(new NormalState(e));
 		}
 	}
 	
 	public void fantasmasModoNormal() {
 		for(Enemigo e: this.listaEnemigos) {
-			e.volverModoNormal();
+			e.changeState(new NormalState(e));
 		}
 		huir=false;
 		this.pacmanInvisible=false;
@@ -102,7 +106,9 @@ public class MenteEnemiga extends Thread{
 	public void setHuir() {
 		huir=true;
 		for(Enemigo e: this.listaEnemigos) {
-			e.setHuir();
+			if( !(e.estoyMuerto()) ) {
+				e.changeState(new HuirState(e));
+			}
 		}
 	}
 	
@@ -113,7 +119,7 @@ public class MenteEnemiga extends Thread{
 	public void explotoBomba(Point ub) {
 		for(Enemigo e: this.listaEnemigos) {
 			if(Math.abs(ub.x-e.getUbicacion().x)<=31*8 ||Math.abs(ub.y-e.getUbicacion().y)<=31*8 ) {
-				e.morir();
+				e.changeState(new MuertoState(e));
 				miLogicaGeneral.sumarPuntos(400);
 			}
 		}
@@ -132,7 +138,7 @@ public class MenteEnemiga extends Thread{
 	private void fantasmasMuertos() {
 		for(Enemigo e: this.listaEnemigos) {
 			if(this.colisionoConPacman(e)) {
-				e.morir();
+				e.changeState(new MuertoState(e));
 				miLogicaGeneral.sumarPuntos(200);
 			}
 		}

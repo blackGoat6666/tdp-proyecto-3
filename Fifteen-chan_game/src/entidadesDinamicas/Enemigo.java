@@ -73,9 +73,7 @@ public abstract class Enemigo extends EntidadDinamica {
 	public Boolean getSaliDeGate() {
 		return this.saliDeGate;
 	}
-	public void volverModoNormal() {
-		this.miEstado.modoNormal();
-	}
+
 	
 	public Boolean puedoAtravesarGate() {
 		return miEstado.puedeAtravesarGate();
@@ -85,10 +83,6 @@ public abstract class Enemigo extends EntidadDinamica {
 		this.meMovi=true;
 	}
 
-	@Override
-	public void morir() {
-		this.miEstado.morir();
-	}
 	public void actualizarMiEntidadGrafica() {
 		if(this.siguienteDireccion(this.miEstado.getIntentos()).x==0) {
 			if(this.siguienteDireccion(this.miEstado.getIntentos()).y==1) {
@@ -161,10 +155,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		}
 	}
 	
-	public void setHuir() {
-		this.miEstado.huir();
-		
-	}
+	
 	
 	public String toString() {
 		return "Enemigo";
@@ -176,10 +167,7 @@ public abstract class Enemigo extends EntidadDinamica {
 	public boolean estoyMuerto() {
 		return this.miEstado.getMuerto();
 	}
-	protected void resetearGeneral() {
-		this.miEstado.resetear();
-		saliDeGate=false;
-	}
+
 
 	public abstract void calcularDirNormal(Point Pacman);
 	
@@ -199,5 +187,6 @@ public abstract class Enemigo extends EntidadDinamica {
 	public Boolean getSeMovio() {
 		return this.meMovi;
 	}
+	
 
 }

@@ -57,15 +57,7 @@ public class HuirState implements StateFantasma{
 		
 	}
 
-	@Override
-	public void morir() {
-		this.miFantasmita.changeState(new MuertoState(this.miFantasmita));
-	}
-
-	@Override
-	public void huir() {
-	}
-
+	
 	
 	@Override
 	public Boolean puedeAtravesarGate() {
@@ -77,19 +69,7 @@ public class HuirState implements StateFantasma{
 		return false;
 	}
 
-	@Override
-	public void modoNormal() {
-		miFantasmita.changeState(new NormalState(this.miFantasmita)); 
-	}
-
-	@Override
-	public void resetear() {
-		this.modoNormal();
-	}
-
-	@Override
 	public int getIntentos() {
-		// TODO Auto-generated method stub
 		return intentos;
 	}
 
