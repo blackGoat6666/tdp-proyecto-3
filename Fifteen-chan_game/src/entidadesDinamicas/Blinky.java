@@ -20,7 +20,7 @@ public class Blinky extends Enemigo {
 	
 	public void resetear() {
 		ubicacion.setLocation(310,310);
-		this.resetearGeneral();
+		saliDeGate=false;
 	}
 
 }

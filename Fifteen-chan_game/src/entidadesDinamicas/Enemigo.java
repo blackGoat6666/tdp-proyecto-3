@@ -17,6 +17,8 @@ public abstract class Enemigo extends EntidadDinamica {
 	protected Boolean saliDeGate;
 	protected StateFantasma miEstado;
 	protected Point ultimoBloque;
+	protected Boolean meMovi;
+	
 	
 	public Enemigo(int mov, EntidadGraficaDinamica imagen) {
 		super(imagen);
@@ -27,6 +29,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		posicionObjetivo= new Point(0,0);
 		saliDeGate=false;
 		preferencias= new Point(0,0);
+		this.meMovi=false;
     }
 	
 	public void setMenteEnemiga(MenteEnemiga megamind) {
@@ -70,22 +73,16 @@ public abstract class Enemigo extends EntidadDinamica {
 	public Boolean getSaliDeGate() {
 		return this.saliDeGate;
 	}
-	public void volverModoNormal() {
-		this.miEstado.modoNormal();
-	}
+
 	
 	public Boolean puedoAtravesarGate() {
 		return miEstado.puedeAtravesarGate();
 	}
 	
 	public void seMovio() {
-		miEstado.setMePuedoMover(true);
+		this.meMovi=true;
 	}
 
-	@Override
-	public void morir() {
-		this.miEstado.morir();
-	}
 	public void actualizarMiEntidadGrafica() {
 		if(this.siguienteDireccion(this.miEstado.getIntentos()).x==0) {
 			if(this.siguienteDireccion(this.miEstado.getIntentos()).y==1) {
@@ -158,25 +155,19 @@ public abstract class Enemigo extends EntidadDinamica {
 		}
 	}
 	
-	public void setHuir() {
-		this.miEstado.huir();
-		
-	}
+	
 	
 	public String toString() {
 		return "Enemigo";
 	}
 	public void setNoSeMovio() {
-		miEstado.setMePuedoMover(false);
+		this.meMovi=false;
 	}
 	
 	public boolean estoyMuerto() {
 		return this.miEstado.getMuerto();
 	}
-	protected void resetearGeneral() {
-		this.miEstado.resetear();
-		saliDeGate=false;
-	}
+
 
 	public abstract void calcularDirNormal(Point Pacman);
 	
@@ -192,5 +183,10 @@ public abstract class Enemigo extends EntidadDinamica {
 	public void setMovimiento(int mov) {
 		this.movimientoOriginal=mov;
 	}
+	
+	public Boolean getSeMovio() {
+		return this.meMovi;
+	}
+	
 
 }

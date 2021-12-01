@@ -14,9 +14,8 @@ public class Clyde extends Enemigo {
 	}
 
 	public void resetear() {
-		this.resetearGeneral();
+		saliDeGate=false;
 		ubicacion.setLocation(310,310);
-		miImagen.setLocation(ubicacion.x-30, ubicacion.y-50);
 	}
 
 	public void calcularDirNormal(Point Pacman) {

@@ -78,6 +78,7 @@ public class LogicaGeneral {
     public void comenzarJuego() {
     	jugando=true;
     	this.nivel=1;
+    	this.miLogicaColisiones.clean();
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
     	miLogicaColisiones.nivel1();
     	

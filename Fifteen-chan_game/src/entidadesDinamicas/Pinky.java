@@ -17,7 +17,7 @@ public class Pinky extends Enemigo{
 	@Override
 	public void resetear() {
 		ubicacion.setLocation(330,310);
-		this.resetearGeneral();
+		saliDeGate=false;
 	}
 
 	@Override

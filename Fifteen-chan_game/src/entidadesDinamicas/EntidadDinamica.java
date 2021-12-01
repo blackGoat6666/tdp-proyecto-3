@@ -15,12 +15,12 @@ public abstract void resetear();
 
 public abstract void mover();
 
-public abstract void morir();
 
 public abstract String toString(); 
 
 public void accept(Visitor v) {
 }
-
+public void morir() {
+	}
 	
 }
