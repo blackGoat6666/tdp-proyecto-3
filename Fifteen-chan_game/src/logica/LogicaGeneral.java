@@ -10,6 +10,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JLabel;
 
 import Nivel.Niveles;
 import entidades.EntidadEstatica;
@@ -19,7 +20,7 @@ import fabricas.FabricaSCP;
 import fabricas.FabricaVampiro;
 import gui.GUI;
 
-public class LogicaGeneral extends Logica {
+public class LogicaGeneral {
 	//atributos de instancia
 	private int puntos;
 	private int nivel;
@@ -27,13 +28,17 @@ public class LogicaGeneral extends Logica {
 	protected LogicaColisiones miLogicaColisiones;
 	private Clip musiquita;
 	private Boolean musica;
+	protected int vidas;
+	protected GUI miGUI;
+
+	protected Boolean jugando;
     
 	//constructor
 	
 	public LogicaGeneral(GUI gui) {
 	       vidas=3;
 	       miGUI=gui;
-	       miLogicaColisiones= new LogicaColisiones(gui, this);
+	       miLogicaColisiones= new LogicaColisiones( this);
 	     }
 	
 	//metodos
@@ -62,39 +67,21 @@ public class LogicaGeneral extends Logica {
     	}
     	else {
     		miGUI.cambiarNivel(miFabrica.getFondo(nivel));
-    		niveles.siguienteNivel(nivel);
-    		matriz=niveles.getMatriz(miFabrica);
-    		miLogicaColisiones.setMatriz(matriz);
-    		miLogicaColisiones.graficarEntidadesDinamicas();
-    		miLogicaColisiones.resetearLogicaPropia();
-    		this.megamind.cambiarVelocidad();
+    		miLogicaColisiones.cambiarNivel(nivel);
+    		
     		this.PararSonido();
             this.ReproducirSonido(miFabrica.getMusica(nivel));
-            this.miLogicaColisiones.setCantidadDots(niveles.getDots());
             miGUI.actualizar();	
     	}
     	
     }
     public void comenzarJuego() {
-        this.nivel1();
-    }
-    private void nivel1() {
-    	//221
     	jugando=true;
-    	miLogicaColisiones.jugando=true;
     	this.nivel=1;
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
-    	miPersonaje= this.miFabrica.getPersonaje(miLogicaColisiones);
-        miLogicaColisiones.setPersonaje(miPersonaje);
-        miGUI.addGrilla(miPersonaje.getEntidadGrafica());
-        niveles = new Niveles(miLogicaColisiones);
-        matriz=niveles.getMatriz(miFabrica);
-        miLogicaColisiones.setCantidadDots(221);
-        miLogicaColisiones.setMatriz(matriz);
-        megamind= new MenteEnemiga(this,miLogicaColisiones,  miFabrica.getBlinky(), miFabrica.getInky(), miFabrica.getPinky(), miFabrica.getClyde());
-        miLogicaColisiones.setMenteEnemiga(megamind);
-        megamind.start();  
-        for(int i=1; i<=3; i++) {
+    	miLogicaColisiones.nivel1();
+    	
+    	for(int i=1; i<=3; i++) {
         	miGUI.setVida(i, miFabrica.getVida());
         }
         if(musiquita!=null) {
@@ -102,7 +89,9 @@ public class LogicaGeneral extends Logica {
         }
         this.ReproducirSonido(miFabrica.getMusica(1));
         miGUI.actualizar();	
+    	
     }
+    
     public void setLogicaColisiones(LogicaColisiones logicaColisiones) {
     	miLogicaColisiones=logicaColisiones;
     }
@@ -110,6 +99,11 @@ public class LogicaGeneral extends Logica {
     public void terminarJuego() {
         miGUI.terminarJuego();
         this.PararSonido();
+
+    }
+    
+    public void actualizarGraficosJuego() {
+        miGUI.actualizar();
 
     }
     public int getNivel() {
@@ -163,4 +157,18 @@ public class LogicaGeneral extends Logica {
     	this.miLogicaColisiones.clean();
    
     }
+    
+    public void perderVida() {
+    	miGUI.setVida(vidas, miFabrica.getVidaMuerta());
+    	vidas--;
+    	if(vidas==0) {
+    		terminarJuego();
+    	}
+    	miLogicaColisiones.reset();
+    }
+
+	public void graficar(JLabel imagen) {
+		miGUI.addGrilla(imagen);
+		
+	}
 }

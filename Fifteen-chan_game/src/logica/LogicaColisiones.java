@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import javax.swing.JLabel;
 
+import Nivel.Niveles;
 import entidades.Bloque;
 import entidades.EntidadEstatica;
 import entidades.EntidadGraficaEstatica;
@@ -16,7 +17,7 @@ import visitor.Visitor;
 import visitor.VisitorFantasma;
 import visitor.VisitorPacman;
 
-public class LogicaColisiones extends Logica {
+public class LogicaColisiones {
 
     private VisitorFantasma visitorFantasma;
     private Visitor visitorPacman;
@@ -28,14 +29,18 @@ public class LogicaColisiones extends Logica {
     private boolean coloqueFruit;
     private boolean coloquePotion;
     private EntidadGraficaEstatica bombasticeo;
+
+	protected Bloque[][] matriz;
+	protected MenteEnemiga megamind;
+	protected Niveles niveles;
+
+	protected Personaje miPersonaje;
     
 
-    public LogicaColisiones(GUI gui,LogicaGeneral logicaGeneral) {
+    public LogicaColisiones(LogicaGeneral logicaGeneral) {
        visitorFantasma= new VisitorFantasma(this);
        miLogicaGeneral = logicaGeneral;
        visitorPacman= new VisitorPacman(this, miLogicaGeneral);
-       vidas=3;
-       miGUI=gui;
        bomba=false;
        coloqueFruit=false;
        coloquePotion=false;
@@ -54,25 +59,16 @@ public class LogicaColisiones extends Logica {
     
    
     public void actualizarPantalla() {
-    	miGUI.actualizar();
+    	miLogicaGeneral.actualizarGraficosJuego();
     }
    
     public Boolean colisionaConPacman(Point Ubicacion) {
     	return (this.obtenerBloque(Ubicacion)==this.obtenerBloque(miPersonaje.getPosicion()));
       }
 
-    public void perderVida() {
-    	miGUI.setVida(vidas, miLogicaGeneral.miFabrica.getVidaMuerta());
-    	this.reset();
-    	vidas--;
-    	if(vidas==0) {
-    		miLogicaGeneral.terminarJuego();
-    	}
-    }
+    
    
-    public void terminoTiempoConsumible() {
-
-    }
+    
     public void agarroBomba() {
     	this.bomba=true;
     }
@@ -82,7 +78,7 @@ public class LogicaColisiones extends Logica {
     		bombasticeo=miLogicaGeneral.getFabrica().getBomba(ubicacionBomba).getEntidadGrafica();
     		bombasticeo.setLocation(ubicacionBomba);
     		this.graficar(bombasticeo);
-    		this.miGUI.actualizar();
+    		miLogicaGeneral.actualizarGraficosJuego();
     		bomba=false;
     		miTimer= new Timer(this);
     		miTimer.start();
@@ -95,7 +91,7 @@ public class LogicaColisiones extends Logica {
     	  miTimer=null;
     	  bombasticeo.setIcon(null);
     	  bombasticeo=null;
-    	  miGUI.actualizar();
+    	  miLogicaGeneral.actualizarGraficosJuego();
     	  bomba=false;
       }
     
@@ -145,7 +141,7 @@ public class LogicaColisiones extends Logica {
 	}
 	
 	public Boolean jugando() {
-		return jugando;
+		return miLogicaGeneral.jugando;
 	}
 
 	public void pacmanPuedeMoverse() {
@@ -162,7 +158,7 @@ public class LogicaColisiones extends Logica {
 		miPersonaje.setMeMuevo(false);
 	}
    public void graficar(JLabel imagen) {
-	   miGUI.addGrilla(imagen);
+	   miLogicaGeneral.graficar( imagen);
 	   
    }
    public void graficarEntidadesDinamicas() {
@@ -202,9 +198,7 @@ public class LogicaColisiones extends Logica {
 	   cantidadDots=cantidad;
    }
    
-   public void setDots(int dots) {
-	   this.cantidadDots=dots;
-   }
+   
    
    public void restarDots() {
 	   cantidadDots--;
@@ -237,10 +231,43 @@ public class LogicaColisiones extends Logica {
    }
     
    public void clean() {
-	   this.vidas=3;
 	   this.coloqueFruit=false;
 	   this.coloquePotion=false;
    }
    
+   public void reset() {
+		megamind.resetearFantasmas();
+		miPersonaje.resetear();
+		miLogicaGeneral.actualizarGraficosJuego();
+		this.resetearLogicaPropia();
+	}
+
+   public void pacmanMurio() {
+	   miLogicaGeneral.perderVida();
+   }
+   public void cambiarVelocidad() {
+	   megamind.cambiarVelocidad();
+   }
+   public void nivel1() {
+	   miPersonaje= miLogicaGeneral.getFabrica().getPersonaje(this);
+       miLogicaGeneral.graficar(miPersonaje.getEntidadGrafica());
+	   megamind= new MenteEnemiga(this,  miLogicaGeneral.getFabrica().getBlinky(), miLogicaGeneral.getFabrica().getInky(), miLogicaGeneral.getFabrica().getPinky(), miLogicaGeneral.getFabrica().getClyde());
+       megamind.start();
+       niveles = new Niveles(this);
+       matriz=niveles.getMatriz(miLogicaGeneral.getFabrica());
+       cantidadDots=221;
+   }
+
+   public void sumarPuntos(int i) {
+	   miLogicaGeneral.sumarPuntos(i);
+   }
+   public void cambiarNivel(int nivel) {
+	   niveles.siguienteNivel(nivel);
+	   matriz=niveles.getMatriz(miLogicaGeneral.getFabrica());
+	   graficarEntidadesDinamicas();
+	   resetearLogicaPropia();
+	   megamind.cambiarVelocidad();
+	   cantidadDots = niveles.getDots();
+   }
  
 }

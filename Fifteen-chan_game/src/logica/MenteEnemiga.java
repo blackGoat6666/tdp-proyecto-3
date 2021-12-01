@@ -12,7 +12,6 @@ import entidadesDinamicas.Pinky;
 
 public class MenteEnemiga extends Thread{
 
-	private LogicaGeneral miLogicaGeneral;
 	private LogicaColisiones miLogicaColisiones;
 	private Enemigo blinky;
 	private Enemigo inky;
@@ -22,8 +21,8 @@ public class MenteEnemiga extends Thread{
 	private Point pacman;
 	private Boolean pacmanInvisible;
 	
-	public MenteEnemiga(LogicaGeneral logicaGeneral, LogicaColisiones logicaColisiones, Enemigo rojito, Enemigo celestito, Enemigo rosita, Enemigo miRey) {
-		miLogicaGeneral= logicaGeneral;
+	public MenteEnemiga( LogicaColisiones logicaColisiones, Enemigo rojito, Enemigo celestito, Enemigo rosita, Enemigo miRey) {
+		
 		miLogicaColisiones =logicaColisiones;
 		blinky=rojito;
 		inky=celestito;
@@ -121,19 +120,19 @@ public class MenteEnemiga extends Thread{
 	public void explotoBomba(Point ub) {
 		if(Math.abs(ub.x-blinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-blinky.getUbicacion().y)<=31*8 ) {
 			blinky.morir();
-			miLogicaGeneral.sumarPuntos(400);
+			miLogicaColisiones.sumarPuntos(400);
 		}
 		if(Math.abs(ub.x-inky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-inky.getUbicacion().y)<=31*8 ) {
 			inky.morir();
-			miLogicaGeneral.sumarPuntos(400);
+			miLogicaColisiones.sumarPuntos(400);
 		}
 		if(Math.abs(ub.x-pinky.getUbicacion().x)<=31*8 ||Math.abs(ub.y-pinky.getUbicacion().y)<=31*8 ) {
 			pinky.morir();
-			miLogicaGeneral.sumarPuntos(400);
+			miLogicaColisiones.sumarPuntos(400);
 		}
 		if(Math.abs(ub.x-elPana.getUbicacion().x)<=31*8 ||Math.abs(ub.y-elPana.getUbicacion().y)<=31*8 ) {
 			elPana.morir();
-			miLogicaGeneral.sumarPuntos(400);
+			miLogicaColisiones.sumarPuntos(400);
 		}
 		miLogicaColisiones.actualizarPantalla();
 	}
@@ -150,26 +149,26 @@ public class MenteEnemiga extends Thread{
 	private void fantasmasMuertos() {
 		if(this.colisionoConPacman(blinky) ) {
 			blinky.morir();
-			miLogicaGeneral.sumarPuntos(200);
+			miLogicaColisiones.sumarPuntos(200);
 		}
 		if(this.colisionoConPacman(inky)) {
 			inky.morir();
-			miLogicaGeneral.sumarPuntos(200);
+			miLogicaColisiones.sumarPuntos(200);
 		}
 		if(this.colisionoConPacman(pinky)) {
 			pinky.morir();
-			miLogicaGeneral.sumarPuntos(200);
+			miLogicaColisiones.sumarPuntos(200);
 		}
 		if(this.colisionoConPacman(elPana)) {
 			elPana.morir();
-			miLogicaGeneral.sumarPuntos(200);
+			miLogicaColisiones.sumarPuntos(200);
 		}
 		
 	}
 	private void pacmanMuerto() {
 		if( !(this.pacmanInvisible) && ( (this.colisionoConPacman(blinky)  && !(blinky.estoyMuerto()) ) ||
 		 (this.colisionoConPacman(inky)  && !(inky.estoyMuerto())) ||(this.colisionoConPacman(pinky)  && !(pinky.estoyMuerto())) || (this.colisionoConPacman(elPana) && !(elPana.estoyMuerto())) ) ) {
-			miLogicaColisiones.perderVida();
+			miLogicaColisiones.pacmanMurio();
 		}
 	}
 	

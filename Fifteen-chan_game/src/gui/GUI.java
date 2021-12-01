@@ -76,7 +76,6 @@ public class GUI {
 		btnMusicaJuego.setBackground(Color.BLACK);
 		btnMusicaJuego.setBounds(1079, 574, 64, 58);
 		miLogicaGeneral=new LogicaGeneral(this);
-		miLogicaColisiones= new LogicaColisiones(this,miLogicaGeneral);
 		miLogicaGeneral.setLogicaColisiones(miLogicaColisiones);
 		
 		initialize();
