@@ -5,6 +5,7 @@ import java.awt.Point;
 import entidades.EntidadGrafica;
 import logica.LogicaColisiones;
 import visitor.Visitor;
+import visitor.VisitorPacman;
 
 public class Personaje extends EntidadDinamica {
 	private LogicaColisiones miLogica;
@@ -22,6 +23,7 @@ public class Personaje extends EntidadDinamica {
 		movimiento=4;
 		miImagen.setLocation(ubicacion.x-17, ubicacion.y-50);
 		acomodarIzquierda=0;
+		this.miVisitor= new VisitorPacman(this);
 	}
 	
 	public void setMovimiento(int mov) {
@@ -139,6 +141,8 @@ public class Personaje extends EntidadDinamica {
 		this.miImagen.setModo(mode);
 	}
 
-
+	public LogicaColisiones getLogicaColisiones() {
+		return this.miLogica;
+	}
 }
 

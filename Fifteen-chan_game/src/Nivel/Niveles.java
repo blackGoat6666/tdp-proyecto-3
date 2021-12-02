@@ -3,12 +3,9 @@ package Nivel;
 import java.awt.Point;
 
 import entidades.Bloque;
-import entidades.Dot;
 import entidades.EntidadEstatica;
-import entidades.EntidadGraficaEstatica;
 import entidades.Gate;
 import entidades.Ladrillo;
-import entidades.PowerPellet;
 import fabricas.FabricaEntidades;
 import logica.LogicaColisiones;
 

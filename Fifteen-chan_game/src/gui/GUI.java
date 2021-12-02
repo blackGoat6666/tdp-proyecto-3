@@ -75,7 +75,7 @@ public class GUI {
 		btnMusicaJuego.setBackground(Color.BLACK);
 		btnMusicaJuego.setBounds(1079, 574, 64, 58);
 		miLogicaGeneral=new LogicaGeneral(this);
-		miLogicaGeneral.setLogicaColisiones(miLogicaColisiones);
+		this.miLogicaColisiones= this.miLogicaGeneral.getLogicaColisiones();
 		
 		initialize();
 	}
@@ -246,7 +246,7 @@ private void initialize() {
 				panelMenu.setVisible(true);
 				miLogicaGeneral.PararSonido();
 				miLogicaGeneral.clean();
-				miLogicaColisiones.clean();
+				miLogicaColisiones= miLogicaGeneral.getLogicaColisiones();
 				miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
 				
 			}

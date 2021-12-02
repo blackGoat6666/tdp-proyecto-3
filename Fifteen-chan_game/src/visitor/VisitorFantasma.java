@@ -3,27 +3,20 @@ package visitor;
 import entidades.Bloque;
 import entidades.Bomba;
 import entidades.Dot;
-import entidades.Entidad;
 import entidades.Fruit;
 import entidades.Invisibilidad;
 import entidades.PowerPellet;
 import entidades.Velocidad;
 import entidadesDinamicas.Enemigo;
-import logica.LogicaColisiones;
 
 public class VisitorFantasma implements Visitor{
-	private Enemigo visitante;
-	protected LogicaColisiones miLogicaColisiones;
+	private Enemigo miFantasma;
 	
 	
-	public VisitorFantasma(LogicaColisiones miLog) {
-		miLogicaColisiones=miLog;
+	public VisitorFantasma(Enemigo fantasmin) {
+		this.miFantasma= fantasmin;
 	}
-	
-	public void setVisitante(Enemigo ente) {
-		visitante=ente;
-	}
-	
+
 	public void visitBloque(Bloque casillero) {
 	  casillero.accept(this);
 		
@@ -32,67 +25,66 @@ public class VisitorFantasma implements Visitor{
 
 	@Override
 	public void visitPowerPellet(PowerPellet power) {
-		visitante.seMovio();
+		miFantasma.seMovio();
 	}
 
 	@Override
 	public void visitBomba(Bomba bombastic) {
-		Bloque eliminar=miLogicaColisiones.obtenerBloque(bombastic.getPosicion());
+		Bloque eliminar=miFantasma.getBloque(bombastic.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		miLogicaColisiones.setModoPacman("normal");
-		visitante.seMovio();
+		miFantasma.seMovio();
 		
 	}
 
 	@Override
 	public void visitInvisibilidad(Invisibilidad invi) {
-		visitante.seMovio();
-		Bloque eliminar=miLogicaColisiones.obtenerBloque(invi.getPosicion());
+		miFantasma.seMovio();
+		Bloque eliminar=miFantasma.getBloque(invi.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 		
 	}
 
 	@Override
 	public void visitVelocidad(Velocidad barry) {
-		Bloque eliminar=miLogicaColisiones.obtenerBloque(barry.getPosicion());
+		Bloque eliminar=miFantasma.getBloque(barry.getPosicion());
 		eliminar.eliminarEntidadEstatica();
-		visitante.seMovio();
+		miFantasma.seMovio();
 		
 	}
 
 
 	@Override
 	public void visitLadrillo() {
-		visitante.setNoSeMovio();
+		miFantasma.setNoSeMovio();
 	}
 
 	@Override
 	public void visitGate() {
-		if(visitante.puedoAtravesarGate()) {
-			visitante.seMovio();
+		if(miFantasma.puedoAtravesarGate()) {
+			miFantasma.seMovio();
 		}
 		else {
-			visitante.setNoSeMovio();
+			miFantasma.setNoSeMovio();
 		}
 		
 	}
 
 	@Override
 	public void visitBloqueVacio() {
-		visitante.seMovio();
+		miFantasma.seMovio();
 		
 	}
 
 	@Override
 	public void visitDot(Dot dot) {
-		visitante.seMovio();
+		miFantasma.seMovio();
 		
 	}
 
 	@Override
 	public void visitFruit(Fruit fru) {
-		visitante.seMovio();
-		Bloque eliminar=miLogicaColisiones.obtenerBloque(fru.getPosicion());
+		miFantasma.seMovio();
+		Bloque eliminar=miFantasma.getBloque(fru.getPosicion());
 		eliminar.eliminarEntidadEstatica();
 	}
 

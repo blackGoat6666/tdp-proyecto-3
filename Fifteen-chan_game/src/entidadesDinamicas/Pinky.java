@@ -2,8 +2,6 @@ package entidadesDinamicas;
 
 import java.awt.Point;
 
-import logica.MenteEnemiga;
-import state.NormalState;
 
 public class Pinky extends Enemigo{
 

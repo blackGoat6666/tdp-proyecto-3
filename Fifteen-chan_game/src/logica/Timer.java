@@ -1,7 +1,5 @@
 package logica;
 
-import logica.LogicaColisiones;
-
 public class Timer extends Thread {
     // atributos
    

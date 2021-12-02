@@ -2,9 +2,11 @@ package entidadesDinamicas;
 
 import java.awt.Point;
 
+import entidades.Bloque;
 import logica.MenteEnemiga;
 import state.NormalState;
 import state.StateFantasma;
+import visitor.VisitorFantasma;
 
 public abstract class Enemigo extends EntidadDinamica {
     
@@ -30,6 +32,7 @@ public abstract class Enemigo extends EntidadDinamica {
 		saliDeGate=false;
 		preferencias= new Point(0,0);
 		this.meMovi=false;
+		this.miVisitor= new VisitorFantasma(this);
     }
 	
 	public void setMenteEnemiga(MenteEnemiga megamind) {
@@ -186,6 +189,10 @@ public abstract class Enemigo extends EntidadDinamica {
 	
 	public Boolean getSeMovio() {
 		return this.meMovi;
+	}
+	
+	public Bloque getBloque(Point ubi) {
+		return this.miMente.getBloque(ubi);
 	}
 	
 

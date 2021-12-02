@@ -12,7 +12,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 
-import Nivel.Niveles;
 import entidades.EntidadEstatica;
 import fabricas.FabricaEntidades;
 import fabricas.FabricaMetaleros;
@@ -38,8 +37,8 @@ public class LogicaGeneral {
 	public LogicaGeneral(GUI gui) {
 	       vidas=3;
 	       miGUI=gui;
-	       miLogicaColisiones= new LogicaColisiones( this);
-	     }
+	       this.miLogicaColisiones= new LogicaColisiones(this);
+	  }
 	
 	//metodos
 	public void sumarPuntos(int i) {
@@ -78,7 +77,6 @@ public class LogicaGeneral {
     public void comenzarJuego() {
     	jugando=true;
     	this.nivel=1;
-    	this.miLogicaColisiones.clean();
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
     	miLogicaColisiones.nivel1();
     	
@@ -92,10 +90,7 @@ public class LogicaGeneral {
         miGUI.actualizar();	
     	
     }
-    
-    public void setLogicaColisiones(LogicaColisiones logicaColisiones) {
-    	miLogicaColisiones=logicaColisiones;
-    }
+  
 
     public void terminarJuego() {
         miGUI.terminarJuego();
@@ -151,11 +146,13 @@ public class LogicaGeneral {
     	return musica;
     }
     public void clean() {
+    	this.jugando=false;
     	this.nivel=1;
     	this.puntos=0;
     	this.miGUI.actualizarPuntos(puntos);
     	this.vidas=3;
-    	this.miLogicaColisiones.clean();
+    	this.miLogicaColisiones=null;
+    	this.miLogicaColisiones= new LogicaColisiones(this);
    
     }
     
@@ -171,5 +168,8 @@ public class LogicaGeneral {
 	public void graficar(JLabel imagen) {
 		miGUI.addGrilla(imagen);
 		
+	}
+	public LogicaColisiones getLogicaColisiones() {
+		return this.miLogicaColisiones;
 	}
 }

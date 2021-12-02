@@ -2,9 +2,6 @@ package entidadesDinamicas;
 
 import java.awt.Point;
 
-import logica.MenteEnemiga;
-import state.NormalState;
-
 public class Clyde extends Enemigo {
 
 	public Clyde(int mov, EntidadGraficaDinamica imagen) {

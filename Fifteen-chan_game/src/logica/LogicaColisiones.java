@@ -12,16 +12,13 @@ import entidades.Ladrillo;
 import entidadesDinamicas.Enemigo;
 import entidadesDinamicas.EntidadDinamica;
 import entidadesDinamicas.Personaje;
-import gui.GUI;
 import visitor.Visitor;
 import visitor.VisitorFantasma;
 import visitor.VisitorPacman;
 
 public class LogicaColisiones {
 
-    private VisitorFantasma visitorFantasma;
-    private Visitor visitorPacman;
-	protected int cantidadDots;
+    protected int cantidadDots;
     private Timer miTimer;
     protected LogicaGeneral miLogicaGeneral;
     private Boolean bomba;
@@ -29,8 +26,7 @@ public class LogicaColisiones {
     private boolean coloqueFruit;
     private boolean coloquePotion;
     private EntidadGraficaEstatica bombasticeo;
-
-	protected Bloque[][] matriz;
+    protected Bloque[][] matriz;
 	protected MenteEnemiga megamind;
 	protected Niveles niveles;
 
@@ -38,9 +34,7 @@ public class LogicaColisiones {
     
 
     public LogicaColisiones(LogicaGeneral logicaGeneral) {
-       visitorFantasma= new VisitorFantasma(this);
        miLogicaGeneral = logicaGeneral;
-       visitorPacman= new VisitorPacman(this, miLogicaGeneral);
        bomba=false;
        coloqueFruit=false;
        coloquePotion=false;
@@ -48,13 +42,7 @@ public class LogicaColisiones {
      }
 
     public void visitarBloque(EntidadDinamica visitante, Point direccion) {
-      if(visitante.toString()=="Enemigo") { 
-    	visitorFantasma.setVisitante((Enemigo) visitante);  
-        this.obtenerBloque(direccion).accept(visitorFantasma);	  
-      }
-      else {
-    	this.obtenerBloque(direccion).accept(visitorPacman);	  
-      }
+      this.obtenerBloque(direccion).accept(visitante.getVisitor());	  
     }
     
    
@@ -158,9 +146,8 @@ public class LogicaColisiones {
 		miPersonaje.setMeMuevo(false);
 	}
    public void graficar(JLabel imagen) {
-	   miLogicaGeneral.graficar( imagen);
-	   
-   }
+	   miLogicaGeneral.graficar(imagen);
+	}
    public void graficarEntidadesDinamicas() {
 	   megamind.graficarFantasmitas();
 	   this.graficar(this.miPersonaje.getEntidadGrafica());
@@ -230,10 +217,7 @@ public class LogicaColisiones {
 	   this.miPersonaje.setModo(mode);
    }
     
-   public void clean() {
-	   this.coloqueFruit=false;
-	   this.coloquePotion=false;
-   }
+
    
    public void reset() {
 		megamind.resetearFantasmas();
@@ -252,10 +236,10 @@ public class LogicaColisiones {
 	   miPersonaje= miLogicaGeneral.getFabrica().getPersonaje(this);
        miLogicaGeneral.graficar(miPersonaje.getEntidadGrafica());
 	   megamind= new MenteEnemiga(this,  miLogicaGeneral.getFabrica().getBlinky(), miLogicaGeneral.getFabrica().getInky(), miLogicaGeneral.getFabrica().getPinky(), miLogicaGeneral.getFabrica().getClyde());
-       megamind.start();
        niveles = new Niveles(this);
        matriz=niveles.getMatriz(miLogicaGeneral.getFabrica());
        cantidadDots=221;
+       megamind.start();
    }
 
    public void sumarPuntos(int i) {
@@ -269,5 +253,7 @@ public class LogicaColisiones {
 	   megamind.cambiarVelocidad();
 	   cantidadDots = niveles.getDots();
    }
+
+ 
  
 }
