@@ -167,9 +167,9 @@ public class FabricaSCP implements FabricaEntidades {
 	@Override
 	public String getFondo(int nivel) {
 		switch(nivel) {
-		case 1: return "/resources/Vampiro/nivelvampiro1.png";
-		case 2: return "/resources/Vampiro/nivelvampiro2.png";
-		case 3: return "/resources/Vampiro/nivelvampiro3.png";
+		case 1: return "/resources/SCP/nivelscp1.png";
+		case 2: return "/resources/SCP/nivelscp2.png";
+		case 3: return "/resources/SCP/nivelscp3.png";
 	}
 	return null;
 }

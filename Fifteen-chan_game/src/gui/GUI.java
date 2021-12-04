@@ -26,6 +26,7 @@ public class GUI {
 
 	private JPanel panelMenu;
 	private JPanel panelJuego;
+	private JPanel panelAyuda;
 	private JFrame frame;
 	private LogicaColisiones miLogicaColisiones;
 	private LogicaGeneral miLogicaGeneral;
@@ -99,6 +100,12 @@ private void initialize() {
 		frame.getContentPane().add(panelMenu);
 		panelMenu.setLayout(null);
 		
+		panelAyuda = new Panel("/Images/ayuda.png");
+		panelAyuda.setBounds(0, 0, 1200, 720);
+		panelAyuda.setVisible(true);
+		frame.getContentPane().add(panelAyuda);
+		panelAyuda.setLayout(null);
+		
 		
 		JButton btnAyuda = new JButton("Ayuda");
 		btnAyuda.setForeground(Color.RED);
@@ -134,10 +141,18 @@ private void initialize() {
 		
 		
 		JButton btnVolverMenu = new JButton("Volver al menu");
-		btnVolverMenu.setForeground(Color.WHITE);
+		btnVolverMenu.setForeground(Color.RED);
 		btnVolverMenu.setBackground(Color.BLACK);
 		btnVolverMenu.setBounds(50, 100, 226, 58);
+		btnVolverMenu.setEnabled(false);
 		panelJuego.add(btnVolverMenu);
+		
+		JButton btnVolverMenu2 = new JButton("Volver al menu");
+		btnVolverMenu2.setForeground(Color.RED);
+		btnVolverMenu2.setBackground(Color.BLACK);
+		btnVolverMenu2.setBounds(50, 100, 226, 58);
+		btnVolverMenu2.setEnabled(false);
+		panelAyuda.add(btnVolverMenu2);
 		
 		vida1= new JLabel("");
 		vida1.setBounds(25, 259, 64, 64);
@@ -201,6 +216,8 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				panelAyuda.setVisible(false);
+				btnVolverMenu.setEnabled(true);
 				miLogicaGeneral.setFabrica("metaleros");
 				miLogicaGeneral.comenzarJuego();
 			}
@@ -210,6 +227,8 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				panelAyuda.setVisible(false);
+				btnVolverMenu.setEnabled(true);
 				miLogicaGeneral.setFabrica("vampiros");
 				miLogicaGeneral.comenzarJuego();
 			}
@@ -221,16 +240,13 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(true);
 				panelMenu.setVisible(false);
+				panelAyuda.setVisible(false);
+				btnVolverMenu.setEnabled(true);
 				miLogicaGeneral.setFabrica("scp");
 				miLogicaGeneral.comenzarJuego();
 			}
 		});
 		
-		btnAyuda.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
 		
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -244,6 +260,26 @@ private void initialize() {
 			public void mouseClicked(MouseEvent e) {
 				panelJuego.setVisible(false);
 				panelMenu.setVisible(true);
+				panelAyuda.setVisible(false);
+				btnVolverMenu.setEnabled(false);
+				btnVolverMenu2.setEnabled(false);
+				miLogicaGeneral.PararSonido();
+				miLogicaGeneral.clean();
+				miLogicaColisiones= miLogicaGeneral.getLogicaColisiones();
+				miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
+				
+			}
+			
+		});
+		
+		btnVolverMenu2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelJuego.setVisible(false);
+				panelMenu.setVisible(true);
+				panelAyuda.setVisible(false);
+				btnVolverMenu.setEnabled(false);
+				btnVolverMenu2.setEnabled(false);
 				miLogicaGeneral.PararSonido();
 				miLogicaGeneral.clean();
 				miLogicaColisiones= miLogicaGeneral.getLogicaColisiones();
@@ -270,6 +306,16 @@ private void initialize() {
 				}
 				else
 					miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Oh Klahoma 8bit.wav");
+			}
+		});
+		
+		btnAyuda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelJuego.setVisible(false);
+				panelMenu.setVisible(false);
+				panelAyuda.setVisible(true);
+				btnVolverMenu2.setEnabled(true);
 			}
 		});
 		
