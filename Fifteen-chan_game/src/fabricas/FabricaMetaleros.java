@@ -185,9 +185,9 @@ public class FabricaMetaleros implements FabricaEntidades{
 	@Override
 	public String getMusica(int nivel) {
 		switch(nivel) {
-        case 1: return "/src/resources/Musica/Dragula8bit.wav";
-		case 2: return "/src/resources/Musica/Dragula8bit.wav";
-		case 3: return "/src/resources/Musica/Dragula8bit.wav";
+        case 1: return "/src/resources/Musica/Painkiller.wav";
+		case 2: return "/src/resources/Musica/Breaking The Law8bit.wav";
+		case 3: return "/src/resources/Musica/Master Of Puppets8bit.wav";
 	}
 	return null;
 }

@@ -158,8 +158,8 @@ public class FabricaSCP implements FabricaEntidades {
 	public String getMusica(int nivel) {
 		switch(nivel) {
         case 1: return "/src/resources/Musica/Two Time 8bit.wav";
-		case 2: return "/src/resources/Musica/Dead Weight 8bit.wav";
-		case 3: return "/src/resources/Musica/Cheeseburger Family.wav";
+		case 2: return "/src/resources/Musica/XFiles.wav";
+		case 3: return "/src/resources/Musica/Dead Weight 8bit.wav";
 	}
 	return null;
 }
