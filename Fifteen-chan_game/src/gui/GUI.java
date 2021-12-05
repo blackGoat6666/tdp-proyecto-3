@@ -21,6 +21,7 @@ import logica.LogicaGeneral;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class GUI {
 
@@ -62,6 +63,7 @@ public class GUI {
 	public GUI() {
 		
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/resources/Vampiro/power pellet.gif")));
 		frame.setAlwaysOnTop(true);
 		frame.setResizable(false);
 		frame.setBounds(0, 0, 1200, 720);
