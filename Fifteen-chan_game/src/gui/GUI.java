@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,7 +22,6 @@ import logica.LogicaGeneral;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
 
 public class GUI {
 
@@ -63,7 +63,6 @@ public class GUI {
 	public GUI() {
 		
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/resources/Vampiro/power pellet.gif")));
 		frame.setAlwaysOnTop(true);
 		frame.setResizable(false);
 		frame.setBounds(0, 0, 1200, 720);
@@ -87,6 +86,10 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 private void initialize() {
+	
+	    Image icon = new ImageIcon(getClass().getResource("/Images/Icono.png")).getImage();
+	    frame.setIconImage(icon);
+	
 	    panelJuego = new Panel("/Images/fondo.png");
 	    panelJuego.setBounds(0, 0, 1200, 720);
 	    panelJuego.setVisible(false);
