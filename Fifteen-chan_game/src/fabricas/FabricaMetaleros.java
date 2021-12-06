@@ -197,7 +197,7 @@ public class FabricaMetaleros implements FabricaEntidades{
 		switch(nivel) {
 			case 1: return "/resources/Metalero/nivel1.jpg";
 			case 2: return "/resources/Metalero/nivel2jpg.jpg";
-			case 3: return "/resources/Metaleros/nivel3.jpg";
+			case 3: return "/resources/Metalero/nivel3.jpg";
 		}
 		return null;
 	}
