@@ -45,6 +45,7 @@ public class GUI {
 	private JLabel vida3;
 	private JLabel lblPuntuacion;
 	private JLabel puntajes[] = new JLabel[5];
+	private JLabel puntajes2[] = new JLabel[5];
 	private JPanel grillaActual;
 	private JPanel panelPerdiste;
 	private JPanel panelGanaste;
@@ -265,8 +266,13 @@ private void initialize() {
 			puntajes[i].setFont(Chiller);
 			puntajes[i].setForeground(Color.RED);
 			puntajes[i].setVerticalAlignment(SwingConstants.TOP);
+			puntajes2[i] = new JLabel("..............");
+			puntajes2[i].setBounds(200, 150+i*100, 700, 65);
+			puntajes2[i].setFont(Chiller);
+			puntajes2[i].setForeground(Color.RED);
+			puntajes2[i].setVerticalAlignment(SwingConstants.TOP);
 			panelPerdiste.add(puntajes[i]);
-			panelGanaste.add(puntajes[i]);
+			panelGanaste.add(puntajes2[i]);
 			
 			
 		}

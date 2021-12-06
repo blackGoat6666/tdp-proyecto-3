@@ -23,8 +23,9 @@ public class Ranking implements Serializable {
 		System.out.println();
 		int i = 0;
 		for(Nombres p : this.ranking) {
-			puntajes[i].setText(p.getNombre() + ".............." + p.getPuntaje());
+			
 			if( i== 5 ) break;
+			puntajes[i].setText(p.getNombre() + ".............." + p.getPuntaje());
 			i++;
 		}
 	}
