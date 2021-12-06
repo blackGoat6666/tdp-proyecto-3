@@ -19,6 +19,12 @@ import fabricas.FabricaSCP;
 import fabricas.FabricaVampiro;
 import gui.GUI;
 
+/**
+ * La logica General es la clase encargada de controlar las cosas mas generales del juego,
+ * como comenzarlo, guardar los puntos, vidas, inicializar las fabricas...
+ * @author Iara
+ *
+ */
 public class LogicaGeneral {
 	//atributos de instancia
 	private int puntos;
@@ -34,7 +40,10 @@ public class LogicaGeneral {
 	protected Boolean jugando;
     
 	//constructor
-	
+	/**
+	 * constructor
+	 * @param gui la gui correspondiente de nuestro proyecto
+	 */
 	public LogicaGeneral(GUI gui) {
 	       vidas=3;
 	       miGUI=gui;
@@ -42,15 +51,27 @@ public class LogicaGeneral {
 	  }
 	
 	//metodos
+	/**
+	 * suma los puntos totales
+	 * @param i entero
+	 */
 	public void sumarPuntos(int i) {
     	puntos=puntos+i;
     	miGUI.actualizarPuntos(puntos);
     }
+	/**
+	 * setea la fabrica segun el boton que se eligio
+	 * @param fab String del tipo de fabrico
+	 */
 	public void setFabrica(String fab) {	
 		this.getFabrica(fab);
 	      
 	}
-	    
+	
+	/**
+	 * privado, devuelve la fabrica segun el string
+	 * @param fab String
+	 */
     private void getFabrica(String fab) {
     	switch(fab) {
     		case "vampiros": miFabrica=new FabricaVampiro(); break;
@@ -59,6 +80,10 @@ public class LogicaGeneral {
 	    }
     }
     
+    /**
+     * se encarga de las cosas necesarias para cambiar de nivel.
+     * (Si el nivel ya era el 3 ganamos)
+     */
     public void cambiarNivel() {
     	miLogicaColisiones.reset();
     	nivel++;
@@ -75,6 +100,10 @@ public class LogicaGeneral {
     	}
     	
     }
+    /**
+     * comienza el juego
+     * @param jugador (string, es para el ranking)
+     */
     public void comenzarJuego(String jugador) {
         nombre=jugador;
     	jugando=true;
@@ -93,6 +122,10 @@ public class LogicaGeneral {
     	
     }
   
+    
+    /**
+     * es el metodo que termina el juego 
+     */
 
     public void terminarJuego() {
         miGUI.terminarJuego();
@@ -100,16 +133,31 @@ public class LogicaGeneral {
 
     }
     
+    /**
+     * nos sirve para graficar los cambios cada vez que nuestras entidades en el juego cambian 
+     */
     public void actualizarGraficosJuego() {
         miGUI.actualizar();
 
     }
+    /**
+     * retorna el nivel
+     * @return int
+     */
     public int getNivel() {
     	return nivel;
     }
+    /**
+     * devuelve la fabrica (ya creada)
+     * @return FabricaEntidades
+     */
      public FabricaEntidades getFabrica() {
     	return this.miFabrica;
     }
+    /**
+     * Nos sirve para manipular el hilo del sonido, la musica indicada se comienza a reproducir
+     * @param nombreSonido (String) path de la musica
+     */
     public void ReproducirSonido(String nombreSonido){
         try {
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(FileSystems.getDefault().getPath("").toAbsolutePath() +nombreSonido));
@@ -122,6 +170,9 @@ public class LogicaGeneral {
         }
         musica = true;
     }
+    /**
+     * le pone estop al sonido
+     */
     public void PararSonido() {
     	if(musica) {
     		musiquita.stop();
@@ -131,6 +182,10 @@ public class LogicaGeneral {
     	}
     	
     }
+    /**
+     * devuelve una entidad estatica potion
+     * @return
+     */
     public EntidadEstatica getPotion() {
  	   switch(this.nivel) {
  	   	case 1: return  miFabrica.getBomba( new Point( ((11)*30)+5, ((12)*30)+5 ) );
@@ -142,8 +197,7 @@ public class LogicaGeneral {
     public EntidadEstatica getFruit() {
   	   return  miFabrica.getFruit(new Point( ((11)*30)+5, ((12)*30)+5 ), nivel);
   	 }
-    protected void resetearLogicaPropia() {
-    }
+    
     public Boolean getBooleanMusica() {
     	return musica;
     }

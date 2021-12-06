@@ -16,6 +16,12 @@ import visitor.Visitor;
 import visitor.VisitorFantasma;
 import visitor.VisitorPacman;
 
+/**
+ * La logica de colisiones es la parte logica que se encarga de las colisiones y la parte mas interna
+ * del juego, guarda al personaje, enemigos, la matriz, el timer, el nivel, etc.
+ * @author Iara
+ *
+ */
 public class LogicaColisiones {
 
     protected int cantidadDots;
