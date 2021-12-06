@@ -9,15 +9,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import logica.LogicaColisiones;
 import logica.LogicaGeneral;
+import ranking.Nombres;
+import ranking.Ranking;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -35,16 +44,38 @@ public class GUI {
 	private JLabel vida2;
 	private JLabel vida3;
 	private JLabel lblPuntuacion;
+	private JLabel puntajes[] = new JLabel[5];
 	private JPanel grillaActual;
 	private JPanel panelPerdiste;
 	private JPanel panelGanaste;
 	private JButton btnMusicaJuego;
 	private JButton btnMusicaMenu;
 	
-	/**
+	private static Ranking ranking;
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		ranking =new Ranking();
+
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream("./score.tdp");
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            System.out.print("cargando...");
+            ranking = (Ranking) objectInputStream.readObject();
+            objectInputStream.close();
+        }
+        catch(FileNotFoundException e) {
+
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -89,6 +120,7 @@ private void initialize() {
 	
 	    Image icon = new ImageIcon(getClass().getResource("/Images/Icono.png")).getImage();
 	    frame.setIconImage(icon);
+	    frame.setTitle("Fifteen-Chan-Game");
 	
 	    panelJuego = new Panel("/Images/fondo.png");
 	    panelJuego.setBounds(0, 0, 1200, 720);
@@ -124,6 +156,18 @@ private void initialize() {
 		btnSalir.setSelectedIcon(null);
 		btnSalir.setBounds(406, 451, 226, 58);
 		panelMenu.add(btnSalir);
+		
+		JLabel labelNombre = new JLabel("Nombre Jugador:");
+        labelNombre.setForeground(Color.RED);
+        labelNombre.setBackground(Color.BLACK);
+        labelNombre.setBounds(360, 564, 120, 20);
+        panelMenu.add(labelNombre);
+
+
+        JTextField textField = new JTextField();
+        textField.setBounds(477, 564, 86, 20);
+        panelMenu.add(textField);
+        textField.setColumns(10);
 		
 		JButton btnJugarMetalero = new JButton("Jugar metal fight");
 		btnJugarMetalero.setForeground(Color.RED);
@@ -169,7 +213,10 @@ private void initialize() {
 		vida3.setBounds(240, 259, 64, 64);
 		panelJuego.add(vida3);
 		
-		Font Chiller= new Font("Chiller", Font.BOLD | Font.ITALIC, 50);
+		
+		Font Chiller= new Font("Chiller", Font.BOLD | Font.ITALIC, 40);
+		
+		
 		
 		JLabel lblPuntuacionLetra = new JLabel("Puntuacion");
 		lblPuntuacionLetra.setForeground(Color.RED);
@@ -193,7 +240,7 @@ private void initialize() {
 		btnMusicaMenu.setIcon(new ImageIcon(GUI.class.getResource("/resources/Musica/musicola.png")));
 		
 		
-		panelPerdiste = new Panel("/Images/menu.png");
+		panelPerdiste = new Panel("/Images/fondo.png");
         panelPerdiste.setBounds(0, 0, 1200, 720);
         panelPerdiste.setVisible(false);
         frame.getContentPane().add(panelPerdiste);
@@ -203,54 +250,60 @@ private void initialize() {
         lblPerdiste.setFont(Chiller);
         lblPerdiste.setForeground(Color.RED);
         lblPerdiste.setVerticalAlignment(SwingConstants.TOP);
-        lblPerdiste.setBounds(408, 362, 259, 64);
+        lblPerdiste.setBounds(400, 80, 260, 65);
         panelPerdiste.add(lblPerdiste);
 		
-        panelGanaste = new Panel("/Images/menu.png");
+        panelGanaste = new Panel("/Images/fondo.png");
         panelGanaste.setBounds(0, 0, 1200, 720);
         panelGanaste.setVisible(false);
         frame.getContentPane().add(panelGanaste);
         panelGanaste.setLayout(null);
         
-        
+        for (int i = 0 ; i < 5; i++) {
+			puntajes[i] = new JLabel("..............");
+			puntajes[i].setBounds(200, 150+i*100, 700, 65);
+			puntajes[i].setFont(Chiller);
+			puntajes[i].setForeground(Color.RED);
+			puntajes[i].setVerticalAlignment(SwingConstants.TOP);
+			panelPerdiste.add(puntajes[i]);
+			panelGanaste.add(puntajes[i]);
+			
+			
+		}
+		
+		Chiller = new Font("Chiller", Font.BOLD | Font.ITALIC, 50);
 		
 		// acciones botones
 		
-		btnJugarMetalero.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panelJuego.setVisible(true);
-				panelMenu.setVisible(false);
-				panelAyuda.setVisible(false);
-				btnVolverMenu.setEnabled(true);
-				miLogicaGeneral.setFabrica("metaleros");
-				miLogicaGeneral.comenzarJuego();
-			}
-		});
-		btnJugarVampiros.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panelJuego.setVisible(true);
-				panelMenu.setVisible(false);
-				panelAyuda.setVisible(false);
-				btnVolverMenu.setEnabled(true);
-				miLogicaGeneral.setFabrica("vampiros");
-				miLogicaGeneral.comenzarJuego();
-			}
-		});
-		
-		
-		btnJugarSCP.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panelJuego.setVisible(true);
-				panelMenu.setVisible(false);
-				panelAyuda.setVisible(false);
-				btnVolverMenu.setEnabled(true);
-				miLogicaGeneral.setFabrica("scp");
-				miLogicaGeneral.comenzarJuego();
-			}
-		});
+        btnJugarMetalero.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panelJuego.setVisible(true);
+                panelMenu.setVisible(false);
+                miLogicaGeneral.setFabrica("metaleros");
+                miLogicaGeneral.comenzarJuego(textField.getText());
+            }
+        });
+        btnJugarVampiros.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panelJuego.setVisible(true);
+                panelMenu.setVisible(false);
+                miLogicaGeneral.setFabrica("vampiros");
+                miLogicaGeneral.comenzarJuego(textField.getText());
+            }
+        });
+
+
+        btnJugarSCP.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panelJuego.setVisible(true);
+                panelMenu.setVisible(false);
+                miLogicaGeneral.setFabrica("scp");
+                miLogicaGeneral.comenzarJuego(textField.getText());
+            }
+        });
 		
 		
 		btnSalir.addMouseListener(new MouseAdapter() {
@@ -408,33 +461,41 @@ private void initialize() {
 	}
 
 	public void terminarJuego() {
-		panelJuego.setVisible(false);
+        panelJuego.setVisible(false);
         panelMenu.setVisible(false);
+        panelAyuda.setVisible(false);
         panelPerdiste.setVisible(true);
         this.miLogicaGeneral.PararSonido();
         this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Milk.wav");
-	}
+        Nombres jugador= new Nombres(miLogicaGeneral.getPuntos(),miLogicaGeneral.getNombre());
+        GUI.ranking.addRanking(jugador);
+        GUI.ranking.printPlayers(puntajes);
+        guardar();
+		}
 	
 	public void ganaste() {
 		panelJuego.setVisible(false);
         panelMenu.setVisible(false);
+        panelAyuda.setVisible(false);
         panelGanaste.setVisible(true);
         this.miLogicaGeneral.PararSonido();
         this.miLogicaGeneral.ReproducirSonido("/src/resources/Musica/Coffee.wav");
-        JLabel vampirito= new JLabel();
+        JLabel vampirito= new JLabel("");
         vampirito.setIcon(new ImageIcon(GUI.class.getResource("/resources/Vampiro/vampiro bomba adelante.gif")));
-        JLabel metalerito= new JLabel();
+        vampirito.setBounds(460, 80, 100, 65);
+        
+        JLabel metalerito= new JLabel("");
         metalerito.setIcon(new ImageIcon(GUI.class.getResource("/resources/Metalero/metaleroBomba.gif")));
-        JLabel scpcito= new JLabel();
+        metalerito.setBounds(540, 80, 100, 65);
+        
+        JLabel scpcito= new JLabel("");
         scpcito.setIcon(new ImageIcon(GUI.class.getResource("/resources/SCP/999bomba.gif")));
-        vampirito.setBounds(60, 60, 300, 300);
-        vampirito.setBounds(60, 60, 350, 300);
-        vampirito.setBounds(60, 60, 400, 300);
+        scpcito.setBounds(620, 80, 100, 65);
+        
         JLabel lblganaste = new JLabel("Ganaste");
         lblganaste.setForeground(Color.RED);
         lblganaste.setVerticalAlignment(SwingConstants.TOP);
-        lblganaste.setBounds(408, 362, 259, 64);
-        lblganaste.setVerticalAlignment(SwingConstants.TOP);
+        lblganaste.setBounds(200, 80, 260, 65);
         panelGanaste.add(lblganaste);
         panelGanaste.add(scpcito);
         panelGanaste.add(vampirito);
@@ -447,5 +508,22 @@ private void initialize() {
 		this.btnMusicaMenu.setIcon(new ImageIcon(GUI.class.getResource(imagen)));
 		this.btnMusicaJuego.setIcon(new ImageIcon(GUI.class.getResource(imagen)));
 	}
+	
+	private void guardar() {
+        try {
+            System.out.println("guardando...");
+            FileOutputStream fileOutputStream = new FileOutputStream("./score.tdp");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(GUI.ranking);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 }

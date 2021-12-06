@@ -29,6 +29,7 @@ public class LogicaGeneral {
 	private Boolean musica;
 	protected int vidas;
 	protected GUI miGUI;
+	protected String nombre;
 
 	protected Boolean jugando;
     
@@ -74,7 +75,8 @@ public class LogicaGeneral {
     	}
     	
     }
-    public void comenzarJuego() {
+    public void comenzarJuego(String jugador) {
+        nombre=jugador;
     	jugando=true;
     	this.nivel=1;
     	miGUI.cambiarNivel(miFabrica.getFondo(nivel));
@@ -172,4 +174,11 @@ public class LogicaGeneral {
 	public LogicaColisiones getLogicaColisiones() {
 		return this.miLogicaColisiones;
 	}
+	
+	public String getNombre() {
+        return nombre;
+    }
+    public int getPuntos() {
+        return puntos;
+    }
 }
